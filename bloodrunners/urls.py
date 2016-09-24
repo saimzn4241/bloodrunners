@@ -21,6 +21,13 @@ urlpatterns = [
   url(r'^admin/', admin.site.urls),
   url(r'^view2/',
       generic.TemplateView.as_view(template_name='view2.html')),
+  url(r'^home/',
+      generic.TemplateView.as_view(template_name='home.html')),
+  url(r'^login/',
+      generic.TemplateView.as_view(template_name='login.html')),
+  url(r'^signup/',
+      generic.TemplateView.as_view(template_name='signup.html')),
+  
   url(r'^$',
       generic.TemplateView.as_view(template_name='view1.html')),
 ]
