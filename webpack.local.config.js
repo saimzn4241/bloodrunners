@@ -13,6 +13,21 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/App1',
   ],
+  Home: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Home',
+  ],
+  Login: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Login',
+  ],
+  Signup: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Signup',
+  ],
 }
 
 config.plugins = config.plugins.concat([
