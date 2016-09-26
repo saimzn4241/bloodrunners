@@ -10,6 +10,8 @@ module.exports = {
     Home: './reactjs/Home',
     Login: './reactjs/Login',
     Signup: './reactjs/Signup',
+    Search: './reactjs/Search',
+    
     vendors: ['react'],
   },
 

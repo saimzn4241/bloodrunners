@@ -16,11 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.views import generic
+from bloodrunners.views import *
+
 
 urlpatterns = [
+  url(r'^thanks/', generic.TemplateView.as_view(template_name='thanks.html')),
+  url(r'^search-form/$', search_form),
+  url(r'^search/$', search),
+  
   url(r'^admin/', admin.site.urls),
-  url(r'^view2/',
-      generic.TemplateView.as_view(template_name='view2.html')),
+  url(r'^your_name/',get_name),
   url(r'^home/',
       generic.TemplateView.as_view(template_name='home.html')),
   url(r'^login/',
