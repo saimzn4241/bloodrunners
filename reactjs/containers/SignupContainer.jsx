@@ -9,6 +9,47 @@ export default class SignupContainer extends React.Component {
         <div className="row">
           <div className="col-sm-12">
             <Headline>Sign-up Container</Headline>
+            <form action="/search/" method="get">
+         
+                First Name:
+                <input type="text"  name="first_name">
+                </input>
+
+                <br></br>
+                Last Name:   
+                <input type="text"  name="last_name"/>
+                <br></br>
+                Birthday:
+                <input type="date" name="bday"/>
+                <br></br>
+                Mobile Num:
+                <input type="text"  name="contact"/>
+                <br></br>
+                Address:
+                <input type="text"  name="address"/>
+                <br></br>
+                State:
+                <input type="text"  name="state"/>
+                <br></br>
+                Country:
+                <input type="text"  name="country"/>
+                <br></br>
+                Email:
+                <input type="text"  name="email"/>
+                <br></br>
+                Blood Group:
+
+                <select value="blood group" name="bg" >
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="B+">B+</option>
+                  <option value="O">O</option>
+                </select>
+                <br></br>
+                
+                <input type="submit" value="Submit"/>
+            </form>
+          
           </div>
         </div>
       </div>
