@@ -28,6 +28,11 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/Signup',
   ],
+  Search: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Search',
+  ],
 }
 
 config.plugins = config.plugins.concat([
