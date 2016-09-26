@@ -9,7 +9,7 @@ export default class SignupContainer extends React.Component {
         <div className="row">
           <div className="col-sm-12">
             <Headline>Sign-up Container</Headline>
-            <form action="/search/" method="get">
+            <form action="/loginapp" method="get">
          
                 First Name:
                 <input type="text"  name="first_name">
@@ -22,6 +22,10 @@ export default class SignupContainer extends React.Component {
                 Birthday:
                 <input type="date" name="bday"/>
                 <br></br>
+                City:
+                <input type="text" name="city"/>
+                <br></br>
+                
                 Mobile Num:
                 <input type="text"  name="contact"/>
                 <br></br>

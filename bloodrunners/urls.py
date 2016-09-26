@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.views import generic
 from bloodrunners.views import *
+from login.views import *
 
 
 urlpatterns = [
@@ -34,6 +35,7 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='signup.html')),
   url(r'^signup1/',
       generic.TemplateView.as_view(template_name='signup1.html')),
+  url(r'^loginapp/',addUser),
   
   url(r'^$',
       generic.TemplateView.as_view(template_name='view1.html')),
