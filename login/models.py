@@ -1,7 +1,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
-# from datetime import date
+from datetime import datetime
+
 
 # Create your models here.
 
@@ -22,6 +23,9 @@ class Users(models.Model):
 	contact = models.BigIntegerField(null=True)
 	age = models.BigIntegerField(default=0)
 	status = models.BigIntegerField(null=True) # 1 for active, 2 for temp, 3 for non active
+	
+	def __unicode__(self):
+		return self.first_name
 	# def __init__(self, dob, *args, **kwargs):
 	# 	super(models.Model, self).__init__(self, *args, **kwargs)
 	# 	today = date.today()

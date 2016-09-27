@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from models import Users
-from django.http import HttpResponseRedirect, HttpResponse
-import datetime
+
 # Create your views here.
+from django.http import HttpResponseRedirect, HttpResponse
+
 
 def addUser(request):
 	print(request.GET['bg'])
@@ -10,7 +11,10 @@ def addUser(request):
 	x=x.split("-")
 	print(x[2],x[0],x[2])
 	x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+
 	user = Users(
+		username=str(request.GET['username']),
+		password=str(request.GET['password']),
 		first_name=str(request.GET['first_name']),
 		last_name=str(request.GET['last_name']),
 		email=str(request.GET['email']),
@@ -18,8 +22,20 @@ def addUser(request):
 		city=str(request.GET['city']),
 		state=str(request.GET['state']),
 		country=str(request.GET['country']),
-		bg=str(request.GET['bg']),
 		dob=x,
+		bg=str(request.GET['bg']),
 		contact=int(request.GET['contact']))
 	user.save()
-	return HttpResponse("Nice")
+	#print (user.objects.all())
+	return HttpResponse("got")
+
+def login(request):
+	print(request.GET)
+	username=str(request.GET['username'])
+	password=str(request.GET['password'])
+	
+	if(Users.objects.filter(password=password, username=username).exists()):
+		return HttpResponse("logged-in")	
+	else:
+		return HttpResponse("incorrect data")	
+
