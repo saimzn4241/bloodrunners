@@ -1,24 +1,32 @@
 from __future__ import unicode_literals
 
 from django.db import models
-# from datetime import date
+from datetime import datetime
+
 
 # Create your models here.
 
 class Users(models.Model):
-	first_name = models.CharField(max_length=30)
-	last_name = models.CharField(max_length=40)
+	first_name = models.CharField(max_length=200)
+	last_name = models.CharField(max_length=200)
 	email = models.EmailField()
- 	address = models.CharField(max_length=50)
-	city = models.CharField(max_length=60)
-	state = models.CharField(max_length=30)
-	country = models.CharField(max_length=50)
-	bg = models.CharField(max_length=2)
-	badges = models.IntegerField(default=0)
-	# dob = models.CharField(max_length=12)
-	contact = models.IntegerField(default=0)
-	age = models.IntegerField(default=0)
-	status = models.IntegerField(default = 1) # 1 for active, 2 for temp, 3 for non active
+ 	address = models.CharField(max_length=200)
+	city = models.CharField(max_length=200)
+	state = models.CharField(max_length=200)
+	country = models.CharField(max_length=200)
+	bg = models.CharField(max_length=200)
+	username=models.CharField(max_length=200)
+	password=models.CharField(max_length=200)
+
+	badges = models.BigIntegerField(null=True)
+	dob = models.DateField()
+	contact = models.BigIntegerField(default=0)
+	age = models.BigIntegerField(null=True)
+	status = models.BigIntegerField(null=True) # 1 for active, 2 for temp, 3 for non active
+	
+	def __unicode__(self):
+		return self.first_name
+	
 	# def __init__(self, dob, *args, **kwargs):
 	# 	super(models.Model, self).__init__(self, *args, **kwargs)
 	# 	today = date.today()
