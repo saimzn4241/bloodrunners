@@ -3,6 +3,7 @@ from models import Users
 
 # Create your views here.
 from django.http import HttpResponseRedirect, HttpResponse
+import datetime
 
 
 def addUser(request):
