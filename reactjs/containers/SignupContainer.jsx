@@ -9,7 +9,7 @@ export default class SignupContainer extends React.Component {
         <div className="row">
           <div className="col-sm-12">
             <Headline>Sign-up Container</Headline>
-            <form action="/loginapp" method="get">
+            <form action="/loginapp/" method="POST">
                 
                 
                 First Name:
