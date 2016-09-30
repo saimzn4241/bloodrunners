@@ -12,6 +12,8 @@ module.exports = {
     Signup: './reactjs/Signup',
     Search: './reactjs/Search',
     Extra: './reactjs/Search',
+    Data: './reactjs/Data',
+    Data2: './reactjs/Data2',
     vendors: ['react'],
   },
 
