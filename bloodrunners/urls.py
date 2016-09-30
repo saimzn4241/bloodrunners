@@ -21,7 +21,7 @@ from login.views import *
 
 
 urlpatterns = [
-  url(r'^thanks/', generic.TemplateView.as_view(template_name='thanks.html')),
+  url(r'^thanks/$', generic.TemplateView.as_view(template_name='thanks.html')),
   url(r'^search-form/$', search_form),
   url(r'^search/$', search),
   
@@ -36,7 +36,7 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='signup.html')),
   
   url(r'^loginapp/$',addUser),
-  
+
   url(r'^loginapp1/$',login),
 
   url(r'^extra$',

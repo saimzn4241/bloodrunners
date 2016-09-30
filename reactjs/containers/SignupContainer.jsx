@@ -4,11 +4,11 @@ import Headline from "../components/Headline"
 
 export default class SignupContainer extends React.Component {
   render() {
+  if(this.props.type=='donor'){
     return (
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <Headline>Sign-up Container</Headline>
             <form action="/loginapp/" method="POST">
                 
                 
@@ -17,10 +17,13 @@ export default class SignupContainer extends React.Component {
                 </input>
 
                 <br></br>
-                Last Name:   
+                Last Name:
                 <input type="text"  name="last_name"/>
                 <br></br>
-                
+                Gender:  
+                <input type="radio" name="gender" value="male"/>Male
+                <input type="radio" name="gender" value="female"/> Female
+                <br></br>
 
                 UserName:
                 <input type="text"  name="username">
@@ -56,9 +59,15 @@ export default class SignupContainer extends React.Component {
                 Email:
                 <input type="text"  name="email"/>
                 <br></br>
+
+                Account Type :  
+                <input type="radio" name="type" value="donor"/>Donor
+                <input type="radio" name="type" value="hospital"/>Hospital
+                <br></br>
+
                 Blood Group:
 
-                <select value="blood group" name="bg" >
+                <select name="bg">
                   <option value="A">A</option>
                   <option value="B">B</option>
                   <option value="B+">B+</option>
@@ -72,6 +81,9 @@ export default class SignupContainer extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
+    } else if(this.props.type=='hospital'){
+        return(<h1>{this.props.type}</h1>);
+    }
   }
 }
