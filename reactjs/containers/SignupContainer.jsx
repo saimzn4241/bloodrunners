@@ -11,7 +11,7 @@ export default class SignupContainer extends React.Component {
           <div className="col-sm-12">
             <form action="/loginapp/" method="POST">
                 
-                
+                <input type="hidden" name="type" value="donor"/>
                 First Name:
                 <input type="text"  name="first_name">
                 </input>
@@ -59,14 +59,7 @@ export default class SignupContainer extends React.Component {
                 Email:
                 <input type="text"  name="email"/>
                 <br></br>
-
-                Account Type :  
-                <input type="radio" name="type" value="donor"/>Donor
-                <input type="radio" name="type" value="hospital"/>Hospital
-                <br></br>
-
                 Blood Group:
-
                 <select name="bg">
                   <option value="A">A</option>
                   <option value="B">B</option>
@@ -83,7 +76,14 @@ export default class SignupContainer extends React.Component {
       </div>
     );
     } else if(this.props.type=='hospital'){
-        return(<h1>{this.props.type}</h1>);
+        return(
+        <div>
+        <h1>Fuckoff!</h1>
+            <form action="/loginapp/" method="POST">
+                <input type="hidden" name="type" value="hospital"/>
+            </form>
+        </div>
+        );
     }
   }
 }
