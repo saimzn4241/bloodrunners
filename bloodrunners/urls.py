@@ -43,4 +43,6 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='extra.html')),
   url(r'^$',
       generic.TemplateView.as_view(template_name='view1.html')),
+   url(r'^data$',
+      generic.TemplateView.as_view(template_name='data.html')),
 ]
