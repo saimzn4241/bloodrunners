@@ -7,7 +7,7 @@ class Signup extends React.Component {
   constructor(props) {
         super(props);
         this.state = { // this is your default state
-          type: 'donor'
+          type: 'initial'
         }
       }
   donor() {
@@ -25,15 +25,15 @@ class Signup extends React.Component {
 
     return (
 		<div>
-			Registration Type :
+			<h1>Registration Type :</h1>
 			<br></br>
 			<button onClick={this.donor.bind(this)}>Donor</button>
 			<button onClick={this.hospital.bind(this)}>Hospital</button>
-		<SignupContainer type={this.state.type}/>  
-    	<h1>Signup</h1>
+			<SignupContainer type={this.state.type}/>  
+    		<h1>Signup</h1>
     	</div>
     );
   }
 }
 
-render(<Signup type='donor'/>, document.getElementById('Signup'))
+render(<Signup />, document.getElementById('Signup'))

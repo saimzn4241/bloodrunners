@@ -4,6 +4,9 @@ import Headline from "../components/Headline"
 
 export default class SignupContainer extends React.Component {
   render() {
+  var divStyle = {
+        color: 'red'
+  };
   if(this.props.type=='donor'){
     return (
       <div className="container">
@@ -61,9 +64,12 @@ export default class SignupContainer extends React.Component {
                 <br></br>
                 Blood Group:
                 <select name="bg">
-                  <option value="A">A</option>
-                  <option value="B">B</option>
+                  <option value="A-">A-</option>
+                  <option value="B-">B-</option>
+                  <option value="AB-">AB-</option>
+                  <option value="A+">A+</option>
                   <option value="B+">B+</option>
+                  <option value="AB+">AB+</option>
                   <option value="O">O</option>
                 </select>
                 <br></br>
@@ -77,11 +83,94 @@ export default class SignupContainer extends React.Component {
     );
     } else if(this.props.type=='hospital'){
         return(
-        <div>
-        <h1>Fuckoff!</h1>
+        <div className="col-sm-12">
+            <br></br>
             <form action="/loginapp/" method="POST">
                 <input type="hidden" name="type" value="hospital"/>
+
+                Hospital Name:
+                <input type="text"  name="hospitalName">
+                </input>
+                <br></br>
+                UserName:
+                <input type="text"  name="username">
+                </input>
+                <br></br>
+
+                Password:
+                <input type="password"  name="password">
+                </input>
+
+                <br></br>
+                <h5 style={divStyle}>Contact Person 1 :</h5>
+               
+                <div className="col-sm-12">
+                    
+                    First Name:
+                    <input type="text"  name="cp1First_name"/>
+                    <br></br>
+
+                    Last Name:
+                    <input type="text"  name="cp1Last_name"/>
+                    <br></br>
+
+                    Contact :
+                    <input type="text" name="cp1Contact"/>
+                </div>
+
+                <h5 style={divStyle}>Contact Person 2 :</h5>
+               
+                <div className="col-sm-12">
+                    
+                    First Name:
+                    <input type="text"  name="cp2First_name"/>
+                    <br></br>
+
+                    Last Name:
+                    <input type="text"  name="cp2Last_name"/>
+                    <br></br>
+
+                    Contact :
+                    <input type="text" name="cp2Contact"/>
+                </div>
+
+                <h5 style={divStyle}>Contact Person 3 :</h5>
+               
+                <div className="col-sm-12">
+                    
+                    First Name:
+                    <input type="text"  name="cp3First_name"/>
+                    <br></br>
+
+                    Last Name:
+                    <input type="text"  name="cp3Last_name"/>
+                    <br></br>
+
+                    Contact :
+                    <input type="text" name="cp3Contact"/>
+                </div>
+
+                Street:
+                <input type="text"  name="street"/>
+                <br></br>
+                City:
+                <input type="text"  name="city"/>
+                <br></br>
+                State:
+                <input type="text"  name="state"/>
+                <br></br>
+                Country:
+                <input type="text"  name="country"/>
+                <br></br>
+
+                <input type="submit" value="Submit"/>
             </form>
+        </div>
+        );
+    }else{
+        return(
+        <div>
+            <h3 style={divStyle}>Choose any of the above options!!</h3>
         </div>
         );
     }

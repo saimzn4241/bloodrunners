@@ -54,3 +54,13 @@ class Hospitals(models.Model):
 
 	def __unicode__(self):
 		return self.first_name
+
+
+class user2(models.Model):
+	username = models.CharField(max_length=50)
+	password = models.CharField(max_length=50)
+	first_name = models.CharField(max_length=30)
+	last_name = models.CharField(max_length=40)
+
+	def __unicode__(self):
+		return self.first_name
