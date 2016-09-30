@@ -53,7 +53,50 @@ def login(request):
 	password=str(request.POST.get('password'))
 	
 	if(Users.objects.filter(password=password, username=username).exists()):
-		return HttpResponse("logged-in")	
+		request.session['username'] = username
+		name=request.session['username']
+		return render(request, 'loggedin.html', {"username" : name})
 	else:
 		return HttpResponse("incorrect data")	
+
+@csrf_exempt
+def logout(request):
+   try:
+      del request.session['username']
+   except:
+      pass
+   return render(request, 'home.html')
+
+
+
+		
+
+# def login1(request):
+#    username = 'not logged in'
+   
+#    if request.method == 'POST':
+#       MyLoginForm = LoginForm(request.POST)
+      
+#       if MyLoginForm.is_valid():
+#          username = MyLoginForm.cleaned_data['username']
+#          request.session['username'] = username
+#       else:
+#          MyLoginForm = LoginForm()
+			
+#    return render(request, 'loggedin.html', {"username" : username})
+
+# def formView(request):
+#    if request.session.has_key('username'):
+#       username = request.session['username']
+#       return render(request, 'loggedin.html', {"username" : username})
+#    else:
+#       return render(request, 'login.html', {}) 
+      
+# def logout(request):
+#    try:
+#       del request.session['username']
+#    except:
+#       pass
+#    return HttpResponse("<strong>You are logged out.</strong>")        	
+
 

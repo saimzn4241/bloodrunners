@@ -18,6 +18,11 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/Home',
   ],
+  Extra: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Extra',
+  ],
   Login: [
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',

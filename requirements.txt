@@ -1,2 +1,1 @@
-pip install django-webpack-loader
-pip install django
+npm install react-render
