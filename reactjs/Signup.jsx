@@ -4,21 +4,32 @@ import { render } from "react-dom"
 import SignupContainer from "./containers/SignupContainer"
 
 class Signup extends React.Component {
-  donor(){
-  	this.props.type='donor';
-  }
-  hospital(){
-  	this.props.type='hospital';
-  }
+  constructor(props) {
+        super(props);
+        this.state = { // this is your default state
+          type: 'donor'
+        }
+      }
+  donor() {
+        this.setState({
+          type: 'donor'
+        })
+      }
+
+  hospital() {
+        this.setState({
+          type: 'hospital'
+        })
+      }
   render() {
 
     return (
 		<div>
 			Registration Type :
 			<br></br>
-			<button class="btn btn-block btn-primary" onClick={this.donor}>Donor</button>
-			<button class="btn btn-block btn-primary" onClick={this.hospital}>Hospital</button>
-		<SignupContainer type={this.props.type}/>  
+			<button onClick={this.donor.bind(this)}>Donor</button>
+			<button onClick={this.hospital.bind(this)}>Hospital</button>
+		<SignupContainer type={this.state.type}/>  
     	<h1>Signup</h1>
     	</div>
     );
