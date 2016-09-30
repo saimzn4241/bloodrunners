@@ -13,6 +13,7 @@ module.exports = {
     Search: './reactjs/Search',
     Extra: './reactjs/Search',
     Data: './reactjs/Data',
+    Data2: './reactjs/Data2',
     vendors: ['react'],
   },
 

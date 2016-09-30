@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from models import Users,Hospitals
+from django.http import JsonResponse
+
 
 # Create your views here.
 from django.http import HttpResponseRedirect, HttpResponse
@@ -66,6 +68,11 @@ def logout(request):
    except:
       pass
    return render(request, 'home.html')
+
+
+#@csrf_exempt
+def req(request):
+	return JsonResponse({'foo':'bar'})
 
 
 

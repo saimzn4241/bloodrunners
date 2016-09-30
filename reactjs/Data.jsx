@@ -21,9 +21,7 @@ var Data = React.createClass({
           _this.setState({
             jobs: result.data.jobs
           });
-
-    }
-
+     }
     )
   },
 
