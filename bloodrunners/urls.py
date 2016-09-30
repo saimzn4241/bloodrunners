@@ -21,23 +21,23 @@ from login.views import *
 
 
 urlpatterns = [
-  url(r'^thanks/', generic.TemplateView.as_view(template_name='thanks.html')),
+  url(r'^thanks/$', generic.TemplateView.as_view(template_name='thanks.html')),
   url(r'^search-form/$', search_form),
   url(r'^search/$', search),
   
   url(r'^admin/', admin.site.urls),
-  url(r'^your_name/',get_name),
-  url(r'^home/',
+  url(r'^your_name/$',get_name),
+  url(r'^home/$',
       generic.TemplateView.as_view(template_name='home.html')),
-  url(r'^login/',
+  url(r'^login/$',
       generic.TemplateView.as_view(template_name='login.html')),
   
-  url(r'^signup/',
+  url(r'^signup/$',
       generic.TemplateView.as_view(template_name='signup.html')),
   
-  url(r'^loginapp/',addUser),
+  url(r'^loginapp/$',addUser),
   
-  url(r'^loginapp1/',login),
+  url(r'^loginapp1/$',login),
   
   url(r'^$',
       generic.TemplateView.as_view(template_name='view1.html')),
