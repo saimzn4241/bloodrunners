@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
     'webpack_loader',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
+    'react',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +119,11 @@ WEBPACK_LOADER = {
         'BUNDLE_DIR_NAME': 'bundles/local/',  # end with slash
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-local.json'),
     }
+}
+
+REACT = {
+    'RENDER': not DEBUG,
+    'RENDER_URL': 'http://127.0.0.1:3000/render',
 }
 
 # Internationalization

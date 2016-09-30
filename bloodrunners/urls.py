@@ -36,9 +36,11 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='signup.html')),
   
   url(r'^loginapp/$',addUser),
-  
+
   url(r'^loginapp1/$',login),
-  
+
+  url(r'^extra$',
+      generic.TemplateView.as_view(template_name='extra.html')),
   url(r'^$',
       generic.TemplateView.as_view(template_name='view1.html')),
 ]

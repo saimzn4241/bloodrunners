@@ -9,8 +9,9 @@ export default class LoginContainer extends React.Component {
         <div className="row">
           <div className="col-sm-12">
             <Headline>Login Container</Headline>
-            <form action="/loginapp1/" method="POST">
-         
+            <form action="/loginapp1/" method="POST"> 
+                    
+
                 Username:
                 <input type="text"  name="username">
                 </input>
