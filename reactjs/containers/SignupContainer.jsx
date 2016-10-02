@@ -12,7 +12,7 @@ export default class SignupContainer extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <form action="/loginapp/" method="POST">
+            <form action="/addUser/" method="POST">
                 
                 <input type="hidden" name="type" value="donor"/>
                 First Name:
@@ -85,7 +85,7 @@ export default class SignupContainer extends React.Component {
         return(
         <div className="col-sm-12">
             <br></br>
-            <form action="/loginapp/" method="POST">
+            <form action="/addUser/" method="POST">
                 <input type="hidden" name="type" value="hospital"/>
 
                 Hospital Name:

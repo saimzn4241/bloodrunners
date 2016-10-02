@@ -31,13 +31,14 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='home.html')),
   url(r'^login/$',
       generic.TemplateView.as_view(template_name='login.html')),
-  
+  url(r'^logout/$',logout),
+
   url(r'^signup/$',
       generic.TemplateView.as_view(template_name='signup.html')),
   
-  url(r'^loginapp/$',addUser),
+  url(r'^addUser/$',addUser),
 
-  url(r'^loginapp1/$',login),
+  url(r'^login_verify/$',login),
 
   url(r'^extra$',
       generic.TemplateView.as_view(template_name='extra.html')),

@@ -21,8 +21,8 @@ def addUser(request):
 			print(request.POST.get('bday'))
 			x=str(request.POST.get('bday'))
 			x=x.split("-")
-			print(x[2],x[0],x[2])
-			x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+			print(x[0],x[1],x[2])
+			x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
 
 			user = Users(
 				username=str(request.POST.get('username')),
@@ -71,18 +71,46 @@ def addUser(request):
 	else :
 		return HttpResponse("Not ")
 
+# @csrf_exempt
+# def login_old(request):
+# 	print(request.POST.get('username'))
+# 	username=str(request.POST.get('username'))
+# 	password=str(request.POST.get('password'))
+	
+# 	if(Users.objects.filter(password=password, username=username).exists()):
+# 		request.session['username'] = username
+# 		name=request.session['username']
+# 		return render(request, 'loggedin.html', {"username" : name})
+# 	else:
+# 		return HttpResponse("incorrect data")	
+
+
 @csrf_exempt
 def login(request):
+	print(request)
 	print(request.POST.get('username'))
+	print(request.POST.get('password'))
 	username=str(request.POST.get('username'))
 	password=str(request.POST.get('password'))
 	
 	if(Users.objects.filter(password=password, username=username).exists()):
 		request.session['username'] = username
 		name=request.session['username']
-		return render(request, 'loggedin.html', {"username" : name})
+		return JsonResponse({'login_value':'ok'})
 	else:
-		return HttpResponse("incorrect data")	
+		return JsonResponse({'login_value':'not ok'})
+
+	# m=Users.objects.filter(password=request.POST.get('password'), username=request.POST.get('username'))
+	# if(m.exists()):
+	# 	request.session['username'] = m.username
+ #        #return HttpResponse("You're logged in.")
+	# 	return JsonResponse({'login_value':'ok'})
+
+	# else:
+ #        #return HttpResponse("Your username and password didn't match.")
+	# 	return JsonResponse({'login_value':'not ok'})
+
+
 
 @csrf_exempt
 def logout(request):
@@ -90,7 +118,10 @@ def logout(request):
       del request.session['username']
    except:
       pass
-   return render(request, 'home.html')
+   #return render(request, 'home.html')
+   #return HttpResponse("You're logged out.")
+   return JsonResponse({'logout_value':'not ok'})
+
 
 
 #@csrf_exempt
@@ -122,11 +153,5 @@ def req(request):
 #    else:
 #       return render(request, 'login.html', {}) 
       
-# def logout(request):
-#    try:
-#       del request.session['username']
-#    except:
-#       pass
-#    return HttpResponse("<strong>You are logged out.</strong>")        	
 
 
