@@ -64,3 +64,10 @@ class user2(models.Model):
 
 	def __unicode__(self):
 		return self.first_name
+
+class Link(models.Model):
+	user = models.ForeignKey(Users, on_delete=models.CASCADE)
+	hospitals = models.ForeignKey(Hospitals, on_delete=models.CASCADE)
+	status=models.BooleanField(default=False)
+	def __unicode__(self):
+		return self.user
