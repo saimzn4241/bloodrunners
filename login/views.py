@@ -22,8 +22,8 @@ def addUser(request):
 			x=str(request.POST.get('bday'))
 			x=x.split("-")
 			print(x[0],x[1],x[2])
-			# x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
-			x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+			x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
+			#x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
 
 			user = Users(
 				username=str(request.POST.get('username')),

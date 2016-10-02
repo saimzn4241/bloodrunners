@@ -1,7 +1,7 @@
 import React from "react"
 
-import Headline from "../components/Headline"
 import axios from 'axios';
+
 
 export default class LoginContainer extends React.Component {
 
@@ -20,19 +20,27 @@ export default class LoginContainer extends React.Component {
     var password= this.state.password;
     var qs = require('qs');
     var _this = this;
-    axios.post('/login_verify/',qs.stringify({password: password , username: username}))
+    axios.post('/login_verify/' ,qs.stringify({password: password , username: username}))
     .then(function (response) {
      
-      console.log(response);
-      console.log("here");
-      
-    _this.setState({
-          value: response.data.login_value
-          });
+        console.log(response);
+        console.log("here");
+          
+        _this.setState({
+            value: response.data.login_value
+            });
+
+          if(_this.state.value=="ok"){
+            console.log("okok1");
+            var arg=_this.state.username;
+            console.log(arg);
+             _this.props.updateStateProp(arg);
+          }       
     })
     .catch(function (error) {
       console.log(error);
     });
+    
 
   }    
 
@@ -46,33 +54,35 @@ export default class LoginContainer extends React.Component {
    }
 
   render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12">
-            <Headline>Login Container</Headline>
-            
-                Username:
-                <input type="text"   name="username" onChange = {this.updateUsername.bind(this)}>
-                </input>
-                <br></br>
+    
+      return (
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              
+                  Username:
+                  <input type="text"   name="username" onChange = {this.updateUsername.bind(this)}>
+                  </input>
+                  <br></br>
 
-                Password:   
-                <input type="password"  name="password" onChange = {this.updatePassword.bind(this)}>
-                </input>
-                
-                
-                <br></br>
-                
-                
-                <input type="button" value="Submit" onClick={this.request.bind(this)}/>
-                
-                <h1>{this.state.value}</h1>
-                
+                  Password:   
+                  <input type="password"  name="password" onChange = {this.updatePassword.bind(this)}>
+                  </input>
+                  
+                  
+                  <br></br>
+                  
+                  
+                  <input type="button" value="Submit" onClick={this.request.bind(this)}/>
+                  
+                  <h1>{this.state.value}</h1>
+                  
 
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    
+
   }
 }
