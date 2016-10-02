@@ -1,6 +1,8 @@
 import React from "react"
 import Login from "../Login"
 import { render } from "react-dom"
+import axios from 'axios';
+
             
 export default class Headline extends React.Component {
       
@@ -10,8 +12,6 @@ export default class Headline extends React.Component {
         
           this.state = {
              session: '',
-             username:'',
-             password:'',
              type: 'initial'
           }
 
@@ -36,13 +36,24 @@ export default class Headline extends React.Component {
               type: 'signup'
             })
         }
-        signoutfun() {
+        logoutfun() {
          var _this = this;
+         var qs = require('qs');
         
+            
+
             _this.setState({
-              type: ''
-            })
+              type: 'initial',
+              session: ''
+            });
+            axios.post('/logout/' ,qs.stringify({username: this.state.session})).then(function(result) {    
+              console.log(result)
+            });
+            
+            
         }
+    
+        
       
 
 
@@ -58,10 +69,8 @@ export default class Headline extends React.Component {
                 < button type="submit">Home</button>
                 </form>
                 
-                <form method="get" action="/signup">
-                <button onClick={this.signoutfun.bind(this)}>Sign-Out</button>
-                </form>
-              
+                <button onClick={this.logoutfun.bind(this)}>Log-Out</button>
+                
                 
                 
                 <h1>{ this.props.children }</h1>

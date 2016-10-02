@@ -121,7 +121,7 @@ def logout(request):
       pass
    #return render(request, 'home.html')
    #return HttpResponse("You're logged out.")
-   return JsonResponse({'logout_value':'not ok'})
+   return JsonResponse({'logout_value':'ok'})
 
 
 
