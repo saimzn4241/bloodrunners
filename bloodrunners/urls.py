@@ -48,5 +48,7 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='data.html')),
    url(r'^data2$',
       generic.TemplateView.as_view(template_name='data2.html')),
+   url(r'^maps$',
+      generic.TemplateView.as_view(template_name='maps.html')),
    url(r'^req$',req),
 ]

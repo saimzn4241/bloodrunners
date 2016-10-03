@@ -17,7 +17,7 @@ class Users(models.Model):
 	city = models.CharField(max_length=60)
 	state = models.CharField(max_length=30)
 	country = models.CharField(max_length=50)
-	bg = models.CharField(max_length=200)
+	bg = models. (max_length=200)
 	badges = models.BigIntegerField(null=True)
 	dob = models.DateField()
 	contact = models.BigIntegerField(null=True)
