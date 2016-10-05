@@ -46,14 +46,33 @@ export default class Headline extends React.Component {
               type: 'initial',
               session: ''
             });
-            axios.post('/logout/' ,qs.stringify({username: this.state.session})).then(function(result) {    
+            axios.  post('/logout/' ,qs.stringify({username: this.state.session})).then(function(result) {    
               console.log(result)
             });
             
             
         }
+        homefun() {
+         var _this = this;
+         var qs = require('qs');
+         var ses=_this.state.session;
+         var typ=_this.state.type;
+          if(_this.state.type=='login'){
+            _this.setState({
+              type: 'login',
+              session: ses
+            }); 
+          }
+            
+        }
     
+        homefun1() {
+         var _this = this;
         
+            _this.setState({
+              type: 'initial'
+            })
+        }
       
 
 
@@ -65,36 +84,26 @@ export default class Headline extends React.Component {
               <div>
                 <h1>User logged in= {this.state.session}</h1>
 
-                <form method="get" action="/home">
-                < button type="submit">Home</button>
-                </form>
+                <button onClick={this.homefun.bind(this)}>Home</button>
+
                 
                 <button onClick={this.logoutfun.bind(this)}>Log-Out</button>
-                
-                
-                
-                <h1>{ this.props.children }</h1>
               </div>
             );
 
           }
-
-          else{
+            else{
             return (
           	<div>
-              <form method="get" action="/home">
-              < button type="submit">Home</button>
-              </form>
-              
+              <button onClick={this.homefun1.bind(this)}>Home</button>
+
               <form method="get" action="/signup">
               < button type="submit">Sign-Up</button>
               </form>
-            
               <button  onClick={this.loginfun.bind(this)} >Login</button>
               <Login type={this.state.type} updateStateProp = {this.updateState.bind(this)}/> 
             	<h1>session in headline={this.state.session}</h1>
 
-            	<h1>{ this.props.children }</h1>
           	</div>
             );
           }
