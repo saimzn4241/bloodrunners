@@ -22,8 +22,8 @@ def addUser(request):
 			x=str(request.POST.get('bday'))
 			x=x.split("-")
 			print(x[0],x[1],x[2])
-			# x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
-			x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+			x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
+			#x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
 
 			user = Users(
 				username=str(request.POST.get('username')),
@@ -96,8 +96,8 @@ def login(request):
 	password=str(request.POST.get('password'))
 	
 	if(Users.objects.filter(password=password, username=username).exists()):
-		request.session['username'] = username
-		name=request.session['username']
+		request.session[username] = username
+		name=request.session[username]
 		return JsonResponse({'login_value':'ok'})
 	else:
 		return JsonResponse({'login_value':'not ok'})
@@ -117,12 +117,12 @@ def login(request):
 @csrf_exempt
 def logout(request):
    try:
-      del request.session['username']
+      del request.session[request.POST.get('username')]
+      return JsonResponse({'logout_value':'ok'})
    except:
-      pass
-   #return render(request, 'home.html')
-   #return HttpResponse("You're logged out.")
-   return JsonResponse({'logout_value':'not ok'})
+     #return render(request, 'home.html')
+   		return HttpResponse("cant log out.")
+   
 
 
 
