@@ -38,7 +38,8 @@ def addUser(request):
 				dob=x,
 				gender=str(request.POST.get('gender')),
 				bg=str(request.POST.get('bg')),
-				contact=int(request.POST.get('contact')))
+				contact=int(request.POST.get('contact')),
+				badges=0)
 			user.save()
 		elif(request.POST.get('type')=='hospital'):
 			user = Hospitals(

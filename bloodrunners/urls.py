@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.views import generic
 from bloodrunners.views import *
 from login.views import *
+from info.views import *
 
 
 urlpatterns = [
@@ -49,4 +50,5 @@ urlpatterns = [
    url(r'^data2$',
       generic.TemplateView.as_view(template_name='data2.html')),
    url(r'^req$',req),
+   url(r'^profile/(?P<name>[\w.@+-]+)/$',getUserInfo)
 ]
