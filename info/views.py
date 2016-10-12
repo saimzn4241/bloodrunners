@@ -92,8 +92,8 @@ def getHospitalLocation(request):
 	retData = []
 	for i in hospitalLocationData:
 		tempData = []
+		tempData.append(i[1])
+		tempData.append(i[2])
 		tempData.append(i[0])
-		tempData.append(i[1])
-		tempData.append(i[1])
 		retData.append(tempData)
 	return JsonResponse(retData,safe = False)
