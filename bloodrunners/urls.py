@@ -50,5 +50,7 @@ urlpatterns = [
    url(r'^data2$',
       generic.TemplateView.as_view(template_name='data2.html')),
    url(r'^req$',req),
-   url(r'^profile/(?P<name>[\w.@+-]+)/$',getUserInfo)
+   url(r'^profile/(?P<name>[\w.@+-]+)/$',getUserInfo),
+   url(r'^userLocData$',getUserLocation),
+   url(r'^hosLocData$',getHospitalLocation),
 ]
