@@ -76,3 +76,24 @@ def getUserInfo(request,name):
 		data = {}
 		data['type'] = 'null'
 		return JsonResponse(data)
+
+def getUserLocation(request):
+	userLocationData = Users.objects.values_list('fix_lat','fix_long')
+	retData = []
+	for i in userLocationData:
+		tempData = []
+		tempData.append(i[0])
+		tempData.append(i[1])
+		retData.append(tempData)
+	return JsonResponse(retData,safe = False)
+
+def getHospitalLocation(request):
+	hospitalLocationData = Hospitals.objects.values_list('hospitalName','fix_lat','fix_long')
+	retData = []
+	for i in hospitalLocationData:
+		tempData = []
+		tempData.append(i[0])
+		tempData.append(i[1])
+		tempData.append(i[1])
+		retData.append(tempData)
+	return JsonResponse(retData,safe = False)
