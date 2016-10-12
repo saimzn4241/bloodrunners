@@ -1,12 +1,127 @@
 import React from "react"
 
 import Headline from "../components/Headline"
+import axios from 'axios';
+
+//No support for mixins 
+//var LinkedStateMixin = require('react-addons-linked-state-mixin');
+//import linkState from "react-addons-linked-state-mixin"
+
+var BaseApiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+var Key = '&key=AIzaSyCEZBUCbawCF7xfnms9xdgDodS7s423b2E';
 
 export default class SignupContainer extends React.Component {
+  
+  constructor(props){
+    super(props);
+    this.state = {
+        type: '',
+        name: '',
+        street: '',
+        city: '',
+        zip: '',
+        state: '',
+        country: '',
+        flat: '',
+        flong: '',
+        dlant: '',
+        dlong: '',
+        count: 0
+    }
+  }
+
+  updatFLocat(){
+    this.setState({count : this.state.count + 1});
+    console.log(this.state.count);
+    var _this=this;
+    console.log(this.props.type);
+    var checkurl=BaseApiUrl;
+    if(this.props.type=='hospital'){
+        checkurl+=this.state.name;
+    }
+    var url=checkurl+'+'+this.state.street+'+'+this.state.city+'+'+this.state.zip+'+'+this.state.country+Key;
+    console.log(url);
+    axios.post(url)
+    .then(function (response) {
+        
+        console.log(response)
+        console.log("seperate")
+        if(response.data.status=='OK'){
+
+        console.log(response.data.results[1].geometry.location);
+          
+        _this.setState({
+            flat: response.data.results[1].geometry.location.lat,
+            flong: response.data.results[1].geometry.location.lng
+            });
+        }
+
+        // console.log(this.state.flat)       
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  updateType(e){
+    this.setState({
+        type: e
+    });
+  }
+
+  updateName(e){
+    this.setState({
+        name: e.target.value
+    },
+    function(){
+        this.updatFLocat();
+    });
+  }
+
+  updateStreet(e){
+    this.setState({
+        street: e.target.value
+    },
+    function(){
+        this.updatFLocat();
+    });
+  }
+
+  updateCity(e){
+    this.setState({
+        city: e.target.value
+    },
+    function(){
+        this.updatFLocat();
+    });
+  }
+
+  updateZip(e){
+    this.setState({
+        zip: e.target.value
+    },
+    function(){
+        this.updatFLocat();
+    });
+    
+  }
+
+  updateCountry(e){
+    this.setState({
+        country: e.target.value
+    },
+    function(){
+        this.updatFLocat();
+    });
+    // console.log(this.state.country+' 86' );
+    
+  }
+
   render() {
   var divStyle = {
         color: 'red'
   };
+
   if(this.props.type=='donor'){
     return (
       <div className="container">
@@ -15,6 +130,16 @@ export default class SignupContainer extends React.Component {
             <form action="/addUser/" method="POST">
                 
                 <input type="hidden" name="type" value="donor"/>
+
+                {/* For fixed location */}
+                <input type="hidden" name="flat" value={this.state.flat}/>
+                <input type="hidden" name="flong" value={this.state.flong}/>
+
+                {/* For variable location */}
+                <input type="hidden" name="dlat" value={this.state.dlat}/>
+                <input type="hidden" name="dlong" value={this.state.dlong}/>
+
+                {/*-- Main Form --*/}
                 First Name:
                 <input type="text"  name="first_name">
                 </input>
@@ -44,20 +169,23 @@ export default class SignupContainer extends React.Component {
                 <br></br>
                 
                 City:
-                <input type="text" name="city"/>
+                <input type="text" name="city" onChange={this.updateCity.bind(this)}/>
+                <br></br>
+                Zip:
+                <input type="text" name="zip" onChange={this.updateZip.bind(this)}/>
                 <br></br>
                 
                 Mobile Num:
                 <input type="text"  name="contact"/>
                 <br></br>
                 Address:
-                <input type="text"  name="address"/>
+                <input type="text"  name="address" onChange={this.updateStreet.bind(this)}/>
                 <br></br>
                 State:
-                <input type="text"  name="state"/>
+                <input type="text"  name="state" />
                 <br></br>
                 Country:
-                <input type="text"  name="country"/>
+                <input type="text"  name="country" onChange={this.updateCountry.bind(this)}/>
                 <br></br>
                 Email:
                 <input type="text"  name="email"/>
@@ -75,6 +203,7 @@ export default class SignupContainer extends React.Component {
                 <br></br>
                 
                 <input type="submit" value="Submit"/>
+                <h1>{this.state.country}</h1>
             </form>
           
           </div>
@@ -89,7 +218,7 @@ export default class SignupContainer extends React.Component {
                 <input type="hidden" name="type" value="hospital"/>
 
                 Hospital Name:
-                <input type="text"  name="hospitalName">
+                <input type="text"  name="hospitalName" onChange={this.updateName.bind(this)}>
                 </input>
                 <br></br>
                 UserName:
@@ -151,16 +280,19 @@ export default class SignupContainer extends React.Component {
                 </div>
 
                 Street:
-                <input type="text"  name="street"/>
+                <input type="text"  name="street" onChange={this.updateStreet.bind(this)}/>
                 <br></br>
                 City:
-                <input type="text"  name="city"/>
+                <input type="text"  name="city" onChange={this.updateCity.bind(this)}/>
+                <br></br>
+                Zip:
+                <input type="text"  name="zip" onChange={this.updateZip.bind(this)}/>
                 <br></br>
                 State:
-                <input type="text"  name="state"/>
+                <input type="text"  name="state" />
                 <br></br>
                 Country:
-                <input type="text"  name="country"/>
+                <input type="text"  name="country" onChange={this.updateCountry.bind(this)}/>
                 <br></br>
 
                 <input type="submit" value="Submit"/>
