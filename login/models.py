@@ -58,7 +58,7 @@ class Hospitals(models.Model):
 	fix_long = models.FloatField(default=0.0)
 
 	def __unicode__(self):
-		return self.first_name
+		return self.hospitalName
 
 
 class user2(models.Model):
