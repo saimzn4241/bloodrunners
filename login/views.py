@@ -15,16 +15,23 @@ def addUser(request):
 	# print user.first_name,user.username
 	# user.username="dsfdf"
 	# print user.first_name,user.username
+	returnRespone = {}
+	returnRespone['error'] = True
+	
 	if request.method=='POST':
+		returnRespone['email'] = ''
+		returnRespone['username']=request.POST.get('username')
+		returnRespone['error'] = False
 		if(request.POST.get('type')=='donor'):
 			print "Got the post req"
 			print(request.POST.get('bday'))
 			x=str(request.POST.get('bday'))
 			x=x.split("-")
 			print(x[0],x[1],x[2])
-			x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
-			#x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
-
+			# x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
+			x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+			returnRespone['name']=str(request.POST.get('first_name'))+' '+str(request.POST.get('last_name'))
+			returnRespone['email']=request.POST.get('email')
 			user = Users(
 				username=str(request.POST.get('username')),
 				password=str(request.POST.get('password')),
@@ -42,6 +49,7 @@ def addUser(request):
 				badges=0)
 			user.save()
 		elif(request.POST.get('type')=='hospital'):
+			returnRespone['name']=request.POST.get('hospitalName')
 			user = Hospitals(
 				hospitalName=str(request.POST.get('hospitalName')),
 				username=str(request.POST.get('username')),
@@ -69,9 +77,9 @@ def addUser(request):
 				user.cp3Last_name=str(request.POST.get('cp3Last_name'))
 				user.cp3Contact=int(request.POST.get('cp3Contact'))
 			user.save()
-		return HttpResponse("got")
+		return JsonResponse(returnRespone)
 	else :
-		return HttpResponse("Not ")
+		return JsonResponse(returnRespone)
 
 # @csrf_exempt
 # def login_old(request):
