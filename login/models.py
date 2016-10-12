@@ -23,10 +23,10 @@ class Users(models.Model):
 	contact = models.BigIntegerField(null=True)
 	age = models.BigIntegerField(default=0)
 	status = models.BigIntegerField(null=True) # 1 for active, 2 for temp, 3 for non active
-	# fix_lat = models.BigIntegerField()
-	# fix_long = models.BigIntegerField()
-	# cur_lat = models.BigIntegerField(default=)
-	# cur_long = models.BigIntegerField(default=0)
+	fix_lat = models.FloatField(default=0.0)
+	fix_long = models.FloatField(default=0.0)
+	cur_lat = models.FloatField(default=0.0)
+	cur_long = models.FloatField(default=0.0)
 	def __unicode__(self):
 		return self.first_name
 	# def __init__(self, dob, *args, **kwargs):
@@ -54,6 +54,8 @@ class Hospitals(models.Model):
 	state = models.CharField(max_length=100)
 	country = models.CharField(max_length=100)
 	verified = models.BigIntegerField(default=0)
+	fix_lat = models.FloatField(default=0.0)
+	fix_long = models.FloatField(default=0.0)
 
 	def __unicode__(self):
 		return self.first_name
