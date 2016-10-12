@@ -29,10 +29,16 @@
     
     <script>
         
-        
+        var places=[];
+        var length_p=0;
+
+
         function initMap() {
             
-    
+            this.loadJSON();
+            console.log(places)
+            console.log(length_p);
+            
             var broadway = {
                 info: '<strong>Chipotle on Broadway</strong><br>\
                             5224 N Broadway St<br> Chicago, IL 60640<br>\
@@ -63,29 +69,39 @@
               [sheridan.info, sheridan.lat, sheridan.long, 2],
             ];
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 13,
-                center: new google.maps.LatLng(41.976816, -87.659916),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
+            // var map = new google.maps.Map(document.getElementById('map'), {
+            //     zoom: 13,
+            //     center: new google.maps.LatLng( 28.625758, 77.369719),
+            //     mapTypeId: google.maps.MapTypeId.ROADMAP
+            // });
 
             var infowindow = new google.maps.InfoWindow({});
 
             var marker, i;
 
-            for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    map: map
-                });
+            // for (i = 0; i < locations.length; i++) {
+            //     marker = new google.maps.Marker({
+            //         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            //         map: map
+            //     });
 
-                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                    return function () {
-                        infowindow.setContent(locations[i][0]);
-                        infowindow.open(map, marker);
-                    }
-                })(marker, i));
-            }
+            //     google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            //         return function () {
+            //             infowindow.setContent(locations[i][0]);
+            //             infowindow.open(map, marker);
+            //         }
+            //     })(marker, i));
+            // }
+            // console.log("places =");
+                  
+            // for (i = 0; i < length_p; i++) {
+            //     console.log(places[i][0], places[i][1]);
+                    
+            //     marker = new google.maps.Marker({
+            //         position: new google.maps.LatLng(places[i][0], places[i][1]),
+            //         map: map
+            //     });               
+            // }
         }
 
 
@@ -114,12 +130,49 @@
             }
             
             http_request.onreadystatechange = function(){
-            
                if (http_request.readyState == 4  ){
                   // Javascript function JSON.parse to parse JSON data
-                  console.log(http_request.responseText);
-                  //var jsonObj = JSON.parse(http_request.responseText);
+                  //console.log(http_request.responseText);
+                  
+                  var jsonObj = JSON.parse(http_request.responseText);
                   //console.log(jsonObj);
+                  for (var i = 0; i < jsonObj.length; i++) {
+                    length_p+=1;
+                   places.push(jsonObj[i]);
+                  }
+
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: new google.maps.LatLng( 28.625758, 77.369719),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+                  });
+                  console.log(length_p);
+                  for (i = 0; i < length_p; i++) {
+
+                console.log(places[i][0], places[i][1]);
+                //var image = 'bloodrunners/hosp.png'; 
+                 var icon = {
+                      // url: "https://cdn3.iconfinder.com/data/icons/medical-3-1/512/hospital_place-512.png", 
+                      url: "http://www.iconsdb.com/icons/preview/soylent-red/map-marker-2-xxl.png",
+                      scaledSize: new google.maps.Size(25, 30), // scaled size
+                      origin: new google.maps.Point(0,0), // origin
+                      anchor: new google.maps.Point(0, 0) // anchor
+                  };   
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(places[i][1], places[i][0]),
+                    //label: 'B',
+                    icon: icon,
+                    
+                    map: map
+                });
+
+               
+            }
+                  //console.log("places =");
+                  
+                  //console.log(jsonObj);
+                  
+                  //console.log(jsonObj[0][0]);
                   
                   // jsonObj variable now contains the data structure and can
                   // be accessed as jsonObj.name and jsonObj.country.
@@ -137,8 +190,9 @@
     <script src="script.js"></script>
     <script async defer 
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHpf83Zhph36VUbLYiP_dfIDJoaKMKnwU&callback=initMap"></script>
-<button type="" onclick = "loadJSON()">here</button>
-</body>
+<!-- <button type="" onclick = "loadJSON()">here</button>
+ -->
+ </body>
 
 
 </html>
