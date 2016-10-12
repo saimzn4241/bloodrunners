@@ -94,13 +94,23 @@ def login(request):
 	print(request.POST.get('password'))
 	username=str(request.POST.get('username'))
 	password=str(request.POST.get('password'))
-	
+	dataToBeSend = {}
+	dataToBeSend['login_value'] = 'not ok'
+	dataToBeSend['error'] = True
 	if(Users.objects.filter(password=password, username=username).exists()):
 		request.session[username] = username
 		name=request.session[username]
-		return JsonResponse({'login_value':'ok'})
+		user=(Users.objects.get(username=username))
+		dataToBeSend['uid'] = str(user.id)
+		dataToBeSend['login_value'] = 'ok'
+		dataToBeSend['email'] = str(user.email)
+		dataToBeSend['user'] = str(username)
+		dataToBeSend['error'] = False
+		print (JsonResponse(dataToBeSend))
+		return JsonResponse(dataToBeSend)
 	else:
-		return JsonResponse({'login_value':'not ok'})
+		print (JsonResponse(dataToBeSend))
+		return JsonResponse(dataToBeSend)
 
 	# m=Users.objects.filter(password=request.POST.get('password'), username=request.POST.get('username'))
 	# if(m.exists()):
