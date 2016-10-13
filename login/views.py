@@ -28,7 +28,7 @@ def addUser(request):
 			x=str(request.POST.get('bday'))
 			x=x.split("-")
 			print(x[0],x[1],x[2])
-			# x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
+			#x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
 			x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
 			returnRespone['name']=str(request.POST.get('first_name'))+' '+str(request.POST.get('last_name'))
 			returnRespone['email']=request.POST.get('email')
@@ -106,9 +106,15 @@ def login(request):
 	dataToBeSend['login_value'] = 'not ok'
 	dataToBeSend['error'] = True
 	if(Users.objects.filter(password=password, username=username).exists()):
-		request.session[username] = username
-		name=request.session[username]
+		request.session['username'] = username
+		name=request.session['username']
 		user=(Users.objects.get(username=username))
+		
+		print request.session._session_key
+		print request.session
+		print request.session.items()
+
+
 		dataToBeSend['uid'] = str(user.id)
 		dataToBeSend['login_value'] = 'ok'
 		dataToBeSend['email'] = str(user.email)
@@ -135,7 +141,10 @@ def login(request):
 @csrf_exempt
 def logout(request):
    try:
-      del request.session[request.POST.get('username')]
+      #del request.session[request.POST.get('username')]
+      del request.session['username']
+      
+      print request.session.items()
       return JsonResponse({'logout_value':'ok'})
    except:
      #return render(request, 'home.html')
@@ -149,7 +158,36 @@ def req(request):
 	return JsonResponse({'foo':'bar'})
 
 
+def chechSession(request):
+	dataToBeSend = {}
+	if(request.session.items()):
+		dataToBeSend['type']="login"
+		
+		for i in request.session.items():
+			dataToBeSend['username']=i[1]
+			#username=i[1]
 
+		print (dataToBeSend['type'])
+		print (dataToBeSend['username'])
+		
+		return JsonResponse(dataToBeSend)
+
+		# print "YES"
+		# return HttpResponse("YES")
+	
+	else:
+		dataToBeSend['type']="initial"
+		dataToBeSend['username']=""
+		print (dataToBeSend['type'])
+		print (dataToBeSend['username'])
+		return JsonResponse(dataToBeSend)
+		
+		# print "no"	
+		# return HttpResponse("no")
+
+	
+
+	
 		
 
 # def login1(request):

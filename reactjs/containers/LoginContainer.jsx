@@ -7,6 +7,21 @@ export default class LoginContainer extends React.Component {
 
   constructor(props) {
     super(props);
+    var qs = require('qs');
+    var _this = this;
+    axios.get('/extra1/')
+    .then(function (response) {
+     
+        console.log(response);
+        console.log("here");
+               
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+
+
     this.state = { 
       value: '',
       password: '',

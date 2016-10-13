@@ -55,4 +55,5 @@ urlpatterns = [
    url(r'^hosLocData$',getHospitalLocation),
    url(r'^maps$',
       generic.TemplateView.as_view(template_name='mapss.html')),
+   url(r'^chechSession/$', chechSession),
 ]

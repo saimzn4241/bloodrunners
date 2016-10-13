@@ -4,39 +4,92 @@ import { render } from "react-dom"
 import axios from 'axios';
 
             
-export default class Headline extends React.Component {
+var Headline = React.createClass ({
+    
+    getInitialState: function() {
       
+
+      return {
+      session: '',
+      type: 'initial'
+      };
+
+            
+    
+    },
+    componentWillMount:function(){
+
+      var _this=this;
+      var type;
+      var session;
+      axios.get('/chechSession/').then(function(result) {    
+              console.log(result)
+              console.log(result.data.type)
+              console.log(result.data.username)
+              type=result.data.type
+              session=result.data.username
+              console.log(type)
+              console.log(session)
+              _this.setState({session: session, type:type})
+             } );
       
-      constructor(props) {
-          super(props);
-        
-          this.state = {
-             session: '',
-             type: 'initial'
-          }
 
-       }
+    },
 
-       updateState(arg) {
+      // constructor(props) {
+      //     super(props);
+          
+
+      //     //var _this = this;
+      //       // this.state = {
+      //       //  session: session,
+      //       //  type: type
+      //       // }
+
+      //       var type;
+      //       var session;
+
+      //       axios.get('/extra1/').then(function(result) {    
+      //         console.log(result)
+      //         console.log(result.data.type)
+      //         console.log(result.data.username)
+      //         type=result.data.type
+      //         session=result.data.username
+      //         console.log(type)
+      //         console.log(session)
+      //         this.state = {
+      //        session: session,
+      //        type: type
+      //       }    
+              
+      //       });
+      //       console.log(type)
+      //       console.log(session)
+
+            
+
+      //  }
+
+       updateState:function(arg) {
         var _this = this;
         this.setState({session: arg})
-        }
+        },
        
-       loginfun() {
+       loginfun:function() {
          var _this = this;
         
             _this.setState({
               type: 'login'
             })
-        }
-        signupfun() {
+        },
+        signupfun:function() {
          var _this = this;
         
             _this.setState({
               type: 'signup'
             })
-        }
-        logoutfun() {
+        },
+        logoutfun:function() {
          var _this = this;
          var qs = require('qs');
         
@@ -51,8 +104,8 @@ export default class Headline extends React.Component {
             });
             
             
-        }
-        homefun() {
+        },
+        homefun:function() {
          var _this = this;
          var qs = require('qs');
          var ses=_this.state.session;
@@ -64,21 +117,24 @@ export default class Headline extends React.Component {
             }); 
           }
             
-        }
+        },
     
-        homefun1() {
+        homefun1:function() {
          var _this = this;
         
             _this.setState({
               type: 'initial'
             })
-        }
+        },
       
 
 
-      render() {
+      render:function() {
         
           if(this.state.session!=''){
+            //console.log("return statement");
+
+            console.log(this.state.session);
 
             return (
               <div>
@@ -93,6 +149,7 @@ export default class Headline extends React.Component {
 
           }
             else{
+
             return (
           	<div>
               <button onClick={this.homefun1.bind(this)}>Home</button>
@@ -108,4 +165,5 @@ export default class Headline extends React.Component {
             );
           }
       }
-}
+});
+export default Headline;
