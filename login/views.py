@@ -17,7 +17,8 @@ def addUser(request):
 	# print user.first_name,user.username
 	returnRespone = {}
 	returnRespone['error'] = True
-	
+	# print(request.POST.get('flat'),request.POST.get('flong'),request.POST.get('dlat'),request.POST.get('dlong'))
+
 	if request.method=='POST':
 		returnRespone['email'] = ''
 		returnRespone['username']=request.POST.get('username')
@@ -47,6 +48,16 @@ def addUser(request):
 				bg=str(request.POST.get('bg')),
 				contact=int(request.POST.get('contact')),
 				badges=0)
+			fixedLatitude=str(request.POST.get('flat'))
+			fixedLongitude=str(request.POST.get('flong'))
+			dynamicLatitude=str(request.POST.get('dlat'))
+			dynamicLongitude=str(request.POST.get('dlong'))
+			if(fixedLongitude!='' and fixedLatitude!=''):
+				user.fix_lat=float(fixedLongitude)
+				user.fix_long=float(fixedLatitude)
+			if(dynamicLatitude!='' and dynamicLongitude!=''):
+				user.cur_lat=float(dynamicLatitude)
+				user.cur_long=float(dynamicLongitude)
 			user.save()
 		elif(request.POST.get('type')=='hospital'):
 			returnRespone['name']=request.POST.get('hospitalName')

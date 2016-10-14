@@ -225,6 +225,13 @@ export default class SignupContainer extends React.Component {
             <br></br>
             <form action="/addUser/" method="POST">
                 <input type="hidden" name="type" value="hospital"/>
+                
+                <input type="hidden" name="flat" value={this.state.flat}/>
+                <input type="hidden" name="flong" value={this.state.flong}/>
+
+                {/* For variable location */}
+                <input type="hidden" name="dlat" value={this.state.dlat}/>
+                <input type="hidden" name="dlong" value={this.state.dlong}/>
 
                 Hospital Name:
                 <input type="text"  name="hospitalName" onChange={this.updateName.bind(this)}>
