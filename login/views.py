@@ -122,6 +122,24 @@ def login(request):
 		dataToBeSend['error'] = False
 		print (JsonResponse(dataToBeSend))
 		return JsonResponse(dataToBeSend)
+
+	elif(Hospitals.objects.filter(password=password, username=username).exists()):
+		request.session['username'] = username
+		name=request.session['username']
+		user=(Hospitals.objects.get(username=username))
+		
+		print request.session._session_key
+		print request.session
+		print request.session.items()
+
+
+		dataToBeSend['uid'] = str(user.id)
+		dataToBeSend['login_value'] = 'ok'
+		#dataToBeSend['email'] = str(user.email)
+		dataToBeSend['user'] = str(username)
+		dataToBeSend['error'] = False
+		print (JsonResponse(dataToBeSend))
+		return JsonResponse(dataToBeSend)	
 	else:
 		print (JsonResponse(dataToBeSend))
 		return JsonResponse(dataToBeSend)
@@ -150,15 +168,16 @@ def logout(request):
      #return render(request, 'home.html')
    		return HttpResponse("cant log out.")
    
-
-
+@csrf_exempt
+def profile(request):
+	return render(request, 'profile.html')
 
 #@csrf_exempt
 def req(request):
 	return JsonResponse({'foo':'bar'})
 
 
-def chechSession(request):
+def checkSession(request):
 	dataToBeSend = {}
 	if(request.session.items()):
 		dataToBeSend['type']="login"
