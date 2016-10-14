@@ -7,7 +7,7 @@ import axios from 'axios';
 //var LinkedStateMixin = require('react-addons-linked-state-mixin');
 //import linkState from "react-addons-linked-state-mixin"
 
-var BaseApiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+var BaseApiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?&address=';
 var Key = '&key=AIzaSyCEZBUCbawCF7xfnms9xdgDodS7s423b2E';
 
 export default class SignupContainer extends React.Component {
@@ -37,22 +37,31 @@ export default class SignupContainer extends React.Component {
     console.log(this.props.type);
     var checkurl=BaseApiUrl;
     if(this.props.type=='hospital'){
-        checkurl+=this.state.name;
+        checkurl+=this.state.name+'%2C';
     }
-    var url=checkurl+'+'+this.state.street+'+'+this.state.city+'+'+this.state.zip+'+'+this.state.country+Key;
+    var url=checkurl+this.state.street+'%2C'+this.state.city+'%2C'+this.state.zip+'%2C'+this.state.country+Key;
     console.log(url);
     axios.post(url)
     .then(function (response) {
-        
-        console.log(response)
+        var result = response.data
+        // console.log(result)
+        console.log("======")
+        for(var key in result){
+            
+            console.log(result.results.length)
+
+        }
+        var locaIndex=result.results.length-1;
+        console.log("=====")
+        console.log(response.data)
         console.log("seperate")
         if(response.data.status=='OK'){
 
-        console.log(response.data.results[1].geometry.location);
+        console.log(response.data.results[locaIndex].geometry.location);
           
         _this.setState({
-            flat: response.data.results[1].geometry.location.lat,
-            flong: response.data.results[1].geometry.location.lng
+            flat: response.data.results[locaIndex].geometry.location.lat,
+            flong: response.data.results[locaIndex].geometry.location.lng
             });
         }
 

@@ -5,7 +5,7 @@ var config = require('./webpack.base.config.js')
 
 config.devtool = "#eval-source-map"
 
-var ip = '172.20.10.4'
+var ip = '172.16.108.118'
 
 config.entry = {
   App1: [
