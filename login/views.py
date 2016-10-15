@@ -124,9 +124,14 @@ def login(request):
 		print request.session._session_key
 		print request.session
 		print request.session.items()
-
-
-		dataToBeSend['uid'] = str(user.id)
+		first_name=user.first_name
+		last_name=user.last_name
+		name=str(first_name)+str(last_name)
+		print ("name=", name)
+		dataToBeSend['created_at'] =str("null")
+		dataToBeSend['name'] =str(name)
+		#dataToBeSend['uid'] = str(user.id)
+		dataToBeSend['uid'] = str("null")
 		dataToBeSend['login_value'] = 'ok'
 		dataToBeSend['email'] = str(user.email)
 		dataToBeSend['user'] = str(username)

@@ -7,6 +7,7 @@ config.devtool = "#eval-source-map"
 
 var ip = '172.16.102.229'
 
+
 config.entry = {
   App1: [
     'webpack-dev-server/client?http://' + ip + ':3000',
