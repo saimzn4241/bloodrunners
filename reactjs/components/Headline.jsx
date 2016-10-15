@@ -5,7 +5,7 @@ import axios from 'axios';
 
             
 var Headline = React.createClass ({
-    
+        
     getInitialState: function() {
       
 
@@ -22,7 +22,7 @@ var Headline = React.createClass ({
       var _this=this;
       var type;
       var session;
-      axios.get('/chechSession/').then(function(result) {    
+      axios.get('/checkSession/').then(function(result) {    
               console.log(result)
               console.log(result.data.type)
               console.log(result.data.username)
@@ -36,39 +36,13 @@ var Headline = React.createClass ({
 
     },
 
-      // constructor(props) {
-      //     super(props);
-          
-
-      //     //var _this = this;
-      //       // this.state = {
-      //       //  session: session,
-      //       //  type: type
-      //       // }
-
-      //       var type;
-      //       var session;
-
-      //       axios.get('/extra1/').then(function(result) {    
-      //         console.log(result)
-      //         console.log(result.data.type)
-      //         console.log(result.data.username)
-      //         type=result.data.type
-      //         session=result.data.username
-      //         console.log(type)
-      //         console.log(session)
-      //         this.state = {
-      //        session: session,
-      //        type: type
-      //       }    
-              
-      //       });
-      //       console.log(type)
-      //       console.log(session)
-
-            
-
-      //  }
+      
+      getUrl:function(){
+        //var url=("/profile/").concat(this.state.session);
+        //console.log(url);
+        var url=("/profile/")
+        document.getElementById('urlForm').setAttribute('action', url);
+      },
 
        updateState:function(arg) {
         var _this = this;
@@ -130,7 +104,7 @@ var Headline = React.createClass ({
 
 
       render:function() {
-        
+          
           if(this.state.session!=''){
             //console.log("return statement");
 
@@ -140,10 +114,15 @@ var Headline = React.createClass ({
               <div>
                 <h1>User logged in= {this.state.session}</h1>
 
-                <button onClick={this.homefun.bind(this)}>Home</button>
+                <button onClick={this.homefun}>Home</button>
 
                 
-                <button onClick={this.logoutfun.bind(this)}>Log-Out</button>
+                <button onClick={this.logoutfun}>Log-Out</button>
+                
+                <form id="urlForm" method="POST" action="#" onSubmit={this.getUrl}>
+                < button type="submit">Profile</button>
+                </form>
+              
               </div>
             );
 
@@ -152,13 +131,13 @@ var Headline = React.createClass ({
 
             return (
           	<div>
-              <button onClick={this.homefun1.bind(this)}>Home</button>
+              <button onClick={this.homefun1}>Home</button>
 
               <form method="get" action="/signup">
               < button type="submit">Sign-Up</button>
               </form>
-              <button  onClick={this.loginfun.bind(this)} >Login</button>
-              <Login type={this.state.type} updateStateProp = {this.updateState.bind(this)}/> 
+              <button  onClick={this.loginfun} >Login</button>
+              <Login type={this.state.type} updateStateProp = {this.updateState}/> 
             	<h1>session in headline={this.state.session}</h1>
 
           	</div>

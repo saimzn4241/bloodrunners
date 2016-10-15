@@ -39,10 +39,13 @@ def getUserInfo(request,name):
 				when['status']=i.status
 				data['hospitals'].append(when)
 		return JsonResponse(data)
+	
 	elif(Hospitals.objects.filter(username=username).exists()):
 		data = {}
 		x = Hospitals.objects.filter(username=username)
-		data['type'] = 'donor'
+		
+		data['name'] = str(x[0].hospitalName)
+		data['type'] = 'hospital'
 		data['username'] = str(x[0].username)
 		data['cp1First_name']=str(x[0].cp1First_name)
 		data['cp1Last_name']=str(x[0].cp1Last_name)
