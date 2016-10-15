@@ -14,6 +14,7 @@ export default class SignupContainer extends React.Component {
   
   constructor(props){
     super(props);
+    
     this.state = {
         type: '',
         name: '',
@@ -24,11 +25,35 @@ export default class SignupContainer extends React.Component {
         country: '',
         flat: '',
         flong: '',
-        dlant: '',
+        dlat: '',
         dlong: '',
         count: 0
     }
+    navigator.geolocation.getCurrentPosition(function(location) {
+        console.log("==========");
+        console.log(location.coords.latitude);
+        console.log(location.coords.longitude);
+        console.log(location.coords.accuracy);
+        this.setState({
+            dlat:location.coords.latitude,
+            dlong:location.coords.longitude
+        });
+    }.bind(this));
   }
+  // componentWillMount(){
+  //   console.log("=====1=====");
+  //   console.log(this.count);
+  //   navigator.geolocation.getCurrentPosition(function(location) {
+  //       console.log("==========");
+  //       console.log(location.coords.latitude);
+  //       console.log(location.coords.longitude);
+  //       console.log(location.coords.accuracy);
+  //       this.setState({
+  //           dlat:location.coords.latitude,
+  //           dlong:location.coords.longitude
+  //       });
+  //   });
+  // }
 
   updatFLocat(){
     this.setState({count : this.state.count + 1});
@@ -126,18 +151,17 @@ export default class SignupContainer extends React.Component {
     
   }
 
+
   render() {
   var divStyle = {
         color: 'red'
   };
-
   if(this.props.type=='donor'){
     return (
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
             <form action="/addUser/" method="POST">
-                
                 <input type="hidden" name="type" value="donor"/>
 
                 {/* For fixed location */}
