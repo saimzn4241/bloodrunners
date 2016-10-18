@@ -30,10 +30,10 @@ export default class SignupContainer extends React.Component {
         count: 0
     }
     navigator.geolocation.getCurrentPosition(function(location) {
-        console.log("==========");
-        console.log(location.coords.latitude);
-        console.log(location.coords.longitude);
-        console.log(location.coords.accuracy);
+        // console.log("==========");
+        // console.log(location.coords.latitude);
+        // console.log(location.coords.longitude);
+        // console.log(location.coords.accuracy);
         this.setState({
             dlat:location.coords.latitude,
             dlong:location.coords.longitude
@@ -156,6 +156,7 @@ export default class SignupContainer extends React.Component {
   var divStyle = {
         color: 'red'
   };
+  console.log(location.pathname);
   if(this.props.type=='donor'){
     return (
       <div className="container">
