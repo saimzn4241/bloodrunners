@@ -1,5 +1,6 @@
 import React from "react"
 import axios from 'axios'
+import Headline from "../components/Headline"
 
 
 var ProfileContainer = React.createClass ({
@@ -118,59 +119,84 @@ var ProfileContainer = React.createClass ({
           
             if(this.state.type=="donor"){
             return (
-              <div>
-              <form method="get" action="/home">
-              < button type="submit">Home</button>
-              </form>
 
-              <h1>donor</h1><br></br>
-              <p1>name={this.state.first_name}</p1><br></br> 
-              <p1>username={this.state.username}</p1><br></br>
-              <p1>first_name={this.state.first_name}</p1><br></br>
-              <p1>last_name={this.state.last_name}</p1><br></br>
-              <p1>email={this.state.email}</p1><br></br>
-              <p1>address={this.state.address}</p1><br></br>
-              <p1>city={this.state.city}</p1><br></br>
-              <p1>state={this.state.state}</p1><br></br>
-              <p1>country={this.state.country}</p1><br></br>
-              <p1>bg={this.state.bg}</p1><br></br>
-              <p1>badges={this.state.badges}</p1><br></br>
-              <p1>dob={this.state.dob}</p1><br></br>
-              <p1>contact={this.state.contact}</p1><br></br>
-              <p1>age={this.state.age}</p1><br></br>
-              <p1>status={this.state.status}</p1><br></br>
-                    
+              <div className="container">
+              <div className="row">
+                <div className="col-sm-12">
+                             <Headline></Headline>
+
+                    <div>
+                  {/*<form method="get" action="/home">
+                  < button type="submit">HOME</button>
+                  </form>
+                  */}
+                  <h1><u>donor</u></h1>
+                  <h4>name : {this.state.first_name}</h4>  
+                  <h4>username : {this.state.username}</h4> 
+                  <h4>first name : {this.state.first_name}</h4> 
+                  <h4>last name : {this.state.last_name}</h4> 
+                  <h4>email : {this.state.email}</h4> 
+                  <h4>address : {this.state.address}</h4> 
+                  <h4>city : {this.state.city}</h4> 
+                  <h4>state : {this.state.state}</h4> 
+                  <h4>country : {this.state.country}</h4> 
+                  <h4>bg : {this.state.bg}</h4> 
+                  <h4>badges : {this.state.badges}</h4> 
+                  <h4>dob : {this.state.dob}</h4> 
+                  <h4>contact : {this.state.contact}</h4> 
+                  <h4>age : {this.state.age}</h4> 
+                  <h4>status : {this.state.status}</h4> 
+                        
+                  </div>
+
+
+
+                </div>
               </div>
-            );
+            </div>
+                          );
 
             }
 
           else if(this.state.type=="hospital"){
             return (
-              <div>
-                <form method="get" action="/home">
-                < button type="submit">Home</button>
-                </form>
-                <h1>Hospital</h1><br></br>
-                <p1>HospitalName={this.state.name}</p1><br></br>
-                <p1>username={this.state.username}</p1><br></br>
-                <p1>city={this.state.city}</p1><br></br>
-                <p1>state={this.state.state}</p1><br></br>
-                <p1>country={this.state.country}</p1><br></br>
-                <p1>cp1First_name={this.state.cp1First_name}</p1><br></br>
-                <p1>cp2First_name={this.state.cp2First_name}</p1><br></br>
-                <p1>cp3First_name  ={this.state.cp3First_name}</p1><br></br>
-                <p1>cp1Last_name={this.state.cp1Last_name}</p1><br></br>
-                <p1>cp2Last_name={this.state.cp2Last_name}</p1><br></br>
-                <p1>cp3Last_name={this.state.cp3Last_name}</p1><br></br>
-                <p1>cp1Contact={this.state.cp1Contact}</p1><br></br>
-                <p1>cp2Contact={this.state.cp2Contact}</p1><br></br>
-                <p1>cp3Contact={this.state.cp3Contact}</p1><br></br>
-                <p1>street={this.state.street}</p1><br></br>
-                <p1>verified={this.state.verified}</p1><br></br>
-                
-                    
+              <div className="container">
+                <div className="row">
+                  <div className="col-sm-12">
+                              <Headline></Headline>
+
+                    <div>
+                      <form method="get" action="/home">
+                      < button type="submit">Home</button>
+                      </form>
+                      <h1><u>Hospital</u></h1>
+                      <h4>HospitalName : {this.state.name}</h4>
+                      <h4>username : {this.state.username}</h4>
+                      <h4>city : {this.state.city}</h4>
+                      <h4>state : {this.state.state}</h4>
+                      <h4>country : {this.state.country}</h4>
+                      <h4>cp1First_name : {this.state.cp1First_name}</h4>
+                      <h4>cp1Last_name : {this.state.cp1Last_name}</h4>
+                      
+                      <h4>cp2First_name : {this.state.cp2First_name}</h4>
+                      <h4>cp2Last_name : {this.state.cp2Last_name}</h4>
+                      
+                      <h4>cp3First_name   : {this.state.cp3First_name}</h4>
+                      <h4>cp3Last_name : {this.state.cp3Last_name}</h4>
+                      <h4>cp1Contact : {this.state.cp1Contact}</h4>
+                      <h4>cp2Contact : {this.state.cp2Contact}</h4>
+                      <h4>cp3Contact : {this.state.cp3Contact}</h4>
+                      <h4>street : {this.state.street}</h4>
+                      <h4>verified : {this.state.verified}</h4>
+                      
+                          
+                    </div>
+                  </div>
+                </div>
               </div>
+
+
+              
             );
           }
           else{

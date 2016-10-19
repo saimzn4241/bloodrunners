@@ -154,7 +154,7 @@ export default class SignupContainer extends React.Component {
 
   render() {
   var divStyle = {
-        color: 'red'
+        color: 'black'
   };
   if(this.props.type=='donor'){
     return (
@@ -236,7 +236,7 @@ export default class SignupContainer extends React.Component {
                 <br></br>
                 
                 <input type="submit" value="Submit"/>
-                <h1>{this.state.country}</h1>
+                
             </form>
           
           </div>

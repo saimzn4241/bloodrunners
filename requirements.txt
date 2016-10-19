@@ -1,2 +1,5 @@
 npm install react-render
 npm install axios
+npm install react-image --save
+npm install react-bootstrap --save
+npm install react-style --save

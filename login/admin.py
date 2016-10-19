@@ -21,8 +21,8 @@ from login.models import *
 
 admin.site.register(Users)
 admin.site.register(Hospitals)
-admin.site.register(user2)
-admin.site.register(Link)
+#admin.site.register(user2)
+#admin.site.register(Link)
 
 # admin.site.register(Author, AuthorAdmin)
 # admin.site.register(Book, BookAdmin)
