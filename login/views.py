@@ -73,6 +73,11 @@ def addUser(request):
 				state=str(request.POST.get('state')),
 				country=str(request.POST.get('country'))
 				)
+			fixedLatitude=str(request.POST.get('flat'))
+			fixedLongitude=str(request.POST.get('flong'))
+			if(fixedLongitude!='' and fixedLatitude!=''):
+				user.fix_lat=float(fixedLongitude)
+				user.fix_long=float(fixedLatitude)
 			fn2=str(request.POST.get('cp2First_name'))
 			ln2=str(request.POST.get('cp2Last_name'))
 			c2=str(request.POST.get('cp2Contact'))
