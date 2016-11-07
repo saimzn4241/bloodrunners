@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
+import tornado_websockets
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'info',
+    'tornado_websockets',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,17 @@ REACT = {
     'RENDER_URL': 'http://127.0.0.1:3000/render',
 }
 
+TORNADO = {
+    # ...
+    'handlers': [
+        # ...
+        tornado_websockets.django_app(),  # django_app is using a "wildcard" route, so it should be the last element
+    ],
+    'settings': {
+        'debug': True,
+    }
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -145,3 +157,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TORNADO = {
+    'port': 1337,    # 8000 by default
+    'handlers': [],  # [] by default
+    'settings': {},  # {} by default
+}
