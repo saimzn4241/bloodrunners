@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'login',
     'info',
     'tornado_websockets',
+    'fcm',
+    'chat',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +166,7 @@ TORNADO = {
     'handlers': [],  # [] by default
     'settings': {},  # {} by default
 }
+
+FCM_APIKEY = "AIzaSyByJRvqKlrKvvQFOnfsIe4FlyEWkBZqEhg"
+                
+FCM_DEVICE_MODEL = 'fcm.device'

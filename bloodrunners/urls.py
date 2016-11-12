@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.views import generic
 from bloodrunners.views import *
@@ -22,6 +22,7 @@ from info.views import *
 
 
 urlpatterns = [
+  url(r'fcm/', include('fcm.urls')),
   url(r'^thanks/$', generic.TemplateView.as_view(template_name='thanks.html')),
   url(r'^search-form/$', search_form),
   url(r'^search/$', search),
@@ -55,8 +56,11 @@ urlpatterns = [
    url(r'^hosLocData$',getHospitalLocation),
    url(r'^maps$',
       generic.TemplateView.as_view(template_name='mapss.html')),
+   url(r'^Firebase$',
+      generic.TemplateView.as_view(template_name='Firebase.html')),
    url(r'^checkSession/$', checkSession),
    
    url(r'^profile/$',profile),
+   #url(r'', include('chat.urls')),
 
 ]

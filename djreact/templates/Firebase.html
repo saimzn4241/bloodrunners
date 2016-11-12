@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load render_bundle from webpack_loader %}
+
+{% block main %}
+<div id="Firebase"></div>
+{% render_bundle 'vendors' %}
+{% render_bundle 'Firebase' %}
+{% endblock %}
+

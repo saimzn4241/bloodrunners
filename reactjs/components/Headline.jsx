@@ -2,10 +2,14 @@ import React from "react"
 import Login from "../Login"
 import { render } from "react-dom"
 import axios from 'axios';
+
 //import { Button } from 'react-bootstrap';
 //import StyleSheet from 'react-style';
             
 var Headline = React.createClass ({
+
+    
+
         
     getInitialState: function() {
       
@@ -107,6 +111,7 @@ var Headline = React.createClass ({
 
 
       render:function() {
+
         //var divStyle = {color: 'black' };
           
           if(this.state.session!=''){
