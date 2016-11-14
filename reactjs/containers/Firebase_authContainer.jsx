@@ -11,22 +11,28 @@ export default class App extends Component {
       user:'',
       value: 'notloggedin',
       password: '',
-      email: ''
+      email: '',
+      notif:'',
       
     }
   }
   componentDidMount(){
     var that=this;
     that.stateChange();
-    // var that=this;
-    // const rootRef= firebase.database().ref().child('react');
-    // const speedRef = rootRef.child('speed');
- 
-    // speedRef.on('value', function(snapshot){
-    //      that.setState({
-    //       speed: snapshot.val()
-    //     });     
-    // });
+    that.notif_check();
+
+  }
+  notif_check(){
+    var that=this;
+    const rootRef= firebase.database().ref().child('notification/notif');
+    
+    rootRef.on('value', function(snapshot){
+        console.log(snapshot.val());
+
+          that.setState({
+           notif: snapshot.val()
+         });     
+    });
   }
 
   signIN() {
@@ -55,6 +61,10 @@ export default class App extends Component {
     const auth=firebase.auth().signOut();
     this.stateChange();
   }
+  logOUT() {
+    const auth=firebase.auth().signOut();
+    this.stateChange();
+  }
   stateChange(){
 
     firebase.auth().onAuthStateChanged(firebaseUser=>{
@@ -75,6 +85,19 @@ export default class App extends Component {
     });
 
   }
+
+  PING(){
+    var that=this;
+    const rootRef= firebase.database().ref().child('notification');
+    
+    rootRef.set({
+    notif: 'bloodneeded',
+    user: this.state.user
+    });
+
+    
+  }
+
   
   updateEmail(e) {
       this.setState({email: e.target.value});
@@ -105,10 +128,14 @@ export default class App extends Component {
                   
                   <h4>{this.state.value}</h4>
                   <h4>{this.state.user}</h4>
+                  <h1>notification={this.state.notif}</h1>
                   
                   <input type="button" className="btn btn-default"  value="SignIn" onClick={this.signIN.bind(this)}/>
                   <input type="button" className="btn btn-primary" value="SignUp" onClick={this.signUP.bind(this)}/>
                   <input type="button" className="btn btn-danger" value="LogOUT" onClick={this.logOUT.bind(this)}/>
+                  
+
+                  <input type="button" className="btn btn-danger" value="PING" onClick={this.PING.bind(this)}/>
                   
                   
 
