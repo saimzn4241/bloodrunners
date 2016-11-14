@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'info',
-    'fcm',
     'chat',
     'rest_framework',
 ]
@@ -148,13 +147,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
-TORNADO = {
-    'port': 1337,    # 8000 by default
-    'handlers': [],  # [] by default
-    'settings': {},  # {} by default
-}
-
-FCM_APIKEY = "AIzaSyByJRvqKlrKvvQFOnfsIe4FlyEWkBZqEhg"
-                
-FCM_DEVICE_MODEL = 'fcm.device'

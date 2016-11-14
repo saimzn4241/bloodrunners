@@ -22,7 +22,6 @@ from info.views import *
 
 
 urlpatterns = [
-  url(r'fcm/', include('fcm.urls')),
   url(r'^thanks/$', generic.TemplateView.as_view(template_name='thanks.html')),
   url(r'^search-form/$', search_form),
   url(r'^search/$', search),
@@ -65,6 +64,7 @@ urlpatterns = [
    
    url(r'^profile/$',profile),
    url(r'^firebase_data/$',firebase_data),
+   # url(r'getH')
 
    #url(r'', include('chat.urls')),
 

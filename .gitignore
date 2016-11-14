@@ -1,3 +1,5 @@
 *.pyc
+
 webpack-stats-local.json
 node_modules/
+migrations/
