@@ -60,6 +60,11 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/Firebase',
   ],
+  Firebase_auth: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Firebase_auth',
+  ],
 }
 
 config.plugins = config.plugins.concat([

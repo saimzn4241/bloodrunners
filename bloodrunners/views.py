@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 
 from .forms import NameForm
-
+from firebase import firebase
+    
 def search_form(request):
     return render(request, 'search_form.html')
 
@@ -13,6 +14,23 @@ def search(request):
     else:
         message = 'You submitted an empty form.'
     return HttpResponse(message)
+
+def firebase_data(request):
+    Firebase = firebase.FirebaseApplication('https://bloodrunners-1475434067536.firebaseio.com/', None)
+    #Firebase = firebase.FirebaseApplication('https://bloodrunners-1475434067536.firebaseio.com/', authentication=None)
+    result = Firebase.get('/', None)
+    
+    # new_user = 'arjun'
+    # result = Firebase.post('/users', data={"name":new_user}, params={'print': 'pretty'})   
+    
+    #result = Firebase.delete('/users', 'Arjun')    
+
+    # authentication = Firebase.Authentication('THIS_IS_MY_SECRET', 'ozgurvt@gmail.com', extra={'id': 123})
+    # Firebase.authentication = authentication
+    # print authentication.extra
+    
+    print result
+    return HttpResponse(result)    
 
 
 def get_name(request):

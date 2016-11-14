@@ -58,9 +58,14 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='mapss.html')),
    url(r'^Firebase$',
       generic.TemplateView.as_view(template_name='Firebase.html')),
+   url(r'^Firebase_auth$',
+      generic.TemplateView.as_view(template_name='Firebase_auth.html')),
+   
    url(r'^checkSession/$', checkSession),
    
    url(r'^profile/$',profile),
+   url(r'^firebase_data/$',firebase_data),
+
    #url(r'', include('chat.urls')),
 
 ]
