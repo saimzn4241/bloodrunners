@@ -26,15 +26,23 @@ export default class LoginContainer extends React.Component {
         console.log(response);
         console.log("here");
           
-        _this.setState({
+       
+
+          if(response.data.login_value=="ok"){
+
+             _this.setState({
             value: response.data.login_value
             });
 
-          if(_this.state.value=="ok"){
             console.log("okok1");
             var arg=_this.state.username;
             console.log(arg);
              _this.props.updateStateProp(arg);
+          }
+          else{
+             _this.setState({
+            value: "(incorrect username or password)"
+            });
           }       
     })
     .catch(function (error) {
@@ -65,17 +73,17 @@ export default class LoginContainer extends React.Component {
                   </input>
                   <br></br>
 
-                  Password:   
+                  Password:    
                   <input type="password"  name="password" onChange = {this.updatePassword.bind(this)}>
                   </input>
                   
                   
                   <br></br>
                   
+                  <h4>{this.state.value}</h4>
                   
                   <input type="button" value="Submit" onClick={this.request.bind(this)}/>
                   
-                  <h1>{this.state.value}</h1>
                   
 
             </div>

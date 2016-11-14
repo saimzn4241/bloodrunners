@@ -3,8 +3,13 @@ import Login from "../Login"
 import { render } from "react-dom"
 import axios from 'axios';
 
+//import { Button } from 'react-bootstrap';
+//import StyleSheet from 'react-style';
             
 var Headline = React.createClass ({
+
+    
+
         
     getInitialState: function() {
       
@@ -73,8 +78,10 @@ var Headline = React.createClass ({
               type: 'initial',
               session: ''
             });
-            axios.  post('/logout/' ,qs.stringify({username: this.state.session})).then(function(result) {    
+            axios.post('/logout/' ,qs.stringify({username: this.state.session})).then(function(result) {    
               console.log(result)
+               
+              
             });
             
             
@@ -104,6 +111,8 @@ var Headline = React.createClass ({
 
 
       render:function() {
+
+        //var divStyle = {color: 'black' };
           
           if(this.state.session!=''){
             //console.log("return statement");
@@ -111,17 +120,27 @@ var Headline = React.createClass ({
             console.log(this.state.session);
 
             return (
-              <div>
+              <div /*style={divStyle}*/ >
                 <h1>User logged in= {this.state.session}</h1>
 
-                <button onClick={this.homefun}>Home</button>
-
-                
-                <button onClick={this.logoutfun}>Log-Out</button>
+                {/*<button onClick={this.homefun}>Home</button>*/}
+                <form method="get" action="/home">
+                < button type="submit">HOME</button>
+                </form>
                 
                 <form id="urlForm" method="POST" action="#" onSubmit={this.getUrl}>
                 < button type="submit">Profile</button>
                 </form>
+
+                <form method="get" action="/maps">
+                < button type="submit">MAPS</button>
+                </form>
+
+                
+                <form id="logout1" method="get" action="/home" onSubmit={this.logoutfun}>
+                < button type="submit">Log-Out</button>
+                </form>
+
               
               </div>
             );
@@ -131,18 +150,35 @@ var Headline = React.createClass ({
 
             return (
           	<div>
-              <button onClick={this.homefun1}>Home</button>
-
+              <button  onClick={this.homefun1}>Home</button>
+              <form method="get" action="/maps">
+              < button type="submit">MAPS</button>
+              </form>
               <form method="get" action="/signup">
-              < button type="submit">Sign-Up</button>
+              <button type="submit">Sign-Up</button>
               </form>
               <button  onClick={this.loginfun} >Login</button>
               <Login type={this.state.type} updateStateProp = {this.updateState}/> 
-            	<h1>session in headline={this.state.session}</h1>
+            	
 
           	</div>
             );
           }
       }
 });
+
+
+// const styles = StyleSheet.create({
+//     button: {
+//         padding: 10,
+//         borderColor: 'blue',
+//         borderWidth: 1,
+//         borderRadius: 5,
+//         borderColor: '#000066',
+//         backgroundColor: '#000066',
+//         borderWidth: 1,
+//         },
+// });
+
+
 export default Headline;

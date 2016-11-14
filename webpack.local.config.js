@@ -8,6 +8,7 @@ config.devtool = "#eval-source-map"
 
 var ip = 'localhost'
 
+
 config.entry = {
   App1: [
     'webpack-dev-server/client?http://' + ip + ':3000',
@@ -53,6 +54,16 @@ config.entry = {
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
     './reactjs/Profile',
+  ],
+  Firebase: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Firebase',
+  ],
+  Firebase_auth: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Firebase_auth',
   ],
 }
 

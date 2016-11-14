@@ -27,11 +27,12 @@ export default class Login extends React.Component {
 	  	if(this.props.type=='login'){
 		    return (
 				<div>  
+				<h1>LOGIN</h1>
+				
 				<LoginContainer  
 				 updateStateProp = {this.updateState}
 				/>  
-		    	<h1>LOGIN</h1>
-				<h1>session in login jsx={this.state.session}</h1>	  
+		    	<h1>{this.state.session}</h1>	  
 		    	</div>
 		    )
 	    }

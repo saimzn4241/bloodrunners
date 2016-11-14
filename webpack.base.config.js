@@ -15,6 +15,8 @@ module.exports = {
     Data: './reactjs/Data',
     Data2: './reactjs/Data2',
     Profile: './reactjs/Profile',
+    Firebase: './reactjs/Firebase',
+    Firebase_auth: './reactjs/Firebase_auth',
     vendors: ['react'],
   },
 
