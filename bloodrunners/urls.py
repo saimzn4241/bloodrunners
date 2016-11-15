@@ -19,6 +19,7 @@ from django.views import generic
 from bloodrunners.views import *
 from login.views import *
 from info.views import *
+from chat.views import *
 
 
 urlpatterns = [
@@ -64,7 +65,7 @@ urlpatterns = [
    
    url(r'^profile/$',profile),
    url(r'^firebase_data/$',firebase_data),
-   # url(r'getH')
+   url(r'getNearUsers/$',nearUsers),
 
    #url(r'', include('chat.urls')),
 
