@@ -30,7 +30,7 @@ def nearUsers(request):
 			hosp = (blood_required_at_hospital_data['lat'],blood_required_at_hospital_data['long'])
 			for i in allUsers:
 				user = (i.cur_lat,i.cur_long)
-				if((vincenty(user,hosp).miles)<=2871622):
+				if((vincenty(user,hosp).miles)<=maximum_distance):
 					if(userListToBeReturned['count']==0):
 						userListToBeReturned['users']=[]
 					userListToBeReturned['count']+=1
