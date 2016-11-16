@@ -61,10 +61,7 @@ export default class App extends Component {
     const auth=firebase.auth().signOut();
     this.stateChange();
   }
-  logOUT() {
-    const auth=firebase.auth().signOut();
-    this.stateChange();
-  }
+  
   stateChange(){
 
     firebase.auth().onAuthStateChanged(firebaseUser=>{
