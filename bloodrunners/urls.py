@@ -54,7 +54,7 @@ urlpatterns = [
    url(r'^profile/(?P<name>[\w.@+-]+)/$',getUserInfo),
    url(r'^userLocData$',getUserLocation),
    url(r'^hosLocData$',getHospitalLocation),
-   url(r'^maps$',
+   url(r'^maps/$',
       generic.TemplateView.as_view(template_name='mapss.html')),
    url(r'^Firebase$',
       generic.TemplateView.as_view(template_name='Firebase.html')),
