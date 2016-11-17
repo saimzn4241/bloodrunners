@@ -17,6 +17,8 @@ module.exports = {
     Profile: './reactjs/Profile',
     Firebase: './reactjs/Firebase',
     Firebase_auth: './reactjs/Firebase_auth',
+    react_map: './reactjs/react_map',
+    
     vendors: ['react'],
   },
 

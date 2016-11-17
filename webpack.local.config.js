@@ -6,7 +6,7 @@ var config = require('./webpack.base.config.js')
 config.devtool = "#eval-source-map"
 
 
-var ip = '172.16.102.229'
+var ip = '172.20.10.6'
 
 
 config.entry = {
@@ -64,6 +64,11 @@ config.entry = {
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
     './reactjs/Firebase_auth',
+  ],
+  React_map: [
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/React_map',
   ],
 }
 
