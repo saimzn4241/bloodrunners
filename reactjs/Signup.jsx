@@ -3,9 +3,10 @@ import { render } from "react-dom"
 
 import SignupContainer from "./containers/SignupContainer"
 
-class Signup extends React.Component {
+export default class Signup extends React.Component {
   constructor(props) {
         super(props);
+        
         this.state = { // this is your default state
           type: 'initial'
         }
@@ -27,6 +28,7 @@ class Signup extends React.Component {
       backgroundColor: 'white',
       width: 400
     }
+    
     return (
 		<div>
     <br></br>
@@ -44,5 +46,3 @@ class Signup extends React.Component {
     );
   }
 }
-
-render(<Signup />, document.getElementById('Signup'))

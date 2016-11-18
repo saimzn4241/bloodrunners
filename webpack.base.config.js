@@ -9,7 +9,7 @@ module.exports = {
     App1: './reactjs/App1',
     Home: './reactjs/Home',
     Login: './reactjs/Login',
-    Signup: './reactjs/Signup',
+    SignupFirebaseConfig: './reactjs/SignupFirebaseConfig',
     Search: './reactjs/Search',
     Extra: './reactjs/Search',
     Data: './reactjs/Data',

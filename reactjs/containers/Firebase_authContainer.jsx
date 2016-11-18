@@ -99,6 +99,7 @@ export default class App extends Component {
 
     this.stateChange();
   }
+  
   logOUT() {
     const auth=firebase.auth().signOut();
     this.stateChange();
