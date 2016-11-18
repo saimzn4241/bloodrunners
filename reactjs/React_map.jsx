@@ -1,18 +1,21 @@
 import React from "react"
 import { render } from "react-dom"
-import React_map from "./containers/React_map"
+import React_mapContainer from "./containers/React_mapContainer"
+import Map, {GoogleApiWrapper} from 'google-maps-react'
 
-class Home extends React.Component {
- 
 
+
+class React_map extends React.Component {
   render() {
     return (
-		<div>  
-		<h1>React_map</h1>
-    	<React_map/>  
-    	</div>
+      <div>  Hello from the container
+       <React_mapContainer/> 
+      </div>
     )
   }
 }
 
 render(<React_map/>, document.getElementById('React_map'))
+
+
+
