@@ -2,6 +2,7 @@ import React from "react"
 import Login from "../Login"
 import { render } from "react-dom"
 import axios from 'axios';
+import firebase from 'firebase';
 
 //import { Button } from 'react-bootstrap';
 //import StyleSheet from 'react-style';
@@ -12,36 +13,37 @@ var Headline = React.createClass ({
 
         
     getInitialState: function() {
-      
-
       return {
       session: '',
-      type: 'initial'
+      type: 'initial',
+      user:'',
+      value: 'notloggedin',
+      password: '',
+      email: '',
+      notif:'',
       };
-
-            
-    
     },
-    componentWillMount:function(){
 
+    componentWillMount:function(){
       var _this=this;
       var type;
       var session;
       axios.get('/checkSession/').then(function(result) {    
-              console.log(result)
-              console.log(result.data.type)
-              console.log(result.data.username)
+              // console.log(result)
+              // console.log(result.data.type)
+              // console.log(result.data.username)
               type=result.data.type
               session=result.data.username
               console.log(type)
               console.log(session)
               _this.setState({session: session, type:type})
              } );
-      
-
     },
 
-      
+    componentDidMount:function(){
+      this.stateChange();
+    },
+
       getUrl:function(){
         //var url=("/profile/").concat(this.state.session);
         //console.log(url);
@@ -51,7 +53,7 @@ var Headline = React.createClass ({
 
        updateState:function(arg) {
         var _this = this;
-        this.setState({session: arg})
+        _this.setState({session: arg})
         },
        
        loginfun:function() {
@@ -80,7 +82,7 @@ var Headline = React.createClass ({
             });
             axios.post('/logout/' ,qs.stringify({username: this.state.session})).then(function(result) {    
               console.log(result)
-               
+              _this.logOUT();
               
             });
             
@@ -99,7 +101,7 @@ var Headline = React.createClass ({
           }
             
         },
-    
+
         homefun1:function() {
          var _this = this;
         
@@ -107,7 +109,64 @@ var Headline = React.createClass ({
               type: 'initial'
             })
         },
-      
+
+        signIN:function(a_email,a_password) {
+          this.setState({
+            email: a_email,
+            password: a_password
+          },function changeNewEmail(){
+              const auth=firebase.auth();
+              const promise = auth.signInWithEmailAndPassword(a_email, a_password);
+              promise.catch(e => console.log(e.message)); 
+              this.stateChange();
+            });
+          
+
+        },
+
+        notif_check:function(){
+          var that=this;
+          const rootRef= firebase.database().ref().child('notification/notif');
+          console.log("==========28==========");
+          console.log(this.state.value);
+          console.log("==========30==========");
+          rootRef.on('value', function(snapshot){
+              console.log(snapshot.val());
+
+                that.setState({
+                 notif: snapshot.val()
+               });     
+          });
+        },
+
+        logOUT:function() {
+        const auth=firebase.auth().signOut();
+        this.stateChange();
+        },
+
+        stateChange:function(){
+        firebase.auth().onAuthStateChanged(firebaseUser=>{
+          if(firebaseUser){
+            console.log(firebaseUser);
+            this.setState({
+              user:firebaseUser.email,
+              value:"loggedin"
+            }, function afterStateChange (){
+              this.notif_check();
+            });
+          }
+          else{
+           console.log("not logged in stateChange");
+           console.log(this.state.value); 
+           this.setState({
+              value:"notloggedin",
+              user:"",
+              notif:""
+            }); 
+          }
+        });
+
+      },
 
 
       render:function() {
@@ -158,7 +217,7 @@ var Headline = React.createClass ({
               <button type="submit">Sign-Up</button>
               </form>
               <button  onClick={this.loginfun} >Login</button>
-              <Login type={this.state.type} updateStateProp = {this.updateState}/> 
+              <Login type={this.state.type} updateStateProp = {this.updateState} signIN={this.signIN} /> 
             	
 
           	</div>
