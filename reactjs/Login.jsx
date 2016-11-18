@@ -16,10 +16,14 @@ export default class Login extends React.Component {
 	   };
 
 
-	   updateState(arg) {
+	   updateState(arg,loginEmail,loginPassword) {
 	      var _this = this;
-	      this.setState({session: arg});
-	      this.props.updateStateProp(arg);
+	      this.setState({
+	      	session: arg,
+	        email: loginEmail,
+	        password: loginPassword
+      });
+	      this.props.updateStateProp(arg,loginEmail,loginPassword);
 	   }
 	  
 

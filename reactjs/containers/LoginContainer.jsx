@@ -36,8 +36,9 @@ export default class LoginContainer extends React.Component {
 
             console.log("okok1");
             var arg=_this.state.username;
-            console.log(arg);
-             _this.props.updateStateProp(arg);
+            var email=(arg).concat("@gmail.com");
+            console.log(arg,email,password);
+             _this.props.updateStateProp(arg,email,password);
           }
           else{
              _this.setState({

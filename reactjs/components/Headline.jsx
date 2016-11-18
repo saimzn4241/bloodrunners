@@ -51,9 +51,16 @@ var Headline = React.createClass ({
         document.getElementById('urlForm').setAttribute('action', url);
       },
 
-       updateState:function(arg) {
-        var _this = this;
-        _this.setState({session: arg})
+       updateState:function(arg,loginEmail,loginPassword) {
+        // var _this = this;
+        this.setState({
+          session: arg,
+          email: loginEmail,
+          password: loginPassword
+          },function firebaseSignIn(){
+                // console.log("headline.jsx",loginEmail,loginPassword);
+              this.signIN(loginEmail,loginPassword);
+          });
         },
        
        loginfun:function() {
@@ -110,13 +117,14 @@ var Headline = React.createClass ({
             })
         },
 
-        signIN:function(a_email,a_password) {
+        signIN:function(loginEmail,loginPassword) {
           this.setState({
-            email: a_email,
-            password: a_password
+            email: loginEmail,
+            password: loginPassword
           },function changeNewEmail(){
+              // console.log("headline.jsx 2 ",loginEmail,loginPassword);
               const auth=firebase.auth();
-              const promise = auth.signInWithEmailAndPassword(a_email, a_password);
+              const promise = auth.signInWithEmailAndPassword(loginEmail, loginPassword);
               promise.catch(e => console.log(e.message)); 
               this.stateChange();
             });
@@ -199,6 +207,7 @@ var Headline = React.createClass ({
                 <form id="logout1" method="get" action="/home" onSubmit={this.logoutfun}>
                 < button type="submit">Log-Out</button>
                 </form>
+                <h1>notification={this.state.notif}</h1>
 
               
               </div>
@@ -217,9 +226,9 @@ var Headline = React.createClass ({
               <button type="submit">Sign-Up</button>
               </form>
               <button  onClick={this.loginfun} >Login</button>
-              <Login type={this.state.type} updateStateProp = {this.updateState} signIN={this.signIN} /> 
+              <Login type={this.state.type} updateStateProp = {this.updateState} /> 
             	
-
+              <h1>notification={this.state.notif}</h1>
           	</div>
             );
           }
