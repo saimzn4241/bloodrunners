@@ -63,7 +63,6 @@ export default class SignupContainer extends React.Component {
   signUP() {
     var email=this.state.email;
     var password= this.state.password;
-    var _this = this;
     const auth=firebase.auth();
     const promise = auth.createUserWithEmailAndPassword(email, password);
     promise.catch(e => console.log(e.message)); 
@@ -104,7 +103,6 @@ export default class SignupContainer extends React.Component {
   updatFLocat(){
     this.setState({count : this.state.count + 1});
     console.log(this.state.count);
-    var _this=this;
     console.log(this.props.type);
     var checkurl=BaseApiUrl;
     if(this.props.type=='hospital'){
@@ -129,16 +127,16 @@ export default class SignupContainer extends React.Component {
         if(response.data.status=='OK'){
 
         console.log(response.data.results[locaIndex].geometry.location);
-          
-        _this.setState({
+        this.setState({
             flat: response.data.results[locaIndex].geometry.location.lat,
             flong: response.data.results[locaIndex].geometry.location.lng
             });
         }
-
+        // console.log("afterStateChange");
         // console.log(this.state.flat)       
-    })
+    }.bind(this))
     .catch(function (error) {
+        // console.log("inside catch");
       console.log(error);
     });
   }
@@ -212,11 +210,13 @@ export default class SignupContainer extends React.Component {
 
   getUrl(){
         //var url=("/profile/").concat(this.state.session);
-        //console.log(url);
+        console.log("done");
         this.signUP();
+        console.log("done signup");
         this.logOUT();
-        var url=("/addUser/");
-        document.getElementById('urlForm').setAttribute('action', url);
+        console.log("done logout");
+        // var url=("/addUser/");
+        // document.getElementById('urlForm').setAttribute('action', url);
       }
 
 
@@ -230,7 +230,7 @@ export default class SignupContainer extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <form id="urlForm" action="#" method="POST" onSubmit={this.getUrl} >
+            <form id="urlForm" action="/addUser/" method="POST" onSubmit={this.getUrl.bind(this)} >
                 <input type="hidden" name="type" value="donor"/>
 
                 {/* For fixed location */}
@@ -316,7 +316,7 @@ export default class SignupContainer extends React.Component {
         return(
         <div className="col-sm-12">
             <br></br>
-            <form id="urlForm" action="#" method="POST" onSubmit={this.getUrl}>
+            <form id="urlForm" action="/addUser/" method="POST" onSubmit={this.getUrl}>
                 <input type="hidden" name="type" value="hospital"/>
                 
                 <input type="hidden" name="flat" value={this.state.flat}/>
