@@ -1,0 +1,4 @@
+git reset HEAD~1 //removes last commit
+git reset --hard // unstage last changes in working directory that were not commited or staged
+git branch -D branch_name// delete branch with no futher commits
+
