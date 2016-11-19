@@ -28,10 +28,12 @@ export class  React_mapContainer extends React.Component {
 
   onReady(mapProps, map) {
     const {google} = this.props;
+    
+    var center = {lat: 28.630084,  lng: 77.371882}
     const opts = {
-      location: map.center,
+      location: center,
       radius: '500',
-      types: ['cafe']
+      types: ['hospital']
     }
     searchNearby(google, map, opts)
       .then((results, pagination) => {
@@ -44,13 +46,23 @@ export class  React_mapContainer extends React.Component {
         // There was an error
       })
   }
-  
-  render() {
+    render() {
+    var center = {lat: 28.630084,  lng: 77.371882}
+    
     return (
-      <div> 
-        <Map google={this.props.google} zoom={14} onReady={this.onReady.bind(this)}
+      <div>
+      <Sidebar title={'Restaurants'} places={this.state.places} />
+           {this.state.places.map(place => {
+            return (<div key={place.id}>
+              {place.name}
+              <br></br>
+              </div>)
+          })} 
+        <Map google={this.props.google} center={center} zoom={14} onReady={this.onReady.bind(this)}
           visible={true} >
-           <Sidebar title={'Restaurants'} places={this.state.places} />
+           
+
+
            
            {this.state.places.map(place =>{
 		      return <Marker key={place.id}
@@ -60,12 +72,7 @@ export class  React_mapContainer extends React.Component {
 		              />
 		    })}
 
-            {this.state.places.map(place => {
-            return (<div key={place.id}>
-            	{place.name}
-            	<br></br>
-            	</div>)
-          })}
+            
             
 
         </Map>

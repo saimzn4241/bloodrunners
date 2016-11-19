@@ -13,3 +13,9 @@ pip install geopy
 npm install --save google-maps-react
 
 npm install --save classnames
+npm install --save-dev style-loader
+npm install --save-dev css-loader
+npm i -D extract-text-webpack-plugin style-loader css-loader postcss-loader sass-loader toolbox-loader
+npm install --save-dev babel-loader css-loader style-loader postcss-loader url-loader file-loader
+npm install --save-dev hjs-webpack webpack
+npm install reactcss --save
