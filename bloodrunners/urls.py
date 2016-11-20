@@ -66,6 +66,7 @@ urlpatterns = [
    url(r'^profile/$',profile),
    url(r'^firebase_data/$',firebase_data),
    url(r'getNearUsers/$',nearUsers),
+   url(r'getUserType/$',getUserType),
 
    #url(r'', include('chat.urls')),
 

@@ -203,6 +203,15 @@ def profile(request):
 def req(request):
 	return JsonResponse({'foo':'bar'})
 
+# Utility function for checkSession function
+def getUserTypeHelper(user):
+	userType=""
+	if(Users.objects.filter(username=user).exists()):
+		userType="donor"
+	elif(Users.objects.filter(username=user).exists()):
+		userType="hospital"
+	return str(userType)
+
 
 def checkSession(request):
 	dataToBeSend = {}
@@ -212,6 +221,7 @@ def checkSession(request):
 		for i in request.session.items():
 			dataToBeSend['username']=i[1]
 			#username=i[1]
+		dataToBeSend['userType']=getUserTypeHelper(str(dataToBeSend['username']))
 
 		print (dataToBeSend['type'])
 		print (dataToBeSend['username'])
@@ -231,7 +241,11 @@ def checkSession(request):
 		# print "no"	
 		# return HttpResponse("no")
 
-	
+def getUserType(request):
+	if(request.GET['type']!='initial'):
+		returnValue={}
+		returnValue["userType"]=getUserTypeHelper(str(request.GET['username']))
+		return JsonResponse(returnValue)
 
 	
 		

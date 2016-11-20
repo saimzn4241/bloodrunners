@@ -21,6 +21,7 @@ var Headline = React.createClass ({
       password: '',
       email: '',
       notif:'',
+      userType:''
       };
     },
 
@@ -28,15 +29,18 @@ var Headline = React.createClass ({
       var _this=this;
       var type;
       var session;
+      var userType;
       axios.get('/checkSession/').then(function(result) {    
               // console.log(result)
               // console.log(result.data.type)
               // console.log(result.data.username)
-              type=result.data.type
-              session=result.data.username
-              console.log(type)
-              console.log(session)
-              _this.setState({session: session, type:type})
+              type=result.data.type;
+              session=result.data.username;
+              userType=result.data.userType;
+              console.log(type);
+              console.log(session);
+              console.log(userType);
+              _this.setState({session: session, type:type , userType:userType})
              } );
     },
 
@@ -60,7 +64,20 @@ var Headline = React.createClass ({
           },function firebaseSignIn(){
                 // console.log("headline.jsx",loginEmail,loginPassword);
               this.signIN(loginEmail,loginPassword);
+              this.updateUserType();
           });
+        },
+
+        updateUserType:function(){
+          console.log(("72").concat(this.state.type));
+          var url=("/getUserType/?type=").concat(this.state.type);
+          url=(url).concat("&username=");
+          url=(url).concat(this.state.session);
+          console.log(url);
+          axios.get(url).then(function(result){
+            console.log(result.data.userType);
+            this.setState({userType:result.data.userType})
+          }.bind(this));
         },
        
        loginfun:function() {
