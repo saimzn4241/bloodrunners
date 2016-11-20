@@ -54,7 +54,7 @@ urlpatterns = [
    url(r'^profile/(?P<name>[\w.@+-]+)/$',getUserInfo),
    url(r'^userLocData$',getUserLocation),
    url(r'^hosLocData$',getHospitalLocation),
-   url(r'^maps$',
+   url(r'^maps/$',
       generic.TemplateView.as_view(template_name='mapss.html')),
    url(r'^Firebase$',
       generic.TemplateView.as_view(template_name='Firebase.html')),
@@ -66,10 +66,12 @@ urlpatterns = [
    url(r'^profile/$',profile),
    url(r'^firebase_data/$',firebase_data),
    url(r'getNearUsers/$',nearUsers),
+
    url(r'^react_map$',
       generic.TemplateView.as_view(template_name='react_map.html')),
    url(r'^MarkerInfo/$',MarkerInfo),
    
+   url(r'getUserType/$',getUserType),
 
    #url(r'', include('chat.urls')),
 

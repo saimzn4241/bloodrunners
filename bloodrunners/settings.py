@@ -24,7 +24,7 @@ SECRET_KEY = '-_0_csvwi+$8o@8$(y5baivy($fflvn=y^e_f1v_4^*j(=y3o5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.16.104.251']
 
 
 # Application definition

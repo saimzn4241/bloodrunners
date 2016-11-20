@@ -1,5 +1,5 @@
 import React from "react"
-
+import firebase from 'firebase';
 import Headline from "../components/Headline"
 import axios from 'axios';
 
@@ -27,7 +27,12 @@ export default class SignupContainer extends React.Component {
         flong: '',
         dlat: '',
         dlong: '',
-        count: 0
+        count: 0,
+        user:'',
+        value: 'notloggedin',
+        password: '',
+        email: '',
+        notif:'',
     }
     navigator.geolocation.getCurrentPosition(function(location) {
         // console.log("==========");
@@ -55,10 +60,49 @@ export default class SignupContainer extends React.Component {
   //   });
   // }
 
+  signUP() {
+    var email=this.state.email;
+    var password= this.state.password;
+    const auth=firebase.auth();
+    const promise = auth.createUserWithEmailAndPassword(email, password);
+    promise.catch(e => console.log(e.message)); 
+
+    this.stateChange();
+  }
+
+  logOUT() {
+    const auth=firebase.auth().signOut();
+    this.stateChange();
+  }
+
+  stateChange(){
+
+    firebase.auth().onAuthStateChanged(firebaseUser=>{
+      if(firebaseUser){
+        console.log(firebaseUser);
+        this.setState({
+          user:firebaseUser.email,
+          value:"loggedin"
+        }, function afterStateChange (){
+          this.notif_check();
+        });
+      }
+      else{
+       console.log("not logged in stateChange");
+       console.log(this.state.value); 
+       this.setState({
+          value:"notloggedin",
+          user:"",
+          notif:""
+        }); 
+      }
+    });
+
+  }
+
   updatFLocat(){
     this.setState({count : this.state.count + 1});
     console.log(this.state.count);
-    var _this=this;
     console.log(this.props.type);
     var checkurl=BaseApiUrl;
     if(this.props.type=='hospital'){
@@ -83,16 +127,16 @@ export default class SignupContainer extends React.Component {
         if(response.data.status=='OK'){
 
         console.log(response.data.results[locaIndex].geometry.location);
-          
-        _this.setState({
+        this.setState({
             flat: response.data.results[locaIndex].geometry.location.lat,
             flong: response.data.results[locaIndex].geometry.location.lng
             });
         }
-
+        // console.log("afterStateChange");
         // console.log(this.state.flat)       
-    })
+    }.bind(this))
     .catch(function (error) {
+        // console.log("inside catch");
       console.log(error);
     });
   }
@@ -100,6 +144,19 @@ export default class SignupContainer extends React.Component {
   updateType(e){
     this.setState({
         type: e
+    });
+  }
+
+  updatePassword(e){
+    this.setState({
+        password: e.target.value
+    });
+  }
+
+  updateUsername(e){
+    this.setState({
+        username: e.target.value,
+        email: (e.target.value).concat("@gmail.com")
     });
   }
 
@@ -151,18 +208,29 @@ export default class SignupContainer extends React.Component {
     
   }
 
+  getUrl(){
+        //var url=("/profile/").concat(this.state.session);
+        console.log("done");
+        this.signUP();
+        console.log("done signup");
+        this.logOUT();
+        console.log("done logout");
+        // var url=("/addUser/");
+        // document.getElementById('urlForm').setAttribute('action', url);
+      }
+
 
   render() {
   var divStyle = {
         color: 'black'
   };
-  console.log(location.pathname);
+  // console.log(location.pathname);
   if(this.props.type=='donor'){
     return (
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <form action="/addUser/" method="POST">
+            <form id="urlForm" action="/addUser/" method="POST" onSubmit={this.getUrl.bind(this)} >
                 <input type="hidden" name="type" value="donor"/>
 
                 {/* For fixed location */}
@@ -188,12 +256,12 @@ export default class SignupContainer extends React.Component {
                 <br></br>
 
                 UserName:
-                <input type="text"  name="username">
+                <input type="text"  name="username" onChange={this.updateUsername.bind(this)}>
                 </input>
                 <br></br>
 
                 Password:
-                <input type="password"  name="password">
+                <input type="password"  name="password" onChange={this.updatePassword.bind(this)}>
                 </input>
 
                 <br></br>
@@ -248,7 +316,7 @@ export default class SignupContainer extends React.Component {
         return(
         <div className="col-sm-12">
             <br></br>
-            <form action="/addUser/" method="POST">
+            <form id="urlForm" action="/addUser/" method="POST" onSubmit={this.getUrl}>
                 <input type="hidden" name="type" value="hospital"/>
                 
                 <input type="hidden" name="flat" value={this.state.flat}/>
@@ -263,12 +331,12 @@ export default class SignupContainer extends React.Component {
                 </input>
                 <br></br>
                 UserName:
-                <input type="text"  name="username">
+                <input type="text"  name="username" onChange={this.updateUsername.bind(this)}>
                 </input>
                 <br></br>
 
                 Password:
-                <input type="password"  name="password">
+                <input type="password"  name="password" onChange={this.updatePassword.bind(this)}>
                 </input>
 
                 <br></br>

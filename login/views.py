@@ -29,8 +29,8 @@ def addUser(request):
 			x=str(request.POST.get('bday'))
 			x=x.split("-")
 			print(x[0],x[1],x[2])
-			x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
-			#x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+			# x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
+			x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
 			returnRespone['name']=str(request.POST.get('first_name'))+' '+str(request.POST.get('last_name'))
 			returnRespone['email']=request.POST.get('email')
 			user = Users(
@@ -93,6 +93,7 @@ def addUser(request):
 				user.cp3Last_name=str(request.POST.get('cp3Last_name'))
 				user.cp3Contact=int(request.POST.get('cp3Contact'))
 			user.save()
+			returnRespone['error'] = False
 		return JsonResponse(returnRespone)
 	else :
 		return JsonResponse(returnRespone)
@@ -202,6 +203,15 @@ def profile(request):
 def req(request):
 	return JsonResponse({'foo':'bar'})
 
+# Utility function for checkSession function
+def getUserTypeHelper(user):
+	userType=""
+	if(Users.objects.filter(username=user).exists()):
+		userType="donor"
+	elif(Users.objects.filter(username=user).exists()):
+		userType="hospital"
+	return str(userType)
+
 
 def checkSession(request):
 	dataToBeSend = {}
@@ -211,6 +221,7 @@ def checkSession(request):
 		for i in request.session.items():
 			dataToBeSend['username']=i[1]
 			#username=i[1]
+		dataToBeSend['userType']=getUserTypeHelper(str(dataToBeSend['username']))
 
 		print (dataToBeSend['type'])
 		print (dataToBeSend['username'])
@@ -230,7 +241,11 @@ def checkSession(request):
 		# print "no"	
 		# return HttpResponse("no")
 
-	
+def getUserType(request):
+	if(request.GET['type']!='initial'):
+		returnValue={}
+		returnValue["userType"]=getUserTypeHelper(str(request.GET['username']))
+		return JsonResponse(returnValue)
 
 	
 		

@@ -17,15 +17,37 @@ export default class App extends Component {
     }
   }
   componentDidMount(){
-    var that=this;
-    that.stateChange();
-    that.notif_check();
+    // var that=this;
+    // firebase.auth().onAuthStateChanged(firebaseUser=>{
+    //   if(firebaseUser){
+    //     console.log(firebaseUser);
+    //     this.setState({
+    //       user:firebaseUser.email,
+    //       value:"loggedin"
+    //     }, function afterStateChange (){
+    //       this.notif_check();
+    //     });
+    //   }
+    //   else{
+    //    console.log("not logged in"); 
+    //    this.setState({
+    //       value:"notloggedin",
+    //       user:""
+    //     }, function afterStateChange (){
+    //       this.notif_check();
+    //     }); 
+    //   }
+    // });
+    // this.notif_check();
+    this.stateChange();
 
   }
   notif_check(){
     var that=this;
     const rootRef= firebase.database().ref().child('notification/notif');
-    
+    console.log("==========28==========");
+    console.log(this.state.value);
+    console.log("==========30==========");
     rootRef.on('value', function(snapshot){
         console.log(snapshot.val());
 
@@ -42,8 +64,28 @@ export default class App extends Component {
     const auth=firebase.auth();
     const promise = auth.signInWithEmailAndPassword(email, password);
     promise.catch(e => console.log(e.message)); 
-
-    this.stateChange();
+    var that = this;
+    // firebase.auth().onAuthStateChanged(firebaseUser=>{
+    //   if(firebaseUser){
+    //     console.log(firebaseUser);
+    //     this.setState({
+    //       user:firebaseUser.email,
+    //       value:"loggedin"
+    //     }, function afterStateChange (){
+    //       this.notif_check();
+    //     });
+    //   }
+    //   else{
+    //    console.log("not logged in"); 
+    //    this.setState({
+    //       value:"notloggedin",
+    //       user:""
+    //     }, function afterStateChange (){
+    //       this.notif_check();
+    //     }); 
+    //   }
+    // });
+    that.stateChange();
 
   }
 
@@ -57,6 +99,7 @@ export default class App extends Component {
 
     this.stateChange();
   }
+  
   logOUT() {
     const auth=firebase.auth().signOut();
     this.stateChange();
@@ -70,13 +113,17 @@ export default class App extends Component {
         this.setState({
           user:firebaseUser.email,
           value:"loggedin"
+        }, function afterStateChange (){
+          this.notif_check();
         });
       }
       else{
-       console.log("not logged in"); 
+       console.log("not logged in stateChange");
+       console.log(this.state.value); 
        this.setState({
           value:"notloggedin",
-          user:""
+          user:"",
+          notif:""
         }); 
       }
     });
@@ -127,7 +174,6 @@ export default class App extends Component {
                   <h4>{this.state.user}</h4>
                   <h1>notification={this.state.notif}</h1>
                   
-                  <input type="button" className="btn btn-default"  value="SignIn" onClick={this.signIN.bind(this)}/>
                   <input type="button" className="btn btn-primary" value="SignUp" onClick={this.signUP.bind(this)}/>
                   <input type="button" className="btn btn-danger" value="LogOUT" onClick={this.logOUT.bind(this)}/>
                   
@@ -161,7 +207,7 @@ export default class App extends Component {
                   
                   <h4>{this.state.value}</h4>
                   <h4>{this.state.user}</h4>
-                  
+                  <h1>notification={this.state.notif}</h1>
                   <input type="button" className="btn btn-default"  value="SignIn" onClick={this.signIN.bind(this)}/>
                   <input type="button" className="btn btn-primary" value="SignUp" onClick={this.signUP.bind(this)}/>
                   <input type="button" className="btn btn-danger btn-action hide" value="LogOUT" onClick={this.logOUT.bind(this)}/>
