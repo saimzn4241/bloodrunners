@@ -1,6 +1,6 @@
 import React from "react"
 import { render } from "react-dom"
-import React_mapContainer from "./containers/React_mapContainer"
+import React_mapContainer from "./containers/React_mapContainer2"
 import Map, {GoogleApiWrapper} from 'google-maps-react'
 
 

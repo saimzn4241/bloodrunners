@@ -100,3 +100,33 @@ def getHospitalLocation(request):
 		tempData.append(i[0])
 		retData.append(tempData)
 	return JsonResponse(retData,safe = False)
+
+@csrf_exempt
+def MarkerInfo(request):
+	users=Users.objects.all()
+	hosps=Hospitals.objects.all()
+	retData=[]
+
+	for i in users:
+		data={}
+		data['type'] = 'donor'
+		data['username'] = str(i.username)
+		data['first_name'] = str(i.first_name)
+		data['last_name'] = str(i.last_name)
+
+		data['lat'] = str(i.cur_lat) 
+		data['long'] = str(i.cur_long)
+		retData.append(data)
+
+	for i in hosps:
+		data={}
+		data['type'] = 'hospital'
+		data['name'] = str(i.hospitalName)
+		data['username'] = str(i.username)
+		data['lat'] = str(i.fix_lat)
+		data['long'] = str(i.fix_long)
+		retData.append(data)
+						
+
+
+	return JsonResponse(retData, safe = False)	

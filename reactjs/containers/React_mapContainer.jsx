@@ -1,3 +1,4 @@
+
 import React from "react"
 
 import Map, {GoogleApiWrapper,  Marker } from 'google-maps-react'
@@ -5,8 +6,8 @@ import {searchNearby} from './utils/googleApiHelpers'
 import Sidebar from '../components/Sidebar/Sidebar'
 
 export class  React_mapContainer extends React.Component {
-	
-	constructor(props) {
+  
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -15,7 +16,7 @@ export class  React_mapContainer extends React.Component {
     }
   }
   renderMarkers() {
-  	if (!this.state.places) { return null; }
+    if (!this.state.places) { return null; }
 
     return this.state.places.map(place =>{
       return <Marker key={place.id}
@@ -65,12 +66,12 @@ export class  React_mapContainer extends React.Component {
 
            
            {this.state.places.map(place =>{
-		      return <Marker key={place.id}
-		                name={place.id}
-		                place={place}
-		                position={place.geometry.location}
-		              />
-		    })}
+          return <Marker key={place.id}
+                    name={place.id}
+                    place={place}
+                    position={place.geometry.location}
+                  />
+        })}
 
             
             
