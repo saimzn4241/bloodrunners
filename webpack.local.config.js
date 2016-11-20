@@ -7,7 +7,7 @@ var config = require('./webpack.base.config.js')
 
 config.devtool = "#eval-source-map"
 
-var ip = '172.20.10.6'
+var ip = 'localhost'
 
 
 config.entry = {

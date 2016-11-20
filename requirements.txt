@@ -23,3 +23,7 @@ npm install reactcss --save
 npm install react-google-maps --save
 
 npm install react-google-map --save
+
+
+npm install --save react-async-script-loader
+npm install react-gmaps --save
