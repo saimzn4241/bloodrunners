@@ -169,6 +169,16 @@ var Headline = React.createClass ({
         this.stateChange();
         },
 
+        PING:function(){
+          var that=this;
+          const rootRef= firebase.database().ref().child('notification');
+          
+          rootRef.set({
+          notif: 'bloodneeded',
+          user: this.state.user
+          });
+        },
+
         stateChange:function(){
         firebase.auth().onAuthStateChanged(firebaseUser=>{
           if(firebaseUser){
@@ -203,45 +213,86 @@ var Headline = React.createClass ({
 
             console.log(this.state.session);
 
-            return (
-              <div /*style={divStyle}*/ >
-                <h1>User logged in= {this.state.session}</h1>
+            if(this.state.userType=='donor')
+            {
+              return (
+                <div /*style={divStyle}*/ >
+                  <h1>User logged in= {this.state.session}</h1>
 
-                {/*<button onClick={this.homefun}>Home</button>*/}
-                <form method="get" action="/home">
-                < button type="submit">HOME</button>
-                </form>
+                  {/*<button onClick={this.homefun}>Home</button>*/}
+                  <form method="get" action="/home">
+                  <button type="submit">HOME</button>
+                  </form>
+                  
+                  <form id="urlForm" method="POST" action="#" onSubmit={this.getUrl}>
+                  <button type="submit">Profile</button>
+                  </form>
+
+                  <form method="get" action="/maps">
+                  <button type="submit">MAPS</button>
+                  </form>
+
+                  
+                  <form id="logout1" method="get" action="/home" onSubmit={this.logoutfun}>
+                  <button type="submit">Log-Out</button>
+                  </form>
+                  <h1>notification={this.state.notif}</h1>
+
                 
-                <form id="urlForm" method="POST" action="#" onSubmit={this.getUrl}>
-                < button type="submit">Profile</button>
-                </form>
+                </div>
+              );
+            }
 
-                <form method="get" action="/maps">
-                < button type="submit">MAPS</button>
-                </form>
+            else
+            {
+              return (
+                <div /*style={divStyle}*/ >
+                  <h1>User logged in= {this.state.session}</h1>
+
+                  {/*<button onClick={this.homefun}>Home</button>*/}
+                  <form method="get" action="/home">
+                  <button type="submit">HOME</button>
+                  </form>
+                  
+                  <form id="urlForm" method="POST" action="#" onSubmit={this.getUrl}>
+                  <button type="submit">Profile</button>
+                  </form>
+
+                  <form method="get" action="/maps">
+                  <button type="submit">MAPS</button>
+                  </form>
+
+                  
+                  <form id="logout1" method="get" action="/home" onSubmit={this.logoutfun}>
+                  <button type="submit">Log-Out</button>
+                  </form>
+
+                  <input type="button" value="PING" onClick={this.PING}/>
+
+                  <h1>notification={this.state.notif}</h1>
 
                 
-                <form id="logout1" method="get" action="/home" onSubmit={this.logoutfun}>
-                < button type="submit">Log-Out</button>
-                </form>
-                <h1>notification={this.state.notif}</h1>
-
-              
-              </div>
-            );
+                </div>
+              );
+            }
 
           }
-            else{
+          else{
 
             return (
           	<div>
-              <button  onClick={this.homefun1}>Home</button>
-              <form method="get" action="/maps">
-              < button type="submit">MAPS</button>
+              <form method="get" action="/home">
+                <button type="submit">HOME</button>
               </form>
+              
+              <form method="get" action="/maps">
+              <button type="submit">MAPS</button>
+              </form>
+              
               <form method="get" action="/signup">
               <button type="submit">Sign-Up</button>
               </form>
+              
               <button  onClick={this.loginfun} >Login</button>
               <Login type={this.state.type} updateStateProp = {this.updateState} /> 
             	
