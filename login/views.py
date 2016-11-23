@@ -53,8 +53,8 @@ def addUser(request):
 			dynamicLatitude=str(request.POST.get('dlat'))
 			dynamicLongitude=str(request.POST.get('dlong'))
 			if(fixedLongitude!='' and fixedLatitude!=''):
-				user.fix_lat=float(fixedLongitude)
-				user.fix_long=float(fixedLatitude)
+				user.fix_lat=float(fixedLatitude)
+				user.fix_long=float(fixedLongitude)
 			if(dynamicLatitude!='' and dynamicLongitude!=''):
 				user.cur_lat=float(dynamicLatitude)
 				user.cur_long=float(dynamicLongitude)
@@ -76,8 +76,8 @@ def addUser(request):
 			fixedLatitude=str(request.POST.get('flat'))
 			fixedLongitude=str(request.POST.get('flong'))
 			if(fixedLongitude!='' and fixedLatitude!=''):
-				user.fix_lat=float(fixedLongitude)
-				user.fix_long=float(fixedLatitude)
+				user.fix_lat=float(fixedLatitude)
+				user.fix_long=float(fixedLongitude)
 			fn2=str(request.POST.get('cp2First_name'))
 			ln2=str(request.POST.get('cp2Last_name'))
 			c2=str(request.POST.get('cp2Contact'))
