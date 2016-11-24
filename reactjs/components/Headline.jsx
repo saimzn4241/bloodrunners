@@ -96,6 +96,7 @@ var Headline = React.createClass ({
         },
         logoutfun:function() {
          var _this = this;
+         _this.logOUT();
          var qs = require('qs');
         
             
@@ -105,9 +106,9 @@ var Headline = React.createClass ({
               session: ''
             });
             axios.post('/logout/' ,qs.stringify({username: this.state.session})).then(function(result) {    
-              console.log(result)
+              console.log(result);
               _this.logOUT();
-              
+              console.log("logout fire done");
             });
             
             
@@ -157,6 +158,7 @@ var Headline = React.createClass ({
           console.log("==========30==========");
           rootRef.on('value', function(snapshot){
               console.log(snapshot.val());
+              console.log("chutiya bc");
 
                 that.setState({
                  notif: snapshot.val()
