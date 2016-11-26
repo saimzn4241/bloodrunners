@@ -27,3 +27,5 @@ npm install react-google-map --save
 
 npm install --save react-async-script-loader
 npm install react-gmaps --save
+
+npm install react-bootstrap --save

@@ -6,7 +6,7 @@ import firebase from 'firebase';
 
 //import { Button } from 'react-bootstrap';
 //import StyleSheet from 'react-style';
-            
+      
 var Headline = React.createClass ({
 
     

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import Headline from "../components/Headline";
+import { Button } from 'react-bootstrap';
 
 export default class App extends Component {
 

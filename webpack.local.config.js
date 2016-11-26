@@ -77,6 +77,12 @@ config.entry = {
     './reactjs/practice',
   
   ],
+  practice1:[
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/practice1',
+  
+  ],
   map1:[
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',

@@ -20,6 +20,7 @@ module.exports = {
     react_map: './reactjs/react_map',
     practice: './reactjs/practice',
     map1: './reactjs/map1',
+    practice1: './reactjs/practice1',
      
     vendors: ['react'],
   },
