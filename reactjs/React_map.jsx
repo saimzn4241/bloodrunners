@@ -54,7 +54,8 @@ const React_map = React.createClass({
   },
 
   onCloseClick() {
-    console.log('onCloseClick');
+    //console.log('onCloseClick');
+    markers=[];
     var _this=this;
      _this.setState({
             toggle:0
@@ -64,23 +65,23 @@ const React_map = React.createClass({
   onClick(e) {
     console.log('onClick', e);
   },
-  Mark(e){
-    console.log("here in mark", e,markers,"after",  this.state.markers);
+  Mark(place){
+    markers=[];
+    //console.log("here in mark", place);
+    markers.push({lat:place.lat, long:place.long,name:place.name })
     var _this=this;
      _this.setState({
             markers:markers,
             toggle:1
             });
-    // return (<InfoWindow
-    //       lat={place.lat}
-    //       lng={place.long}
-    //       content={place.name}
-    //       onCloseClick={this.onCloseClick} />);
+            
+    
+
   },
   render() {
    
 
-    console.log(this.state.json);
+    //console.log(this.state.json);
 
     var count=0;
   
@@ -100,19 +101,19 @@ const React_map = React.createClass({
         {this.state.json.map(place =>{
           if(place.type=="donor"){
             return <Marker
+            key={place.username}
             lng= {place.long}
             lat={place.lat}
             icon= {donorMarker}
             />
           }
           else if(place.type=="hospital"){
-            markers.push({lat:place.lat, long:place.long,name:place.name })
             return <Marker
-            
+            key={place.username}
             lng= {place.long}
             lat={place.lat}
             icon= {hospMarker}
-            onClick={this.Mark} 
+            onClick={this.Mark.bind(this, place)} 
             
             />
             
