@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load render_bundle from webpack_loader %}
+
+{% block main %}
+<div id="map1"></div>
+<h1>DATA HTML</h1>>
+
+{% render_bundle 'vendors' %}
+{% render_bundle 'map1' %}
+{% endblock %}
+

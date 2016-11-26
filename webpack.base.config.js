@@ -18,7 +18,9 @@ module.exports = {
     Firebase: './reactjs/Firebase',
     Firebase_auth: './reactjs/Firebase_auth',
     react_map: './reactjs/react_map',
-    
+    practice: './reactjs/practice',
+    map1: './reactjs/map1',
+     
     vendors: ['react'],
   },
 

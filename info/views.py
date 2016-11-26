@@ -116,6 +116,7 @@ def MarkerInfo(request):
 
 		data['lat'] = str(i.cur_lat) 
 		data['long'] = str(i.cur_long)
+		data['toggle']=0
 		retData.append(data)
 
 	for i in hosps:
@@ -125,6 +126,7 @@ def MarkerInfo(request):
 		data['username'] = str(i.username)
 		data['lat'] = str(i.fix_lat)
 		data['long'] = str(i.fix_long)
+		data['toggle']=0
 		retData.append(data)
 						
 

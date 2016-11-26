@@ -72,7 +72,11 @@ urlpatterns = [
    url(r'^MarkerInfo/$',MarkerInfo),
    
    url(r'getUserType/$',getUserType),
-
+   url(r'^practice$',
+      generic.TemplateView.as_view(template_name='practice.html')),
+   url(r'^map1$',
+      generic.TemplateView.as_view(template_name='map1.html')),
+   
    #url(r'', include('chat.urls')),
 
 ]

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load render_bundle from webpack_loader %}
+
+{% block main %}
+<div id="practice"></div>
+{% render_bundle 'vendors' %}
+{% render_bundle 'practice' %}
+{% endblock %}
+
+

@@ -1,3 +1,5 @@
 TODO.txt
 
 // authenticate firebase and django
+// date problem
+// UI

@@ -71,6 +71,18 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/React_map',
   ],
+  practice:[
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/practice',
+  
+  ],
+  map1:[
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/map1',
+  
+  ], 
 }
 
 config.plugins = config.plugins.concat([
