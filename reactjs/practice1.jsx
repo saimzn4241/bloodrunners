@@ -1,5 +1,6 @@
 import React from "react"
 import { render } from "react-dom"
+
 import {OverlayTrigger, Popover, Tooltip,Modal, Clearfix, ButtonToolbar, Button, ButtonGroup, DropdownButton, MenuItem, SplitButton} from "react-bootstrap"
 import './practice1.css'
 
@@ -60,6 +61,9 @@ var Practice1= React.createClass({
         );
 
   //modal end
+    
+
+
     return (
     <div >
 
