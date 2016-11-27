@@ -66,6 +66,7 @@ urlpatterns = [
    url(r'^profile/$',profile),
    url(r'^firebase_data/$',firebase_data),
    url(r'getNearUsers/$',nearUsers),
+   url(r'getNearHosps/$',nearHosps),
 
    url(r'^react_map$',
       generic.TemplateView.as_view(template_name='react_map.html')),

@@ -18,7 +18,7 @@ import json
 # Also you need to run 'pip install geopy' and please remove the unnecessary commands after reading them :p
 
 
-def road_distance(hosp, allusers):
+def road_distance(hosp, allusers,type):
 	userListToBeReturned = {'count':0}
 	maximum_distance=287162252452
 
@@ -26,12 +26,17 @@ def road_distance(hosp, allusers):
 	url="https://maps.googleapis.com/maps/api/distancematrix/json?units=metric"
 	origin="&origins="
 	
-	for i in allusers:
-		origin=origin+str(i.cur_long)+","+str(i.cur_lat)+"|"
+	if(type=='hosp'):
+		for i in allusers:
+			origin=origin+str(i.cur_lat)+","+str(i.cur_long)+"|"
+	else:
+		for i in allusers:
+			origin=origin+str(i.fix_lat)+","+str(i.fix_long)+"|"
+			print i.fix_lat, i.fix_long, i.username
 	
 	origin = origin[:-1]	
 	
-	destination="&destinations="+str(hosp[1])+","+(str(hosp[0]))
+	destination="&destinations="+str(hosp[0])+","+(str(hosp[1]))
 	
 	url=url+origin+destination+key
 	
@@ -77,7 +82,28 @@ def nearUsers(request):
 
 			allUsers=Users.objects.all()
 			hosp = (blood_required_at_hospital_data['lat'],blood_required_at_hospital_data['long'])
-			retVal = road_distance(hosp, allUsers)
+			retVal = road_distance(hosp, allUsers , 'hosp')
+			# print retVal
+			return JsonResponse(retVal)
+		else:
+			return JsonResponse(userListToBeReturned)
+						
+@csrf_exempt
+def nearHosps(request):
+	maximum_distance=2871622
+	userListToBeReturned = {'count':0}
+	if request.method=='POST':
+		nearData = {}
+		nearData['username']=str(request.POST.get('username'))
+		if(Users.objects.filter(username=nearData['username']).exists()):
+			user=Users.objects.filter(username=nearData['username'])
+			nearData['lat']=float(request.POST.get('lat'))
+			nearData['long']=float(request.POST.get('long'))
+			print ("near lat long =", nearData['lat'], nearData['long'])
+
+			allHospitals=Hospitals.objects.all()
+			user = (nearData['lat'],nearData['long'])
+			retVal = road_distance(user, allHospitals,'user')
 			# print retVal
 			return JsonResponse(retVal)
 		else:
