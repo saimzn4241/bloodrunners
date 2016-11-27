@@ -17,31 +17,11 @@ export default class App extends Component {
     }
   }
   componentDidMount(){
-    // var that=this;
-    // firebase.auth().onAuthStateChanged(firebaseUser=>{
-    //   if(firebaseUser){
-    //     console.log(firebaseUser);
-    //     this.setState({
-    //       user:firebaseUser.email,
-    //       value:"loggedin"
-    //     }, function afterStateChange (){
-    //       this.notif_check();
-    //     });
-    //   }
-    //   else{
-    //    console.log("not logged in"); 
-    //    this.setState({
-    //       value:"notloggedin",
-    //       user:""
-    //     }, function afterStateChange (){
-    //       this.notif_check();
-    //     }); 
-    //   }
-    // });
-    // this.notif_check();
     this.stateChange();
 
   }
+
+
   notif_check(){
     var that=this;
     const rootRef= firebase.database().ref().child('notification/notif');
@@ -65,26 +45,6 @@ export default class App extends Component {
     const promise = auth.signInWithEmailAndPassword(email, password);
     promise.catch(e => console.log(e.message)); 
     var that = this;
-    // firebase.auth().onAuthStateChanged(firebaseUser=>{
-    //   if(firebaseUser){
-    //     console.log(firebaseUser);
-    //     this.setState({
-    //       user:firebaseUser.email,
-    //       value:"loggedin"
-    //     }, function afterStateChange (){
-    //       this.notif_check();
-    //     });
-    //   }
-    //   else{
-    //    console.log("not logged in"); 
-    //    this.setState({
-    //       value:"notloggedin",
-    //       user:""
-    //     }, function afterStateChange (){
-    //       this.notif_check();
-    //     }); 
-    //   }
-    // });
     that.stateChange();
 
   }
@@ -133,8 +93,9 @@ export default class App extends Component {
   PING(){
     var that=this;
     const rootRef= firebase.database().ref().child('notification');
-    
-    rootRef.set({
+    // const rootRef1 = rootRef.push();
+    // console.log("push" + rootRef1);
+    rootRef.push({
     notif: 'bloodneeded',
     user: this.state.user
     });

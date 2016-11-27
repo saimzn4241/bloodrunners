@@ -123,6 +123,7 @@ def login(request):
 	dataToBeSend['login_value'] = 'not ok'
 	dataToBeSend['error'] = True
 	if(Users.objects.filter(password=password, username=username).exists()):
+		dataToBeSend['userType']='donor'
 		request.session['username'] = username
 		name=request.session['username']
 		user=(Users.objects.get(username=username))
@@ -146,6 +147,7 @@ def login(request):
 		return JsonResponse(dataToBeSend)
 
 	elif(Hospitals.objects.filter(password=password, username=username).exists()):
+		dataToBeSend['userType']='hospital'
 		request.session['username'] = username
 		name=request.session['username']
 		user=(Hospitals.objects.get(username=username))
@@ -208,7 +210,7 @@ def getUserTypeHelper(user):
 	userType=""
 	if(Users.objects.filter(username=user).exists()):
 		userType="donor"
-	elif(Users.objects.filter(username=user).exists()):
+	elif(Hospitals.objects.filter(username=user).exists()):
 		userType="hospital"
 	return str(userType)
 

@@ -55,12 +55,13 @@ var Headline = React.createClass ({
         document.getElementById('urlForm').setAttribute('action', url);
       },
 
-       updateState:function(arg,loginEmail,loginPassword) {
+       updateState:function(arg,loginEmail,loginPassword,userType1) {
         // var _this = this;
         this.setState({
           session: arg,
           email: loginEmail,
-          password: loginPassword
+          password: loginPassword,
+          userType:userType1
           },function firebaseSignIn(){
                 // console.log("headline.jsx",loginEmail,loginPassword);
               this.signIN(loginEmail,loginPassword);
@@ -151,19 +152,43 @@ var Headline = React.createClass ({
         },
 
         notif_check:function(){
-          var that=this;
-          const rootRef= firebase.database().ref().child('notification/notif');
-          console.log("==========28==========");
-          console.log(this.state.value);
-          console.log("==========30==========");
-          rootRef.on('value', function(snapshot){
-              console.log(snapshot.val());
-              console.log("chutiya bc");
+          console.log("====Dekhle bc====");
+          console.log(this.state.userType);
+          if(this.state.userType=='hospital')
+          {
+            const rootRef= firebase.database().ref().child('notification/notif');
+            console.log("==========28==========");
+            console.log(this.state.value);
+            console.log("==========30==========");
+            rootRef.on('value', function(snapshot){
+                console.log(snapshot.val());
 
-                that.setState({
-                 notif: snapshot.val()
-               });     
-          });
+                  this.setState({
+                   notif: snapshot.val()
+                 });     
+            }.bind(this));
+          }
+          else if(this.state.userType=='donor')
+          {
+            var url=('userHospNotif/').concat(this.state.session);
+            const rootRef= firebase.database().ref().child(url);
+            rootRef.on('value', function(snapshot){
+                console.log("=======got the donor notification========");
+                console.log(snapshot.val());
+                var objectReturned=snapshot.val();
+                // var notifications = objectReturned.map(function(obj){
+                //   console.log("===== "+obj[hospUsername]+" =====");
+                // });
+                var notifications = [];
+                for(var key in objectReturned){
+                  console.log("===== "+objectReturned[key].hospUsername+" =====");
+                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername}</li>);
+                }
+                this.setState({
+                  notif: notifications
+                });
+            }.bind(this));
+          }
         },
 
         logOUT:function() {
@@ -171,14 +196,28 @@ var Headline = React.createClass ({
         this.stateChange();
         },
 
-        PING:function(){
-          var that=this;
-          const rootRef= firebase.database().ref().child('notification');
+        PING:function(userRecieve){
+          var url = ('userHospNotif/').concat(userRecieve);
+          const rootRef= firebase.database().ref().child(url);
           
-          rootRef.set({
-          notif: 'bloodneeded',
-          user: this.state.user
+          rootRef.push({
+          hospUsername: this.state.user,
+          read: 'False'
           });
+        },
+
+        MainPing:function(){
+          var qs = require('qs');
+          axios.post('/getNearUsers/',qs.stringify({hospital: this.state.session})).then(function(result){
+            console.log(result);
+            var numberOfRecievers = result.data.count;
+            // console.log(numberOfRecievers);
+            // console.log(result.data.users[0]);
+            for (var i = 0; i < numberOfRecievers; i++) {
+              console.log(result.data.users[i]);
+              this.PING(result.data.users[i]);
+            }
+          }.bind(this));
         },
 
         stateChange:function(){
@@ -238,7 +277,12 @@ var Headline = React.createClass ({
                   <form id="logout1" method="get" action="/home" onSubmit={this.logoutfun}>
                   <button type="submit">Log-Out</button>
                   </form>
-                  <h1>notification={this.state.notif}</h1>
+
+                  {/*<h1>notification={this.state.notif}</h1>*/}
+                  <h1>Notifications List : </h1>
+                  <div>
+                    {this.state.notif}
+                  </div>
 
                 
                 </div>
@@ -269,7 +313,7 @@ var Headline = React.createClass ({
                   <button type="submit">Log-Out</button>
                   </form>
 
-                  <input type="button" value="PING" onClick={this.PING}/>
+                  <input type="button" value="PING" onClick={this.MainPing}/>
 
                   <h1>notification={this.state.notif}</h1>
 
