@@ -89,10 +89,28 @@ config.entry = {
   //   './reactjs/practice2',
   
   // ],
+  // practice1:[
+  //   'webpack-dev-server/client?http://' + ip + ':3000',
+  //   'webpack/hot/only-dev-server',
+  //   './reactjs/practice3',
+  
+  // ],
+  // practice1:[
+  //   'webpack-dev-server/client?http://' + ip + ':3000',
+  //   'webpack/hot/only-dev-server',
+  //   './reactjs/practice4',
+  
+  // ],
+  // practice1:[
+  //   'webpack-dev-server/client?http://' + ip + ':3000',
+  //   'webpack/hot/only-dev-server',
+  //   './reactjs/practice5',
+  
+  // ],
   practice1:[
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
-    './reactjs/practice3',
+    './reactjs/practice6',
   
   ],
   map1:[
@@ -121,6 +139,11 @@ config.module.loaders.push(
   { test: /\.css$/, loaders: ['css-loader'] }
 )
 
+config.module.loaders.push(
+{
+  test: /\.(jpg|png)$/,
+  loader: 'url?limit=25000'
+})
 
 config.output.publicPath = 'http://' + ip + ':3000' + '/assets/bundles/'
 
