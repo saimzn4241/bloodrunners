@@ -182,7 +182,7 @@ var Headline = React.createClass ({
                 var notifications = [];
                 for(var key in objectReturned){
                   console.log("===== "+objectReturned[key].hospUsername+" =====");
-                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername}</li>);
+                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername} <button>Accept</button><button>Decline</button></li>);
                 }
                 this.setState({
                   notif: notifications
@@ -201,7 +201,7 @@ var Headline = React.createClass ({
           const rootRef= firebase.database().ref().child(url);
           
           rootRef.push({
-          hospUsername: this.state.user,
+          hospUsername: this.state.session,
           read: 'False'
           });
         },
