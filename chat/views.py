@@ -20,7 +20,7 @@ import json
 
 def road_distance(hosp, allusers):
 	userListToBeReturned = {'count':0}
-	maximum_distance=2871622
+	maximum_distance=287162252452
 
 	key="&key=AIzaSyCxLotVeAyJaSZJwnoYmYmTRDTiIDriJ0M"
 	url="https://maps.googleapis.com/maps/api/distancematrix/json?units=metric"
@@ -77,8 +77,11 @@ def nearUsers(request):
 
 			allUsers=Users.objects.all()
 			hosp = (blood_required_at_hospital_data['lat'],blood_required_at_hospital_data['long'])
-			return JsonResponse(road_distance(hosp, allUsers))
-			
+			retVal = road_distance(hosp, allUsers)
+			# print retVal
+			return JsonResponse(retVal)
+		else:
+			return JsonResponse(userListToBeReturned)
 						
 				
 	

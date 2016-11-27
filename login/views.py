@@ -53,8 +53,8 @@ def addUser(request):
 			dynamicLatitude=str(request.POST.get('dlat'))
 			dynamicLongitude=str(request.POST.get('dlong'))
 			if(fixedLongitude!='' and fixedLatitude!=''):
-				user.fix_lat=float(fixedLongitude)
-				user.fix_long=float(fixedLatitude)
+				user.fix_lat=float(fixedLatitude)
+				user.fix_long=float(fixedLongitude)
 			if(dynamicLatitude!='' and dynamicLongitude!=''):
 				user.cur_lat=float(dynamicLatitude)
 				user.cur_long=float(dynamicLongitude)
@@ -76,8 +76,8 @@ def addUser(request):
 			fixedLatitude=str(request.POST.get('flat'))
 			fixedLongitude=str(request.POST.get('flong'))
 			if(fixedLongitude!='' and fixedLatitude!=''):
-				user.fix_lat=float(fixedLongitude)
-				user.fix_long=float(fixedLatitude)
+				user.fix_lat=float(fixedLatitude)
+				user.fix_long=float(fixedLongitude)
 			fn2=str(request.POST.get('cp2First_name'))
 			ln2=str(request.POST.get('cp2Last_name'))
 			c2=str(request.POST.get('cp2Contact'))
@@ -123,6 +123,7 @@ def login(request):
 	dataToBeSend['login_value'] = 'not ok'
 	dataToBeSend['error'] = True
 	if(Users.objects.filter(password=password, username=username).exists()):
+		dataToBeSend['userType']='donor'
 		request.session['username'] = username
 		name=request.session['username']
 		user=(Users.objects.get(username=username))
@@ -146,6 +147,7 @@ def login(request):
 		return JsonResponse(dataToBeSend)
 
 	elif(Hospitals.objects.filter(password=password, username=username).exists()):
+		dataToBeSend['userType']='hospital'
 		request.session['username'] = username
 		name=request.session['username']
 		user=(Hospitals.objects.get(username=username))
@@ -208,7 +210,7 @@ def getUserTypeHelper(user):
 	userType=""
 	if(Users.objects.filter(username=user).exists()):
 		userType="donor"
-	elif(Users.objects.filter(username=user).exists()):
+	elif(Hospitals.objects.filter(username=user).exists()):
 		userType="hospital"
 	return str(userType)
 
