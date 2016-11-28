@@ -258,8 +258,11 @@ var Headline = React.createClass ({
             {
               return (
                 <div /*style={divStyle}*/ >
-                  <h1>User logged in= {this.state.session}</h1>
-
+                  {this.state.session!=''?
+                    <h1>User logged in= {this.state.session}</h1>
+                    :
+                    <div></div>
+                  }
                   {/*<button onClick={this.homefun}>Home</button>*/}
                   <form method="get" action="/home">
                   <button type="submit">HOME</button>
@@ -279,10 +282,14 @@ var Headline = React.createClass ({
                   </form>
 
                   {/*<h1>notification={this.state.notif}</h1>*/}
-                  <h1>Notifications List : </h1>
-                  <div>
-                    {this.state.notif}
-                  </div>
+                  {this.state.notif!=''?
+                    <div>
+                      <h1>Notifications List : </h1>
+                      {this.state.notif}
+                    </div>
+                    :
+                    <div></div>
+                  }
 
                 
                 </div>
@@ -293,8 +300,11 @@ var Headline = React.createClass ({
             {
               return (
                 <div /*style={divStyle}*/ >
+                {this.state.session!=''?
                   <h1>User logged in= {this.state.session}</h1>
-
+                  :
+                  <div></div>
+                }
                   {/*<button onClick={this.homefun}>Home</button>*/}
                   <form method="get" action="/home">
                   <button type="submit">HOME</button>
@@ -313,10 +323,15 @@ var Headline = React.createClass ({
                   <button type="submit">Log-Out</button>
                   </form>
 
-                  <input type="button" value="PING" onClick={this.MainPing}/>
+                  <form method="get" action="/request/">
+                  <button type="submit">Request</button>
+                  </form>
 
-                  <h1>notification={this.state.notif}</h1>
-
+                  {this.state.notif!=''?
+                    <h1>notification={this.state.notif}</h1>
+                    :
+                    <div></div>
+                  }
                 
                 </div>
               );
@@ -342,7 +357,11 @@ var Headline = React.createClass ({
               <button  onClick={this.loginfun} >Login</button>
               <Login type={this.state.type} updateStateProp = {this.updateState} /> 
             	
-              <h1>notification={this.state.notif}</h1>
+              {this.state.notif!=''?
+                <h1>notification={this.state.notif}</h1>
+                :
+                <div></div>
+              }
           	</div>
             );
           }

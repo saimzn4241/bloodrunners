@@ -80,6 +80,8 @@ urlpatterns = [
    
    url(r'^map1$',
       generic.TemplateView.as_view(template_name='map1.html')),
+   url(r'^request/$',
+      generic.TemplateView.as_view(template_name='request.html')),
    
    #url(r'', include('chat.urls')),
 
