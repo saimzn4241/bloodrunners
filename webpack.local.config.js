@@ -76,8 +76,8 @@ config.entry = {
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
     './reactjs/practice',
-  
   ],
+
   // practice1:[
   //   'webpack-dev-server/client?http://' + ip + ':3000',
   //   'webpack/hot/only-dev-server',
@@ -112,14 +112,18 @@ config.entry = {
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
     './reactjs/practice6',
-  
   ],
   map1:[
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
     './reactjs/map1',
-  
-  ], 
+  ],
+
+  request:[
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/request',
+  ],
 }
 
 config.plugins = config.plugins.concat([

@@ -184,7 +184,7 @@ var Headline = React.createClass ({
                 var notifications = [];
                 for(var key in objectReturned){
                   console.log("===== "+objectReturned[key].hospUsername+" =====");
-                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername}</li>);
+                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername} <button>Accept</button><button>Decline</button></li>);
                 }
                 this.setState({
                   notif: notifications
@@ -203,7 +203,7 @@ var Headline = React.createClass ({
           const rootRef= firebase.database().ref().child(url);
           
           rootRef.push({
-          hospUsername: this.state.user,
+          hospUsername: this.state.session,
           read: 'False'
           });
         },
@@ -260,8 +260,11 @@ var Headline = React.createClass ({
             {
               return (
                 <div /*style={divStyle}*/ >
-                  <h1>User logged in= {this.state.session}</h1>
-
+                  {this.state.session!=''?
+                    <h1>User logged in= {this.state.session}</h1>
+                    :
+                    <div></div>
+                  }
                   {/*<button onClick={this.homefun}>Home</button>*/}
                   <form method="get" action="/home">
                   <button type="submit">HOME</button>
@@ -281,12 +284,16 @@ var Headline = React.createClass ({
                   </form>
 
                   {/*<h1>notification={this.state.notif}</h1>*/}
-                  <h1>Notifications List : </h1>
-                  <div>
-                    {this.state.notif}
-                  </div>
+
+                  {this.state.notif!=''?
+                    <div>
+                      <h1>Notifications List : </h1>
+                      {this.state.notif}
+                    </div>
+                    :
+                    <div></div>
+                  }
                   <React_map />
-                
                 </div>
               );
             }
@@ -295,8 +302,11 @@ var Headline = React.createClass ({
             {
               return (
                 <div /*style={divStyle}*/ >
+                {this.state.session!=''?
                   <h1>User logged in= {this.state.session}</h1>
-
+                  :
+                  <div></div>
+                }
                   {/*<button onClick={this.homefun}>Home</button>*/}
                   <form method="get" action="/home">
                   <button type="submit">HOME</button>
@@ -315,11 +325,15 @@ var Headline = React.createClass ({
                   <button type="submit">Log-Out</button>
                   </form>
 
-                  <input type="button" value="PING" onClick={this.MainPing}/>
-
-                  <h1>notification={this.state.notif}</h1>
-
-                   <React_map />
+                  <form method="get" action="/request/">
+                  <button type="submit">Request</button>
+                  </form>
+                  {this.state.notif!=''?
+                    <h1>notification={this.state.notif}</h1>
+                    :
+                    <div></div>
+                  }
+                  <React_map />
                 </div>
               );
             }
@@ -343,10 +357,13 @@ var Headline = React.createClass ({
               
               <button  onClick={this.loginfun} >Login</button>
               <Login type={this.state.type} updateStateProp = {this.updateState} /> 
-            	
-              <h1>notification={this.state.notif}</h1>
-              <React_map />
-          	</div>
+              {this.state.notif!=''?
+                <h1>notification={this.state.notif}</h1>
+                :
+                <div></div>
+              }
+            <React_map />
+            </div>
             );
           }
       }

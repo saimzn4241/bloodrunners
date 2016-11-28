@@ -21,7 +21,7 @@ module.exports = {
     practice: './reactjs/practice',
     map1: './reactjs/map1',
     practice1: './reactjs/practice1',
-     
+    request: './reactjs/request',
     vendors: ['react'],
   },
 
