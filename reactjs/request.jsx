@@ -20,7 +20,6 @@ class Request extends React.Component {
 	  	firebase.initializeApp(config);
 		return(
 			<div>
-				<h1>This is request</h1>
 				<RequestContainer/>
 			</div>
 		);
