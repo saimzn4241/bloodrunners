@@ -22,6 +22,8 @@ module.exports = {
     map1: './reactjs/map1',
     practice1: './reactjs/practice1',
     request: './reactjs/request',
+    Loc_change: './reactjs/Loc_change',
+    letsWait: './reactjs/letsWait',
     vendors: ['react'],
   },
 
