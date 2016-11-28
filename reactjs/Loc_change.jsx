@@ -33,9 +33,8 @@ class Loc_change extends React.Component {
 		//while(1){
 		var that=this;
 		for(var i=0;i<10;i++){
-			if(f==0){
-				f=1;
-		this.sleep(2000*i)	
+			
+		
 		setTimeout(() => {
 						
 					
@@ -55,10 +54,8 @@ class Loc_change extends React.Component {
 			        
 		    	}
 		    }.bind(this))
-		}, 2000) 
+		}, 2000*(i^6)) 
 		
-		f=0;
-		}
 	
 	   }
 	}
