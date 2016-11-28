@@ -109,5 +109,21 @@ def nearHosps(request):
 		else:
 			return JsonResponse(userListToBeReturned)
 						
-				
+@csrf_exempt				
+def FrontendDistance(request):
+	ret={}
+	ret['distance']="null"
+	ret['time']="null"
+	url=str(request.POST.get('url'))
+	response = urlopen(url).read()
+	response=json.loads(response)
+	c=0	
+	if(response['rows'][c]['elements'][0]['status']!="ZERO_RESULTS"):
+		dist=str(response['rows'][c]['elements'][0]['distance']['text'])
+		time=str(response['rows'][c]['elements'][0]['duration']['text'])
+		ret['distance']=dist
+		ret['time']=time
+	
+	print ret	
+	return JsonResponse(ret)
 	

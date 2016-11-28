@@ -4,6 +4,8 @@ import { render } from "react-dom"
 import axios from 'axios';
 import firebase from 'firebase';
 
+import React_map from "../React_map"
+
 //import { Button } from 'react-bootstrap';
 //import StyleSheet from 'react-style';
       
@@ -283,7 +285,7 @@ var Headline = React.createClass ({
                   <div>
                     {this.state.notif}
                   </div>
-
+                  <React_map />
                 
                 </div>
               );
@@ -317,7 +319,7 @@ var Headline = React.createClass ({
 
                   <h1>notification={this.state.notif}</h1>
 
-                
+                   <React_map />
                 </div>
               );
             }
@@ -343,6 +345,7 @@ var Headline = React.createClass ({
               <Login type={this.state.type} updateStateProp = {this.updateState} /> 
             	
               <h1>notification={this.state.notif}</h1>
+              <React_map />
           	</div>
             );
           }

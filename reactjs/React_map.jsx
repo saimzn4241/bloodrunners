@@ -45,7 +45,7 @@ const React_map = React.createClass({
 
   onMapCreated(map) {
     map.setOptions({
-      disableDefaultUI: true
+      disableDefaultUI: false
     });
   },
 
@@ -87,8 +87,8 @@ const React_map = React.createClass({
   
     return (
       <Gmaps
-        width={'1200px'}
-        height={'900px'}
+        width={'800px'}
+        height={'400px'}
         lat={coords.lat}
         lng={coords.lng}
         zoom={14}
@@ -148,8 +148,10 @@ const React_map = React.createClass({
 
 });
 
-ReactDOM.render(<React_map />, document.getElementById('React_map'));
+//ReactDOM.render(<React_map />, document.getElementById('React_map'));
 
+
+export default React_map;
 
 
 

@@ -29,3 +29,5 @@ npm install --save react-async-script-loader
 npm install react-gmaps --save
 
 npm install react-bootstrap --save
+npm install google-distance
+npm install --save-dev json-loader

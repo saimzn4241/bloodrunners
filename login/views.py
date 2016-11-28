@@ -30,7 +30,9 @@ def addUser(request):
 			x=x.split("-")
 			print(x[0],x[1],x[2])
 			# x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
-			x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+			#x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+			x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
+			
 			returnRespone['name']=str(request.POST.get('first_name'))+' '+str(request.POST.get('last_name'))
 			returnRespone['email']=request.POST.get('email')
 			user = Users(

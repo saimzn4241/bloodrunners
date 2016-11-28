@@ -7,7 +7,8 @@ var config = require('./webpack.base.config.js')
 
 config.devtool = "#eval-source-map"
 
-var ip = '127.0.0.1'
+//var ip = '172.16.102.229'
+var ip = 'localhost'
 
 
 config.entry = {
@@ -143,6 +144,11 @@ config.module.loaders.push(
 {
   test: /\.(jpg|png)$/,
   loader: 'url?limit=25000'
+})
+
+config.module.loaders.push(
+{ 
+  test: /\.json$/, loader: 'json-loader' 
 })
 
 config.output.publicPath = 'http://' + ip + ':3000' + '/assets/bundles/'
