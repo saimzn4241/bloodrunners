@@ -153,6 +153,26 @@ var Headline = React.createClass ({
 
         },
 
+        addAccepted:function(hosp,user){
+          console.log("dekhoo");
+          console.log(hosp,user);
+          var url = ('accepted/').concat(hosp);
+          const rootRef= firebase.database().ref().child(url);
+          
+            rootRef.push({
+            username: user,
+          });
+          var url2 = ('waiting/').concat(user);
+          const rootRef1= firebase.database().ref().child(url2);
+          
+            rootRef1.push({
+            username: hosp,
+          });
+          var url3=("/letsWait/")
+          document.getElementById('notificationsList').setAttribute('action', url3); 
+
+        },
+
         notif_check:function(){
           console.log("====Dekhle bc====");
           console.log(this.state.userType);
@@ -184,7 +204,7 @@ var Headline = React.createClass ({
                 var notifications = [];
                 for(var key in objectReturned){
                   console.log("===== "+objectReturned[key].hospUsername+" =====");
-                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername} <button>Accept</button><button>Decline</button></li>);
+                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername} <form id='notificationsList' method='get' action="#" onSubmit={this.addAccepted.bind(this,objectReturned[key].hospUsername,this.state.session)}><button type="submit">Accept</button><button>Decline</button></form></li>);
                 }
                 this.setState({
                   notif: notifications
