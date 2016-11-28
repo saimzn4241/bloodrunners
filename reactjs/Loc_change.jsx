@@ -3,7 +3,7 @@ import { render } from "react-dom"
 //import Loc_changeContainer from "./containers/ProfileContainer"
 var odlat=0;
 var odlong=0;	
-
+var f=0;
 class Loc_change extends React.Component {
 
 	constructor(props) {
@@ -32,8 +32,10 @@ class Loc_change extends React.Component {
 	loc(){
 		//while(1){
 		var that=this;
-		//for(var i=0;i<10;i++){
-		//this.sleep(2000*i)	
+		for(var i=0;i<10;i++){
+			if(f==0){
+				f=1;
+		this.sleep(2000*i)	
 		setTimeout(() => {
 						
 					
@@ -54,7 +56,11 @@ class Loc_change extends React.Component {
 		    	}
 		    }.bind(this))
 		}, 2000) 
-	   //}
+		
+		f=0;
+		}
+	
+	   }
 	}
 
 	render() {
