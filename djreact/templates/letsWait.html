@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load render_bundle from webpack_loader %}
+
+{% block main %}
+<div id="letsWait"></div>
+<h1>letsWait</h1>
+
+{% render_bundle 'vendors' %}
+{% render_bundle 'letsWait' %}
+{% endblock %}
+

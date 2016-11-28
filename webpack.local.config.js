@@ -78,6 +78,7 @@ config.entry = {
     './reactjs/practice',
   ],
 
+
   // practice1:[
   //   'webpack-dev-server/client?http://' + ip + ':3000',
   //   'webpack/hot/only-dev-server',
@@ -123,6 +124,16 @@ config.entry = {
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
     './reactjs/request',
+  ],
+  Loc_change:[
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Loc_change',
+  ],
+  letsWait:[
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/letsWait',
   ],
 }
 
