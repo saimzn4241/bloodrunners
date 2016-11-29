@@ -1,73 +1,31 @@
 import React from "react"
 import { render } from "react-dom"
-//import Loc_changeContainer from "./containers/ProfileContainer"
-var odlat=0;
-var odlong=0;	
-var f=0;
+import axios from 'axios'
+import * as firebase from 'firebase';
+
+import Loc_changeContainer from "./containers/Loc_changeContainer"
+
+
 class Loc_change extends React.Component {
 
-	constructor(props) {
-    super(props);
-
-	    this.state = {
-	    	
-	    	dlat:0,
-			dlong:0,
-	    }
-  	}
-
-	componentDidMount(){
-
-		this.loc();
-	}
-	sleep(milliseconds) {
-	  var start = new Date().getTime();
-	  for (var i = 0; i < 1e7; i++) {
-	    if ((new Date().getTime() - start) > milliseconds){
-	      break;
-	    }
-	  }
-	}
-
-	loc(){
-		//while(1){
-		var that=this;
-		for(var i=0;i<10;i++){
-			
-		
-		setTimeout(() => {
-						
-					
-			navigator.geolocation.getCurrentPosition(function(location) {
-		        // console.log("==========");
-		         console.log("lat=",location.coords.latitude);
-		         console.log("long=", location.coords.longitude);
-		        // console.log(location.coords.accuracy);
-		        if(odlat!=location.coords.latitude || odlong!=location.coords.longitude){
-			        odlat=location.coords.latitude;
-			        odlong=location.coords.longitude;
-
-			        that.setState({
-			        	dlat:location.coords.latitude,
-			        	dlong:location.coords.longitude
-			        });
-			        
-		    	}
-		    }.bind(this))
-		}, 2000*(i^6)) 
-		
-	
-	   }
-	}
-
 	render() {
+
+		var config = {
+	      apiKey: "AIzaSyByJRvqKlrKvvQFOnfsIe4FlyEWkBZqEhg",
+	      authDomain: "bloodrunners-1475434067536.firebaseapp.com",
+	      databaseURL: "https://bloodrunners-1475434067536.firebaseio.com",
+	      storageBucket: "bloodrunners-1475434067536.appspot.com",
+	      messagingSenderId: "801146093422"
+	    };
+	    
+	    firebase.initializeApp(config);
+
+	    
 		return (
-			<div>  
-			<h1>Loc_change</h1>
-			<h1>{this.state.dlat}</h1>
-			<h1>{this.state.dlong}</h1>
 			
-			</div>
+			<Loc_changeContainer/>
+			
+			
 		);
 	}
 }
