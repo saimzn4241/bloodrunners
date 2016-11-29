@@ -88,6 +88,8 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='loc_change.html')),
    url(r'^letsWait/$',
       generic.TemplateView.as_view(template_name='letsWait.html')),
+    url(r'^Now/$',
+      generic.TemplateView.as_view(template_name='Now.html')),
    
    #url(r'', include('chat.urls')),
 

@@ -135,6 +135,11 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/letsWait',
   ],
+  Now:[
+    'webpack-dev-server/client?http://' + ip + ':3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/Now',
+  ],
 }
 
 config.plugins = config.plugins.concat([

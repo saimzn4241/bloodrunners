@@ -24,6 +24,7 @@ module.exports = {
     request: './reactjs/request',
     Loc_change: './reactjs/Loc_change',
     letsWait: './reactjs/letsWait',
+    Now:'./reactjs/Now',
     vendors: ['react'],
   },
 
