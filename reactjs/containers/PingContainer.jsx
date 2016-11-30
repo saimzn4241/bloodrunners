@@ -77,7 +77,7 @@ export default class PingContainer extends React.Component {
 		{
 			return(
 				<div>
-					<h1>Not Verified...!!</h1>
+					<h1>Login or refresh(F5) to proceed Further.</h1>
 
 				</div>
 			);
