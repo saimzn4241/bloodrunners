@@ -198,7 +198,7 @@ var Headline = React.createClass ({
         },
 
         notif_check:function(){
-          console.log("====Dekhle bc====");
+          console.log("====in notif check====");
           console.log(this.state.userType);
           if(this.state.userType=='hospital')
           {
