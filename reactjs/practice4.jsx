@@ -442,5 +442,5 @@ const formInstance5 = (
 );
 
 
-
-render(<Practice4/>, document.getElementById('practice1'))
+export default Practice4
+//render(<Practice4/>, document.getElementById('practice1'))

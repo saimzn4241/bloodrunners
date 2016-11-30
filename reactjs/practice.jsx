@@ -60,7 +60,6 @@ var TweetBox = React.createClass({
   }
 });
 
+export default TweetBox
 
-render(<TweetBox/>, document.getElementById('practice'))
-
-
+//render(<TweetBox/>, document.getElementById('practice'))

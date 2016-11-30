@@ -330,4 +330,5 @@ const mediaListInstance1 = (
   </div>
 );
 
-render(<Practice5/>, document.getElementById('practice1'))
+export default Practice5
+//render(<Practice5/>, document.getElementById('practice1'))

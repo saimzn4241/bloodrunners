@@ -141,11 +141,7 @@ export default class SignupContainer extends React.Component {
     });
   }
 
-  updateType(e){
-    this.setState({
-        type: e
-    });
-  }
+  
 
   updatePassword(e){
     this.setState({
@@ -408,7 +404,8 @@ export default class SignupContainer extends React.Component {
             </form>
         </div>
         );
-    }else{
+    }
+    else{
         return(
         <div>
             <h3 style={divStyle}>Choose any of the above options!!</h3>
@@ -416,4 +413,15 @@ export default class SignupContainer extends React.Component {
         );
     }
   }
+}
+
+
+function FieldGroup({ id, label, help, ...props }) {
+  return (
+    <FormGroup controlId={id}>
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl {...props} />
+      {help && <HelpBlock>{help}</HelpBlock>}
+    </FormGroup>
+  );
 }

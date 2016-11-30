@@ -35,7 +35,6 @@ class Home extends React.Component {
 
     return (
     	<div style={divStyle}>
-		arjunaasdf
 		<h1>BLOOD RUNNERS HOME</h1>
     	<HomeContainer/>  
     	</div>
