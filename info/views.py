@@ -6,7 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
-@csrf_exempt
 def getUserInfo(request,name):
 	print name
 	#username=request.POST.get('username')
@@ -137,3 +136,20 @@ def MarkerInfo(request):
 
 
 	return JsonResponse(retData, safe = False)	
+
+def updateLocation(request):
+	retval = {'error': False, 'updated' : True}
+	if(request.method=='GET'):
+		username = request.GET['username']
+		newlat = request.GET['lat']
+		newlong =request.GET['long']
+		if(Users.objects.filter(username=username).exists()):
+			Users.objects.filter(username=username).update(cur_lat = newlat , cur_long = newlong)
+			return JsonResponse(retval)
+		else :
+			retval['error'] = 'Username does not exists user returend at backend : ' + str(username)
+			retval['updated'] = False
+			return JsonResponse(retval)
+	else:
+		retval['error'] = 'Expected Get Request'
+		return JsonResponse(retval)
