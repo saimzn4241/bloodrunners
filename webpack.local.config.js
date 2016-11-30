@@ -130,10 +130,10 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/Loc_change',
   ],
-  letsWait:[
+  LetsWait:[
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
-    './reactjs/letsWait',
+    './reactjs/LetsWait',
   ],
 }
 

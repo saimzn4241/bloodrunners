@@ -32,7 +32,7 @@ def road_distance(hosp, allusers,type):
 	else:
 		for i in allusers:
 			origin=origin+str(i.fix_lat)+","+str(i.fix_long)+"|"
-			print i.fix_lat, i.fix_long, i.username
+			# print i.fix_lat, i.fix_long, i.username
 	
 	origin = origin[:-1]	
 	
@@ -55,11 +55,19 @@ def road_distance(hosp, allusers,type):
 						userListToBeReturned['users']=[]
 						userListToBeReturned['dist']=[]
 						userListToBeReturned['time']=[]
+						userListToBeReturned['lat']=[]
+						userListToBeReturned['long']=[]
 					
 					userListToBeReturned['count']+=1
 					userListToBeReturned['users'].append(i.username)
 					userListToBeReturned['dist'].append(dist)
 					userListToBeReturned['time'].append(time)
+					if(type=='hosp'):
+						userListToBeReturned['lat'].append(i.cur_lat)
+						userListToBeReturned['long'].append(i.cur_long)
+					else:
+						userListToBeReturned['lat'].append(i.fix_lat)
+						userListToBeReturned['long'].append(i.fix_long)
 	print userListToBeReturned	
 	return (userListToBeReturned)				
 
@@ -86,20 +94,25 @@ def nearUsers(request):
 			# print retVal
 			return JsonResponse(retVal)
 		else:
+			print "ERROR :--- Hospital does not exists"
 			return JsonResponse(userListToBeReturned)
+	else:
+		print "ERROR :--- Expected POST REQUEST"
+		return JsonResponse(userListToBeReturned)
 						
 @csrf_exempt
 def nearHosps(request):
 	maximum_distance=2871622
-	userListToBeReturned = {'count':0}
+	userListToBeReturned = {'count':0,'error':False}
 	if request.method=='POST':
 		nearData = {}
 		nearData['username']=str(request.POST.get('username'))
+		print nearData['username']
 		if(Users.objects.filter(username=nearData['username']).exists()):
 			user=Users.objects.filter(username=nearData['username'])
-			nearData['lat']=float(request.POST.get('lat'))
-			nearData['long']=float(request.POST.get('long'))
-			print ("near lat long =", nearData['lat'], nearData['long'])
+			nearData['lat']=user[0].cur_lat
+			nearData['long']=user[0].cur_long
+			# print ("near lat long =", nearData['lat'], nearData['long'])
 
 			allHospitals=Hospitals.objects.all()
 			user = (nearData['lat'],nearData['long'])
@@ -107,7 +120,13 @@ def nearHosps(request):
 			# print retVal
 			return JsonResponse(retVal)
 		else:
+			userListToBeReturned['error']='User Does not Exist. Recieved username at backend : ' + str(nearData['username'])
+			print "ERROR :--- User Does not Exist. Recieved username at backend : " + str(nearData['username'])
 			return JsonResponse(userListToBeReturned)
+	else:
+		userListToBeReturned['error']='Expected POST REQUEST'
+		print "ERROR :--- Expected POST REQUEST"
+		return JsonResponse(userListToBeReturned)
 						
 @csrf_exempt				
 def FrontendDistance(request):

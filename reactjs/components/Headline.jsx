@@ -162,15 +162,39 @@ var Headline = React.createClass ({
             rootRef.push({
             username: user,
           });
-          var url2 = ('waiting/').concat(user);
-          const rootRef1= firebase.database().ref().child(url2);
+          // var url2 = ('waiting/').concat(user);
+          // const rootRef1= firebase.database().ref().child(url2);
           
-            rootRef1.push({
-            username: hosp,
-          });
+          //   rootRef1.push({
+          //   username: hosp,
+          // });
           var url3=("/letsWait/")
           document.getElementById('notificationsList').setAttribute('action', url3); 
 
+        },
+
+        addHospitalAccepted:function(user,otherUsers){
+          var url = ('hospitalAccepted/').concat(user);
+          const rootRef= firebase.database().ref().child(url);
+            
+            rootRef.push({
+            status: 'true',
+            hospUsername: this.state.session,
+          });
+          for(var key in otherUsers){
+            if(otherUsers[key].username!=user)
+            {
+              var url2 = ('hospitalAccepted/').concat(otherUsers[key].username);
+              const rootRef2= firebase.database().ref().child(url);
+                
+                rootRef2.push({
+                status: 'false',
+                hospUsername: this.state.session,
+              });
+            }
+          }
+          var url3=("/letsWait/")
+          document.getElementById('notificationsListhosp').setAttribute('action', url3);
         },
 
         notif_check:function(){
@@ -178,20 +202,27 @@ var Headline = React.createClass ({
           console.log(this.state.userType);
           if(this.state.userType=='hospital')
           {
-            const rootRef= firebase.database().ref().child('notification/notif');
-            console.log("==========28==========");
-            console.log(this.state.value);
-            console.log("==========30==========");
+            console.log("hosp");
+            var url = ('accepted/').concat(this.state.session);
+            const rootRef= firebase.database().ref().child(url);
             rootRef.on('value', function(snapshot){
                 console.log(snapshot.val());
-
-                  this.setState({
-                   notif: snapshot.val()
-                 });     
+                var objectReturned=snapshot.val();
+                var notifications = [];
+                // notifications.push(<div>);
+                for(var key in objectReturned){
+                  console.log("===== "+objectReturned[key].username+" =====");
+                  notifications.push(<li>Request From :  {objectReturned[key].username} <form id='notificationsListhosp' method='get' action="#" onSubmit={this.addHospitalAccepted.bind(this,objectReturned[key].username,objectReturned)}><button type="submit">Accept</button><button>Decline</button></form></li>);
+                }
+                // notifications.push(</div>);
+                this.setState({
+                  notif: notifications
+                });     
             }.bind(this));
           }
           else if(this.state.userType=='donor')
           {
+            console.log("user");
             var url=('userHospNotif/').concat(this.state.session);
             const rootRef= firebase.database().ref().child(url);
             rootRef.on('value', function(snapshot){
@@ -349,7 +380,10 @@ var Headline = React.createClass ({
                   <button type="submit">Request</button>
                   </form>
                   {this.state.notif!=''?
-                    <h1>notification={this.state.notif}</h1>
+                    <div>
+                      <h1>Notifications List : </h1>
+                      {this.state.notif}
+                    </div>
                     :
                     <div></div>
                   }
