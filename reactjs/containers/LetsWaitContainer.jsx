@@ -10,6 +10,7 @@ export default class LetsWaitContainer extends React.Component {
 		this.state={
 			username : '',
 			userType : '',
+			accepted : 'none'
 		};
 	}
 
@@ -23,11 +24,20 @@ export default class LetsWaitContainer extends React.Component {
         }.bind(this));
 	}
 
+	checkNotification(){
+		if(this.state.userType=='donor')
+		{
+			var url = ('hospitalAccepted/').concat(this.state.username);
+		}
+	}
+
 	render(){
 		if(this.state.username!='')
 		{
 			return(
-				<div>Havin fun {this.state.username}...?</div>
+				<div>
+					<h3>Hello {this.state.username}, waiting for the hospital response!!</h3>
+				</div>
 
 			);
 		}
