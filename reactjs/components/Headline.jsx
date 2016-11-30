@@ -168,7 +168,7 @@ var Headline = React.createClass ({
           //   rootRef1.push({
           //   username: hosp,
           // });
-          var url3=("/letsWait/")
+          var url3=("/letsWait/?username=").concat(hosp);
           document.getElementById('notificationsList').setAttribute('action', url3); 
 
         },
@@ -193,7 +193,7 @@ var Headline = React.createClass ({
               });
             }
           }
-          var url3=("/letsWait/")
+          var url3=("/letsWait/?username=").concat(user);
           document.getElementById('notificationsListhosp').setAttribute('action', url3);
         },
 

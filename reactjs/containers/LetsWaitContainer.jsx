@@ -107,7 +107,14 @@ export default class LetsWaitContainer extends React.Component {
 			else
 			{
 				return(
-					<div>Thanks for helping...!!</div>
+					<div>
+						<h2 align="center">Thanks for helping...!!</h2>
+						<div>
+							<form method="get" action="/home">
+			                	<button type="submit">HOME</button>
+			                </form>
+						</div>
+					</div>
 				);
 			}
 		}
@@ -133,7 +140,14 @@ export default class LetsWaitContainer extends React.Component {
 		else
 		{
 			return(
-				<div>Havin fun {this.state.waitingFor}...?</div>
+				<div>
+					<h2 align="center">You are not logged in Go to home to login first...!!</h2>
+						<div>
+							<form method="get" action="/home">
+			                	<button type="submit">HOME</button>
+			                </form>
+						</div>
+				</div>
 			);	
 		}
 	}
