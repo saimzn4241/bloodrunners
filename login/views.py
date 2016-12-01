@@ -27,11 +27,11 @@ def addUser(request):
 			print "Got the post req"
 			print(request.POST.get('bday'))
 			x=str(request.POST.get('bday'))
-			x=x.split("-")
-			print(x[0],x[1],x[2])
+			x=x.split("/")
+			print(x[2],x[1],x[0])
 			# x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
-			# x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
-			x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
+			x=datetime.date(int(x[2]),int(x[1]),int(x[0]))
+			#x=datetime.date(int(x[0]),int(x[1]),int(x[2]))
 			
 			returnRespone['name']=str(request.POST.get('first_name'))+' '+str(request.POST.get('last_name'))
 			returnRespone['email']=request.POST.get('email')
@@ -49,7 +49,8 @@ def addUser(request):
 				gender=str(request.POST.get('gender')),
 				bg=str(request.POST.get('bg')),
 				contact=int(request.POST.get('contact')),
-				badges=0)
+				badges=0,
+				status=1)
 			fixedLatitude=str(request.POST.get('flat'))
 			fixedLongitude=str(request.POST.get('flong'))
 			dynamicLatitude=str(request.POST.get('dlat'))
@@ -73,7 +74,8 @@ def addUser(request):
 				street=str(request.POST.get('street')),
 				city=str(request.POST.get('city')),
 				state=str(request.POST.get('state')),
-				country=str(request.POST.get('country'))
+				country=str(request.POST.get('country')),
+				verified=0
 				)
 			fixedLatitude=str(request.POST.get('flat'))
 			fixedLongitude=str(request.POST.get('flong'))
