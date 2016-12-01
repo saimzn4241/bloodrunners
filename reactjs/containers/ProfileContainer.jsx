@@ -176,12 +176,9 @@ var ProfileContainer = React.createClass ({
               <div className="container">
                 <div className="row">
                   <div className="col-sm-12">
-                              <Headline></Headline>
+                             
 
                     <div>
-                      <form method="get" action="/home">
-                      < button type="submit">Home</button>
-                      </form>
                       <h1><u>Hospital</u></h1>
                       <h4>HospitalName : {this.state.name}</h4>
                       <h4>username : {this.state.username}</h4>

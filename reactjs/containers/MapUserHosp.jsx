@@ -41,6 +41,8 @@ const React_map = React.createClass({
 
   onReady(){
     var that=this;
+    var qs = require('qs');
+      
     axios.post('/ret_hosp_loc/' ,qs.stringify({username: this.props.username}))
     .then(function (response) {
         console.log(response);
