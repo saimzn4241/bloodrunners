@@ -10,7 +10,7 @@ and then the willing users accepts the request and inform the hospitals that the
 
 # Stack Used
 1. [Reactjs](https://facebook.github.io/react/)
-2. [Djago 1.10.3](https://www.djangoproject.com/)
+2. [Django 1.10.3](https://www.djangoproject.com/)
 3. [Bootstrap](https://react-bootstrap.github.io/components.html#media-content)
 
 # Install
