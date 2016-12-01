@@ -312,17 +312,10 @@ var Headline = React.createClass ({
                       return (
                         <Popover id="popover-positioned-bottom" title="">
                         <strong>
-                        {this.state.notif!=''?
                           <div>
                             {this.state.notif}
                           </div>
-                          :
-                          <div></div>
-                        }
                         </strong>
-
-
-                        <strong>Holy guacamole!</strong> Check this info.
                       </Popover>
                       )
       },
@@ -342,102 +335,116 @@ var Headline = React.createClass ({
             {
               return (
                 <div >
-                <Navbar inverse collapseOnSelect>
-                  <Navbar.Header>
-                    <Navbar.Brand>
-                      <a href="/home">BLOOD-RUNNERS</a>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                  </Navbar.Header>
-                  
-                 <Navbar.Collapse>
-                    <Nav pullRight>
-                    <Navbar.Brand>
-                      <a eventKey={1} href="/home">Home</a>
-                    </Navbar.Brand>
-                      <Navbar.Brand>
-                      <a eventKey={2} href="/maps">Maps</a>
-                    </Navbar.Brand>
-
-                    
-                      <a eventKey={3} >
-                      <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverBottom()}>
+                  <Navbar inverse collapseOnSelect>
+                      <Navbar.Header>
                         <Navbar.Brand>
-                        Notifications
+                          <a href="/home">BLOOD-RUNNERS</a>
                         </Navbar.Brand>
-                      </OverlayTrigger>
-                      </a>
+                        <Navbar.Toggle />
+                      </Navbar.Header>
+                  
+                     <Navbar.Collapse>
+                        <Nav pullRight>
+                        <Navbar.Brand>
+                          <a eventKey={1} href="/home">Home</a>
+                        </Navbar.Brand>
+                          <Navbar.Brand>
+                          <a eventKey={2} href="/maps">Maps</a>
+                        </Navbar.Brand>
+
+                        
+                          <a eventKey={3} >
+                          <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverBottom()}>
+                            <Navbar.Brand>
+                            Notifications
+                            </Navbar.Brand>
+                          </OverlayTrigger>
+                          </a>
 
 
-                    <Navbar.Brand> 
-                      <a eventKey={4}  >User:{this.state.session}</a>
-                    </Navbar.Brand>
+                      <Navbar.Brand> 
+                        <a eventKey={4}  >User:{this.state.session}</a>
+                      </Navbar.Brand>
 
-                    <Navbar.Brand>  
-                      <a eventKey={5} style={Style1} href="/home" onClick={this.logoutfun} >Logout</a>
-                    </Navbar.Brand>  
-                    
-                    
-                    </Nav>
-                  </Navbar.Collapse>
+                      <Navbar.Brand>  
+                        <a eventKey={5} style={Style1} href="/home" onClick={this.logoutfun} >Logout</a>
+                      </Navbar.Brand>  
+                      
+                      
+                      </Nav>
+                    </Navbar.Collapse>
                 
-                </Navbar>
+                   </Navbar>
+
                   <form id="urlForm" method="GET" action="#" onSubmit={this.getUrl}>
-                  <button type="submit">Profile</button>
+                  <Button type="submit">Profile</Button>
                   </form>
 
-
-
-                  
-
-                  
                   <React_map />
                 </div>
               );
             }
 
-            else
+            else //for hospital
             {
               return (
-                <div /*style={divStyle}*/ >
-                {this.state.session!=''?
-                  <h1>User logged in= {this.state.session}</h1>
-                  :
-                  <div></div>
-                }
-                  {/*<button onClick={this.homefun}>Home</button>*/}
-                  <form method="get" action="/home">
-                  <button type="submit">HOME</button>
-                  </form>
-                  
-                  <form id="urlForm" method="POST" action="#" onSubmit={this.getUrl}>
-                  <button type="submit">Profile</button>
-                  </form>
 
-                  <form method="get" action="/maps">
-                  <button type="submit">MAPS</button>
-                  </form>
 
+                <div>
+                  <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                      <Navbar.Brand>
+                        <a href="/home">BLOOD-RUNNERS</a>
+                      </Navbar.Brand>
+                      <Navbar.Toggle />
+                    </Navbar.Header>
                   
-                  <form id="logout1" method="get" action="/home" onSubmit={this.logoutfun}>
-                  <button type="submit">Log-Out</button>
-                  </form>
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                        <Navbar.Brand>
+                          <a eventKey={1} href="/home">Home</a>
+                        </Navbar.Brand>
+                          <Navbar.Brand>
+                          <a eventKey={2} href="/maps">Maps</a>
+                        </Navbar.Brand>
+
+                        
+                          <a eventKey={3} >
+                          <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverBottom()}>
+                            <Navbar.Brand>
+                            Notifications
+                            </Navbar.Brand>
+                          </OverlayTrigger>
+                          </a>
+
+
+                      <Navbar.Brand> 
+                        <a eventKey={4} >Hospital:{this.state.session}</a>
+                      </Navbar.Brand>
+
+                      <Navbar.Brand>  
+                        <a eventKey={5} style={Style1} href="/home" onClick={this.logoutfun} >Logout</a>
+                      </Navbar.Brand>  
+                      
+                      
+                      </Nav>
+                    </Navbar.Collapse>
+                
+                  </Navbar>
 
                   <form method="get" action="/request/">
-                  <button type="submit">Request</button>
+                  <Button type="submit">Request</Button>
                   </form>
-                  {this.state.notif!=''?
-                    <div>
-                      <h1>Notifications List : </h1>
-                      {this.state.notif}
-                    </div>
-                    :
-                    <div></div>
-                  }
+
+                  <form id="urlForm" method="GET" action="#" onSubmit={this.getUrl}>
+                  <Button type="submit">Profile</Button>
+                  </form>
+
                   <React_map />
                 </div>
               );
             }
+
 
           }
           else{
