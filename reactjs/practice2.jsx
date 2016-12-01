@@ -387,4 +387,6 @@ const pagerInstance2 = (
     <Pager.Item next href="#">Next Page &rarr;</Pager.Item>
   </Pager>
 );
- render(<Practice2/>, document.getElementById('practice1'))
+
+export default Practice2
+//render(<Practice2/>, document.getElementById('practice1'))

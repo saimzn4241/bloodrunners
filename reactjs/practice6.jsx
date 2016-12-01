@@ -231,4 +231,9 @@ const customButtonStyle = (
     <Button bsStyle="custom">Custom</Button>
   </div>
 );
-render(<Practice6/>, document.getElementById('practice1'))
+
+
+export default Practice6
+//render(<Practice6/>, document.getElementById('practice1'))
+
+

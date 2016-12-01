@@ -87,12 +87,12 @@ const React_map = React.createClass({
   
     return (
       <Gmaps
-        width={'800px'}
+        width={'100%'}
         height={'400px'}
         lat={coords.lat}
         lng={coords.lng}
         zoom={14}
-        loadingMessage={'Be happy'}
+        loadingMessage={'loading Map....Be happy'}
         params={{v: '3.exp', key: 'AIzaSyCwVTLGKslXV0UwsLFLP9NSEibmNMoK97c'}}
         onMapCreated={this.onMapCreated}
         >

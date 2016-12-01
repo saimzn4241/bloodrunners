@@ -283,5 +283,5 @@ const wellInstance = (
 
 
 
-
- render(<Practice3/>, document.getElementById('practice1'))
+export default Practice3
+//render(<Practice3/>, document.getElementById('practice1'))

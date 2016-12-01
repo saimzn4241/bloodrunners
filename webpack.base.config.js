@@ -23,8 +23,8 @@ module.exports = {
     practice1: './reactjs/practice1',
     request: './reactjs/request',
     Loc_change: './reactjs/Loc_change',
-    letsWait: './reactjs/letsWait',
     Now:'./reactjs/Now',
+    LetsWait: './reactjs/LetsWait',
     vendors: ['react'],
   },
 

@@ -1,15 +1,12 @@
 import React from "react"
 import { render } from "react-dom"
-import reactCSS from 'reactcss'
 import * as firebase from 'firebase'
-import RequestContainer from "./containers/RequestContainer"
+import LetsWaitContainer from "./containers/LetsWaitContainer"
 
-class Request extends React.Component {
+class LetsWait extends React.Component {
 
-	render(){
-
-		// firebase Configuration
-	  	var config = {
+  	render() {
+  		var config = {
 		    apiKey: "AIzaSyByJRvqKlrKvvQFOnfsIe4FlyEWkBZqEhg",
 		    authDomain: "bloodrunners-1475434067536.firebaseapp.com",
 		    databaseURL: "https://bloodrunners-1475434067536.firebaseio.com",
@@ -18,12 +15,12 @@ class Request extends React.Component {
 	    };
 
 	  	firebase.initializeApp(config);
-		return(
-			<div>
-				<RequestContainer/>
-			</div>
-		);
-	}
+    	return (
+      		<div>
+      			<LetsWaitContainer></LetsWaitContainer>
+      		</div>
+    	)
+  	}
 }
 
-render(<Request/>, document.getElementById('request'))
+render(<LetsWait/>, document.getElementById('LetsWait'))

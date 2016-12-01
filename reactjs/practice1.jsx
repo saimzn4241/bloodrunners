@@ -775,7 +775,8 @@ const popoverClickRootClose = (
 
 
 
+export default Practice1
 
-render(<Practice1/>, document.getElementById('practice1'))
+//render(<Practice1/>, document.getElementById('practice1'))
 
 

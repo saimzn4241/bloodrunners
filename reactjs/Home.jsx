@@ -34,10 +34,8 @@ class Home extends React.Component {
   	firebase.initializeApp(config);
 
     return (
-    	<div style={divStyle}>
-		arjunaasdf
-		<h1>BLOOD RUNNERS HOME</h1>
-    	<HomeContainer/>  
+    	<div >
+		<HomeContainer/>  
     	</div>
     )
   }

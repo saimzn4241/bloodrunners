@@ -168,7 +168,7 @@ const React_map = React.createClass({
         <Circle
           lng= {this.state.lng}
           lat={this.state.lat}
-          radius={500}
+          radius={50}
           onClick={this.onClick} />
       </Gmaps>
       <br/>

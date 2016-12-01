@@ -7,6 +7,7 @@ var config = require('./webpack.base.config.js')
 
 config.devtool = "#eval-source-map"
 
+//var ip='172.20.10.6'
 //var ip = '172.16.102.229'
 var ip = 'localhost'
 
@@ -72,10 +73,10 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/React_map',
   ],
-  practice:[
+  Practice_base:[
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
-    './reactjs/practice',
+    './reactjs/Practice_base',
   ],
 
 
@@ -109,11 +110,11 @@ config.entry = {
   //   './reactjs/practice5',
   
   // ],
-  practice1:[
-    'webpack-dev-server/client?http://' + ip + ':3000',
-    'webpack/hot/only-dev-server',
-    './reactjs/practice6',
-  ],
+  // practice1:[
+  //   'webpack-dev-server/client?http://' + ip + ':3000',
+  //   'webpack/hot/only-dev-server',
+  //   './reactjs/practice6',
+  // ],
   map1:[
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
@@ -130,10 +131,10 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/Loc_change',
   ],
-  letsWait:[
+  LetsWait:[
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
-    './reactjs/letsWait',
+    './reactjs/LetsWait',
   ],
   Now:[
     'webpack-dev-server/client?http://' + ip + ':3000',
@@ -149,7 +150,7 @@ config.plugins = config.plugins.concat([
   new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': JSON.stringify('development'),
-      'BASE_API_URL': JSON.stringify('https://'+ ip +':8000/api/v1/'),
+      'BASE_API_URL': JSON.stringify('http://'+ ip +':8000/api/v1/'),
   }}),
 ])
 

@@ -3,3 +3,5 @@ TODO.txt
 // authenticate firebase and django
 // date problem
 // UI
+// profile redirect
+// signup redirect
