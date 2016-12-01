@@ -100,7 +100,7 @@ export default class LetsWaitContainer extends React.Component {
 				return(
 					<div>
 						<h1>Here is your location and the hospital location </h1>
-						<MapUserHosp username={this.state.waitingFor} lat={this.state.userlat} long={this.state.userlong} >
+						<MapUserHosp username={this.state.waitingFor} lat={this.state.userlat} long={this.state.userlong} />
 
 					</div>
 				);
