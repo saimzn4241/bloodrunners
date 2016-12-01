@@ -3,6 +3,14 @@ import axios from 'axios'
 import Headline from "../components/Headline"
 
 
+import {OverlayTrigger, Popover, Tooltip,Modal, Clearfix, ButtonToolbar, Button, ButtonGroup, DropdownButton, MenuItem, SplitButton} from "react-bootstrap"
+import {Pager , Pagination, Row, Col, Tabs, Tab, Breadcrumb, FormGroup,FormControl, Nav, NavItem, NavDropdown, Navbar} from "react-bootstrap"
+import {Well , Accordion, Panel, Table, ListGroup, ListGroupItem, Grid, Jumbotron, PageHeader} from "react-bootstrap"
+import {Form,Glyphicon,  InputGroup,  Checkbox, Radio, ControlLabel,HelpBlock } from "react-bootstrap"
+import {Media, Carousel, ResponsiveEmbed, Thumbnail,  Image} from "react-bootstrap"
+import {bootstrapUtils,addStyle,  Fade, Collapse, ProgressBar, Alert, Badge, Label} from "react-bootstrap"
+
+
 var ProfileContainer = React.createClass ({
         
     getInitialState: function() {
@@ -139,35 +147,33 @@ var ProfileContainer = React.createClass ({
                 <div className="col-sm-12">
 
                     <div>
-                  {/*<form method="get" action="/home">
-                  < button type="submit">HOME</button>
-                  </form>
-                  */}
-                  <h1><u>donor</u></h1>
-                  <h4>name : {this.state.first_name}</h4>  
-                  <h4>username : {this.state.username}</h4> 
-                  <h4>first name : {this.state.first_name}</h4> 
-                  <h4>last name : {this.state.last_name}</h4> 
-                  <h4>email : {this.state.email}</h4> 
-                  <h4>address : {this.state.address}</h4> 
-                  <h4>city : {this.state.city}</h4> 
-                  <h4>state : {this.state.state}</h4> 
-                  <h4>country : {this.state.country}</h4> 
-                  <h4>bg : {this.state.bg}</h4> 
-                  <h4>badges : {this.state.badges}</h4> 
-                  <h4>dob : {this.state.dob}</h4> 
-                  <h4>contact : {this.state.contact}</h4> 
-                  <h4>age : {this.state.age}</h4> 
-                  <h4>status : {this.state.status}</h4> 
-                        
+                 
+                  <h1><u>Donor's Profile</u></h1>
+                  <h4>First Name : {this.state.first_name}</h4> 
+                  <h4>Last Name : {this.state.last_name}</h4> 
+                  
+                  <h4>Username : {this.state.username}</h4> 
+                  <h4>Email : {this.state.email}</h4> 
+                  <h4>Address : {this.state.address}</h4> 
+                  <h4>City : {this.state.city}</h4> 
+                  <h4>State : {this.state.state}</h4> 
+                  <h4>Country : {this.state.country}</h4> 
+                  <h4>Blood-Group : {this.state.bg}</h4> 
+                  <h4>Badges : {this.state.badges}</h4> 
+                  <h4>Date of Birth : {this.state.dob}</h4> 
+                  <h4>Contact : {this.state.contact}</h4> 
+                  <h4>Age : {this.state.age}</h4> 
+                  {this.state.status=="1"? 
+                    <h4>Status : Active</h4> 
+                    :
+                    <h4>Status : Not-Active</h4> 
+                    
+                  }     
                   </div>
-
-
-
                 </div>
               </div>
             </div>
-                          );
+              );
 
             }
 
@@ -179,33 +185,45 @@ var ProfileContainer = React.createClass ({
                              
 
                     <div>
-                      <h1><u>Hospital</u></h1>
-                      <h4>HospitalName : {this.state.name}</h4>
-                      <h4>username : {this.state.username}</h4>
-                      <h4>city : {this.state.city}</h4>
-                      <h4>state : {this.state.state}</h4>
-                      <h4>country : {this.state.country}</h4>
-                      <h4>cp1First_name : {this.state.cp1First_name}</h4>
-                      <h4>cp1Last_name : {this.state.cp1Last_name}</h4>
+                      <h1><u>Hospital's Profile</u></h1>
+                      <h4>Hospital Name : {this.state.name}</h4>
+                      <h4>Username : {this.state.username}</h4>
+                      <h4>Street : {this.state.street}</h4>
+                      <h4>City : {this.state.city}</h4>
+                      <h4>State : {this.state.state}</h4>
+                      <h4>Country : {this.state.country}</h4>
                       
-                      <h4>cp2First_name : {this.state.cp2First_name}</h4>
-                      <h4>cp2Last_name : {this.state.cp2Last_name}</h4>
+                      <br/>
+                      <h4>Contact Person 1</h4>
+                      <h4>First Name : {this.state.cp1First_name}</h4>
+                      <h4>Last Name : {this.state.cp1Last_name}</h4>
+                      <h4>Contact : {this.state.cp1Contact}</h4>
                       
-                      <h4>cp3First_name   : {this.state.cp3First_name}</h4>
-                      <h4>cp3Last_name : {this.state.cp3Last_name}</h4>
-                      <h4>cp1Contact : {this.state.cp1Contact}</h4>
-                      <h4>cp2Contact : {this.state.cp2Contact}</h4>
-                      <h4>cp3Contact : {this.state.cp3Contact}</h4>
-                      <h4>street : {this.state.street}</h4>
-                      <h4>verified : {this.state.verified}</h4>
+                      <br/>
+                      <h4>Contact Person 2</h4>
+                      <h4>First Name : {this.state.cp2First_name}</h4>
+                      <h4>Last Name : {this.state.cp2Last_name}</h4>
+                      <h4>Contact : {this.state.cp2Contact}</h4>
+                     
+                      <br/>
+                      <h4>Contact Person 3</h4>
+                      <h4>First Name   : {this.state.cp3First_name}</h4>
+                      <h4>Last Name : {this.state.cp3Last_name}</h4>
+                      <h4>Contact : {this.state.cp3Contact}</h4>
+                      <br/>
+                      
+                      {this.state.verified=="1"? 
+                        <h4>Verified : Yes</h4> 
+                        :
+                        <h4>Verified : No</h4> 
+                        
+                      }
                       
                           
                     </div>
                   </div>
                 </div>
               </div>
-
-
               
             );
           }
@@ -217,9 +235,6 @@ var ProfileContainer = React.createClass ({
             );
           } 
     }
-
-
-
 });
 
 export default ProfileContainer;

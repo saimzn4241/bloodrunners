@@ -10,12 +10,28 @@ import axios from 'axios';
 var BaseApiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?&address=';
 var Key = '&key=AIzaSyCEZBUCbawCF7xfnms9xdgDodS7s423b2E';
 
+
+import {OverlayTrigger, Popover, Tooltip,Modal, Clearfix, ButtonToolbar, Button, ButtonGroup, DropdownButton, MenuItem, SplitButton} from "react-bootstrap"
+import {Pager , Pagination, Row, Col, Tabs, Tab, Breadcrumb, FormGroup,FormControl, Nav, NavItem, NavDropdown, Navbar} from "react-bootstrap"
+import {Well , Accordion, Panel, Table, ListGroup, ListGroupItem, Grid, Jumbotron, PageHeader} from "react-bootstrap"
+import {Form,Glyphicon,  InputGroup,  Checkbox, Radio, ControlLabel,HelpBlock } from "react-bootstrap"
+import {Media, Carousel, ResponsiveEmbed, Thumbnail,  Image} from "react-bootstrap"
+import { bootstrapUtils,addStyle,  Fade, Collapse, ProgressBar, Alert, Badge, Label} from "react-bootstrap"
+
+var DatePicker = require("react-bootstrap-date-picker");
+//var moment = require('moment');
+//var startDate= moment();
+var dateIso = new Date().toISOString();
+
 export default class SignupContainer extends React.Component {
   
   constructor(props){
     super(props);
     
     this.state = {
+      
+        dateIso:dateIso,
+    
         error:false,
         boot_value: '',
         type: '',
@@ -60,7 +76,7 @@ export default class SignupContainer extends React.Component {
         
 
     }
-    navigator.geolocation.getCurrentPosition(function(location) {
+  navigator.geolocation.getCurrentPosition(function(location) {
         // console.log(location.coords.accuracy);
         this.setState({
             dlat:location.coords.latitude,
@@ -149,7 +165,7 @@ export default class SignupContainer extends React.Component {
   
 
   updatePassword(e){
-    // console.log( e.target.value)
+    console.log( e.target.value)
       
     this.setState({
         password: e.target.value
@@ -157,7 +173,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateUsername(e){
-    // console.log( e.target.value)
+    console.log( e.target.value)
       
     this.setState({
         username: e.target.value,
@@ -166,7 +182,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateName(e){
-    // console.log( e.target.value)
+    console.log( e.target.value)
       
     this.setState({
         name: e.target.value
@@ -177,7 +193,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateStreet(e){
-    // console.log( e.target.value)
+    console.log( e.target.value)
       
     this.setState({
         street: e.target.value
@@ -188,7 +204,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateCity(e){
-    // console.log( e.target.value)
+    console.log( e.target.value)
       
     this.setState({
         city: e.target.value
@@ -199,7 +215,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateZip(e){
-    // console.log( e.target.value)
+    console.log( e.target.value)
       
     this.setState({
         zip: e.target.value
@@ -211,7 +227,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateCountry(e){
-    // console.log( e.target.value)
+    console.log( e.target.value)
       
     this.setState({
         country: e.target.value
@@ -225,36 +241,38 @@ export default class SignupContainer extends React.Component {
 
     updateFirstname(e){
      
-     // console.log( e.target.value)
+    console.log( e.target.value)
        this.setState({
           first_name: e.target.value
       });
     }
     updateLastname(e){
-     // console.log( e.target.value)
+     console.log( e.target.value)
        
       this.setState({
           last_name: e.target.value
       });
     }
     updateGender(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           gender: e.target.value
       });
     }
 
-    updateBday(e){
-      // console.log( e.target.value)
+    
+    updateBday(value, formattedValue) {
+      console.log( "value=", value,  "formattedValue=",formattedValue);
       
       this.setState({
-          dob: e.target.value
+        dateIso: value, // ISO String, ex: "2016-11-19T12:00:00.000Z" 
+        dob: formattedValue // Formatted String, ex: "11/19/2016" 
       });
     }
 
     updateContact(e){
-        // console.log( e.target.value)
+        console.log( e.target.value)
       
       this.setState({
           contact: e.target.value
@@ -262,7 +280,7 @@ export default class SignupContainer extends React.Component {
     } 
 
     updateEmail(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           email: e.target.value
@@ -270,7 +288,7 @@ export default class SignupContainer extends React.Component {
     }
 
     updateBloodGroup(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           bg: e.target.value
@@ -278,21 +296,21 @@ export default class SignupContainer extends React.Component {
     }
 
     updateCp1Firstname(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
           this.setState({
               cp1First_name: e.target.value
           });
         }
     updateCp1Lastname(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           cp1Last_name: e.target.value
       });
     }
     updateCp1Contact(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           cp1Contact: e.target.value
@@ -302,21 +320,21 @@ export default class SignupContainer extends React.Component {
 
 
     updateCp2Firstname(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           cp2First_name: e.target.value
       });
     }
     updateCp2Lastname(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           cp2Last_name: e.target.value
       });
     }
     updateCp2Contact(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           cp2Contact: e.target.value
@@ -326,21 +344,21 @@ export default class SignupContainer extends React.Component {
 
 
     updateCp3Firstname(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           cp2First_name: e.target.value
       });
     }
     updateCp3Lastname(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           cp2Last_name: e.target.value
       });
     }
     updateCp3Contact(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           cp2Contact: e.target.value
@@ -348,14 +366,14 @@ export default class SignupContainer extends React.Component {
     }
 
      updateState(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           state: e.target.value
       });
     }
     updateType(e){
-      // console.log( e.target.value)
+      console.log( e.target.value)
       
       this.setState({
           type: e.target.value
@@ -503,80 +521,122 @@ export default class SignupContainer extends React.Component {
                 <input type="hidden" name="dlong" value={this.state.dlong}/>
 
                 {/*-- Main Form --*/}
-                First Name:
-                <input type="text"  name="first_name" onChange={this.updateFirstname.bind(this)}>
-                </input>
-               
-                <br></br>
-                Last Name:
-                <input type="text"  name="last_name" onChange={this.updateLastname.bind(this)}/>
                 
-                <br></br>
-                Gender:  
-                <input type="radio" name="gender" value="male" onChange={this.updateGender.bind(this)}/>Male
-                <input type="radio" name="gender" value="female" onChange={this.updateGender.bind(this)}/> Female
-                <br></br>
-               
+                <FieldGroup
+                  id="formControlsText"
+                  type="text"
+                  label="First Name"
+                  placeholder="Enter your first name"
+                  onChange={this.updateFirstname.bind(this)}
+                />
 
-
-                UserName:
-                <input type="text"  name="username" onChange={this.updateUsername.bind(this)}>
-                </input>
-                <br></br>
-
-                Password:
-                <input type="password"  name="password" onChange={this.updatePassword.bind(this)}>
-                </input>
-
-                <br></br>
-
-                Birthday:
-                <input type="date" name="bday" onChange={this.updateBday.bind(this)}/>
-                <br></br>
+                <FieldGroup
+                  id="formControlsText"
+                  type="text"
+                  label="Last Name"
+                  placeholder="Enter your last name"
+                  onChange={this.updateLastname.bind(this)}
+                />
                 
+              <ControlLabel>Gender</ControlLabel>   
+                <FormGroup>
+                  <Radio name="gender"  value="male" inline onChange={this.updateGender.bind(this)}>
+                    <ControlLabel>Male</ControlLabel>
+                  </Radio>
+                  {' '}
+                  <Radio name="gender"  value="female" inline onChange={this.updateGender.bind(this)}>
+                    <ControlLabel>Female</ControlLabel>
+                  </Radio>
+                  {' '}
+                  
+                </FormGroup>
+                <ControlLabel>Date of Birth</ControlLabel>
+                <DatePicker id="example-datepicker" 
+                value={this.state.dateIso} 
+                onChange={this.updateBday.bind(this)} />
+      
+                <br/>
+                <FieldGroup
+                  id="formControlsTel"
+                  type="tel"
+                  label="Contact Number"
+                  placeholder="Enter your contact no."
+                  onChange={this.updateContact.bind(this)}
+                />
+                
+                <FieldGroup
+                  id="formControlsText"
+                  type="text"
+                  label="UserName"
+                  placeholder="Enter your UserName"
+                  onChange={this.updateUsername.bind(this)}
+                />
+                <FieldGroup
+                  id="formControlsPassword"
+                  label="Password"
+                  type="password"
+                  placeholder="Enter your password"
+                  onChange={this.updatePassword.bind(this)}
+                />
 
-                
-                Mobile Num:
-                <input type="text"  name="contact" onChange={this.updateContact.bind(this)}/>
-                <br></br>
-                
+                <FieldGroup
+                  id="formControlsEmail"
+                  type="email"
+                  label="Email address"
+                  placeholder="Enter your email"
+                  onChange={this.updateEmail.bind(this)}
+                />
+                <FieldGroup
+                  id="formControlsText"
+                  type="text"
+                  label="Address"
+                  placeholder="Enter your address"
+                  onChange={this.updateStreet.bind(this)}
+                />
 
-                
-                Address:
-                <input type="text"  name="address" onChange={this.updateStreet.bind(this)}/>
-                <br></br>
+                <FieldGroup
+                  id="formControlsText"
+                  type="text"
+                  label="City"
+                  placeholder="Enter your city"
+                  onChange={this.updateCity.bind(this)}
+                />
+                <FieldGroup
+                  id="formControlsText"
+                  type="text"
+                  label="Zip"
+                  placeholder="Enter your zip"
+                  onChange={this.updateStreet.bind(this)}
+                />
+                <FieldGroup
+                  id="formControlsText"
+                  type="text"
+                  label="State"
+                  placeholder="Enter your state"
+                  onChange={this.updateState.bind(this)}
+                />
+                <FieldGroup
+                  id="formControlsText"
+                  type="text"
+                  label="Country"
+                  placeholder="Enter your country"
+                  onChange={this.updateCountry.bind(this)}
+                />
+                <FormGroup controlId="formControlsSelect">
+                  <ControlLabel>Blood Group</ControlLabel>
+                  <FormControl componentClass="select" placeholder="select your bloodgroup"  name="bg" onChange={this.updateBloodGroup.bind(this)}>
+                    <option value="A-">A-</option>
+                    <option value="B-">B-</option>
+                    <option value="AB-">AB-</option>
+                    <option value="A+">A+</option>
+                    <option value="B+">B+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="O">O</option>
+                  </FormControl>
+                </FormGroup> 
 
-
-                City:
-                <input type="text" name="city" onChange={this.updateCity.bind(this)}/>
                 <br></br>
-                Zip:
-                <input type="text" name="zip" onChange={this.updateZip.bind(this)}/>
-                <br></br>
-                
-                State:
-                <input type="text"  name="state" onChange={this.updateState.bind(this)}/>
-                <br></br>
-                
-                Country:
-                <input type="text"  name="country" onChange={this.updateCountry.bind(this)}/>
-                <br></br>
-                Email:
-                <input type="text"  name="email" onChange={this.updateEmail.bind(this)}/>
-                <br></br>
-                
-                Blood Group:
-                <select name="bg" onChange={this.updateBloodGroup.bind(this)}>
-                  <option value="A-">A-</option>
-                  <option value="B-">B-</option>
-                  <option value="AB-">AB-</option>
-                  <option value="A+">A+</option>
-                  <option value="B+">B+</option>
-                  <option value="AB+">AB+</option>
-                  <option value="O">O</option>
-                </select>
-                <br></br>
-                 <button  onClick={this.getUrl.bind(this)}>Submit</button>
+                 <Button  onClick={this.getUrl.bind(this)}>SignUp</Button>
             </div>
           </div>
         </div>

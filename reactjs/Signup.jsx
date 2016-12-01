@@ -60,20 +60,29 @@ export default class Signup extends React.Component {
     }
     
     return (
-		<div>
-    <br></br>
-    <Headline/>
-  
-      <h1>Signup</h1>
-			<h3>Registration Type :</h3>
+  		<div>
+      <br></br>
+      <Headline/>
+         <div className="container">
+              <div className="row">
+                <div className="col-sm-12">
+                          <h1>Signup</h1>
+            			       <h3>Registration Type :</h3>
 
 
-        <Tabs activeKey={this.state.key} onSelect={this.handleSelect.bind(this)} id="controlled-tab-example">
-          <Tab eventKey={1} title="Donor"><SignupContainer type="donor"/></Tab>
-          <Tab eventKey={2} title="Hospital"><SignupContainer type="hospital"/></Tab>
-        </Tabs> 
-    		
-    	</div>
+                    <Tabs activeKey={this.state.key} onSelect={this.handleSelect.bind(this)} id="controlled-tab-example">
+                      <Tab eventKey={1} title="Donor"><SignupContainer type="donor"/></Tab>
+                      <Tab eventKey={2} title="Hospital"><SignupContainer type="hospital"/></Tab>
+                    </Tabs> 
+            		
+            	 </div>
+               </div>
+              </div>
+              
+      <br></br>
+      <br></br>
+      <br></br>
+          </div>    
     );
   }
 }

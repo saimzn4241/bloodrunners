@@ -4,6 +4,15 @@ import ProfileContainer from "./containers/ProfileContainer"
 import Headline from "./components/Headline"
 import * as firebase from 'firebase'
 
+
+import {OverlayTrigger, Popover, Tooltip,Modal, Clearfix, ButtonToolbar, Button, ButtonGroup, DropdownButton, MenuItem, SplitButton} from "react-bootstrap"
+import {Pager , Pagination, Row, Col, Tabs, Tab, Breadcrumb, FormGroup,FormControl, Nav, NavItem, NavDropdown, Navbar} from "react-bootstrap"
+import {Well , Accordion, Panel, Table, ListGroup, ListGroupItem, Grid, Jumbotron, PageHeader} from "react-bootstrap"
+import {Form,Glyphicon,  InputGroup,  Checkbox, Radio, ControlLabel,HelpBlock } from "react-bootstrap"
+import {Media, Carousel, ResponsiveEmbed, Thumbnail,  Image} from "react-bootstrap"
+import {bootstrapUtils,addStyle,  Fade, Collapse, ProgressBar, Alert, Badge, Label} from "react-bootstrap"
+
+
 class Profile extends React.Component {
 
   render() {
@@ -19,8 +28,11 @@ class Profile extends React.Component {
     return (
 		<div>
 		<Headline></Headline>
-		<h1>Profile</h1>
+		<div>	
+		<Well bsSize="large">
 		<ProfileContainer/>
+		</Well>
+		</div>
 		</div>
     )
   }

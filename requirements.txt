@@ -31,3 +31,7 @@ npm install react-gmaps --save
 npm install react-bootstrap --save
 npm install google-distance
 npm install --save-dev json-loader
+
+//npm install react-datepicker
+//npm install moment
+npm install react-bootstrap-date-picker
