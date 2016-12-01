@@ -167,6 +167,8 @@ var Headline = React.createClass ({
 
         addAccepted:function(hosp,user){
           console.log("dekhoo");
+          var url3=("/letsWait/?username=").concat(hosp);
+          console.log(url3);
           console.log(hosp,user);
           var url = ('accepted/').concat(hosp);
           const rootRef= firebase.database().ref().child(url);
@@ -180,13 +182,17 @@ var Headline = React.createClass ({
           //   rootRef1.push({
           //   username: hosp,
           // });
-          var url3=("/letsWait/?username=").concat(hosp);
-          document.getElementById('notificationsList').setAttribute('action', url3); 
+          
+          // document.getElementById('notificationsList').setAttribute('action', url3);
+          top.location.href = url3; 
 
         },
 
         addHospitalAccepted:function(user,otherUsers){
           var url = ('hospitalAccepted/').concat(user);
+          var url3=("/letsWait/?username=").concat(user);
+          console.log(url3);
+          // console.log(otherUsers);
           const rootRef= firebase.database().ref().child(url);
             
             rootRef.push({
@@ -198,15 +204,16 @@ var Headline = React.createClass ({
             {
               var url2 = ('hospitalAccepted/').concat(otherUsers[key].username);
               const rootRef2= firebase.database().ref().child(url);
-                
+                // console.log(otherUsers[key].username,url2)
                 rootRef2.push({
                 status: 'false',
                 hospUsername: this.state.session,
               });
             }
           }
-          var url3=("/letsWait/?username=").concat(user);
-          document.getElementById('notificationsListhosp').setAttribute('action', url3);
+          
+          // document.getElementById('notificationsListhosp').setAttribute('action', url3);
+          top.location.href = url3;
         },
 
         notif_check:function(){
@@ -224,7 +231,7 @@ var Headline = React.createClass ({
                 // notifications.push(<div>);
                 for(var key in objectReturned){
                   console.log("===== "+objectReturned[key].username+" =====");
-                  notifications.push(<li>Request From :  {objectReturned[key].username} <form id='notificationsListhosp' method='get' action="#" onSubmit={this.addHospitalAccepted.bind(this,objectReturned[key].username,objectReturned)}><button type="submit">Accept</button><button>Decline</button></form></li>);
+                  notifications.push(<li>Request From :  {objectReturned[key].username} <button onClick={this.addHospitalAccepted.bind(this,objectReturned[key].username,objectReturned)}>Accept</button><button>Decline</button></li>);
                 }
                 // notifications.push(</div>);
                 this.setState({
@@ -247,7 +254,7 @@ var Headline = React.createClass ({
                 var notifications = [];
                 for(var key in objectReturned){
                   console.log("===== "+objectReturned[key].hospUsername+" =====");
-                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername} <form id='notificationsList' method='get' action="#" onSubmit={this.addAccepted.bind(this,objectReturned[key].hospUsername,this.state.session)}><button type="submit">Accept</button><button>Decline</button></form></li>);
+                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername} <button onClick={this.addAccepted.bind(this,objectReturned[key].hospUsername,this.state.session)}>Accept</button><button>Decline</button></li>);
                 }
                 this.setState({
                   notif: notifications

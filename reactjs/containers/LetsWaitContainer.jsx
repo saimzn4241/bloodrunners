@@ -15,6 +15,7 @@ export default class LetsWaitContainer extends React.Component {
 			userAccepted : '',
 			userlat: '',
 			userlong: '',
+			type: 1,
 		};
 	}
 
@@ -24,28 +25,35 @@ export default class LetsWaitContainer extends React.Component {
               var username=result.data.username;
               // console.log("LetsWait - "+username);
               // console.log("LetsWait - "+userType);
-              this.setState({username: username, userType:userType})
+              this.setState({
+              	username: username, 
+              	userType:userType
+              },function check(){
+	              	var url = window.location.href;
+					var n = url.indexOf('=');
+					// console.log(n);
+					var username = "";
+					for(var i = n+1 ;i<url.length;i++)
+					{
+						username=username+url[i];
+					}
+					// console.log(username);
+					this.setState({
+						waitingFor: username
+					},function notif(){
+						this.checkNotification();
+					}.bind(this));
+		        });
         }.bind(this));
-		var url = window.location.href;
-		var n = url.indexOf('=');
-		// console.log(n);
-		var username = "";
-		for(var i = n+1 ;i<url.length;i++)
-		{
-			username=username+url[i];
-		}
-		// console.log(username);
-		this.setState({
-			waitingFor: username
-		},function notif(){
-			this.checkNotification();
-		}.bind(this));
+		
 	}
 
 	checkNotification(){
-		console.log("inside");
+		// console.log("inside");
+		// console.log(this.state.userType);
 		if(this.state.userType=='donor')
 		{
+			// console.log(this.state.userType);
 			var url = ('hospitalAccepted/').concat(this.state.username);
 			const rootRef= firebase.database().ref().child(url);
 
@@ -59,15 +67,17 @@ export default class LetsWaitContainer extends React.Component {
                 		status = objectReturned[key].status;
                 	}
                 }
-                rootRef.off();
+                // rootRef.off();
             	this.setState({
               		userAccepted: status
             	});     
             }.bind(this));
 		}
-		if(this.state.userType=='hospital')
+		else if(this.state.userType=='hospital')
 		{
+			// console.log(this.state.userType);
 			var url = ('location/').concat(this.state.waitingFor);
+			// console.log(url);
 			const rootRef= firebase.database().ref().child(url);
 			rootRef.on('value', function(snapshot){
                 console.log(snapshot.val());
@@ -82,6 +92,36 @@ export default class LetsWaitContainer extends React.Component {
             }.bind(this));
 		}
 	}
+
+	loc3(){
+		var url = 'location/'+ this.state.username;
+		console.log(url);
+	    const rootRef= firebase.database().ref().child(url);
+	    navigator.geolocation.getCurrentPosition(function(location) {
+	      console.log("inside=>",location);
+
+	      if(this.state.userlat!=location.coords.latitude || this.state.userlong!=location.coords.longitude){
+	            // odlat=location.coords.latitude;
+	            // odlong=location.coords.longitude;
+	            console.log("here is change in firebase")
+	            rootRef.set({
+	                latitude: location.coords.latitude,
+	                longitude: location.coords.longitude
+	            });
+
+
+	            this.setState({
+	                userlat:location.coords.latitude,
+	                userlong:location.coords.longitude
+	            });   
+	        }
+	    }.bind(this))
+	    
+	    console.log(this.state.userlat, this.state.userlong)
+	    this.setState({
+	                type:1
+	         });
+  	}
 
 	render(){
 		if(this.state.userType=='donor')
@@ -102,6 +142,11 @@ export default class LetsWaitContainer extends React.Component {
 						<h1>Here is your location and the hospital location </h1>
 						<MapUserHosp username={this.state.waitingFor} lat={this.state.userlat} long={this.state.userlong} />
 
+						{
+					        setTimeout(() => {
+					          this.loc3()     
+					        }, 10000)
+					    }
 					</div>
 				);
 			}
