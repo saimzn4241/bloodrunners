@@ -24,28 +24,35 @@ export default class LetsWaitContainer extends React.Component {
               var username=result.data.username;
               // console.log("LetsWait - "+username);
               // console.log("LetsWait - "+userType);
-              this.setState({username: username, userType:userType})
+              this.setState({
+              	username: username, 
+              	userType:userType
+              },function check(){
+	              	var url = window.location.href;
+					var n = url.indexOf('=');
+					// console.log(n);
+					var username = "";
+					for(var i = n+1 ;i<url.length;i++)
+					{
+						username=username+url[i];
+					}
+					// console.log(username);
+					this.setState({
+						waitingFor: username
+					},function notif(){
+						this.checkNotification();
+					}.bind(this));
+		        });
         }.bind(this));
-		var url = window.location.href;
-		var n = url.indexOf('=');
-		// console.log(n);
-		var username = "";
-		for(var i = n+1 ;i<url.length;i++)
-		{
-			username=username+url[i];
-		}
-		// console.log(username);
-		this.setState({
-			waitingFor: username
-		},function notif(){
-			this.checkNotification();
-		}.bind(this));
+		
 	}
 
 	checkNotification(){
-		console.log("inside");
+		// console.log("inside");
+		// console.log(this.state.userType);
 		if(this.state.userType=='donor')
 		{
+			// console.log(this.state.userType);
 			var url = ('hospitalAccepted/').concat(this.state.username);
 			const rootRef= firebase.database().ref().child(url);
 
@@ -65,9 +72,11 @@ export default class LetsWaitContainer extends React.Component {
             	});     
             }.bind(this));
 		}
-		if(this.state.userType=='hospital')
+		else if(this.state.userType=='hospital')
 		{
+			// console.log(this.state.userType);
 			var url = ('location/').concat(this.state.waitingFor);
+			// console.log(url);
 			const rootRef= firebase.database().ref().child(url);
 			rootRef.on('value', function(snapshot){
                 console.log(snapshot.val());
