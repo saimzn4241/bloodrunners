@@ -15,6 +15,7 @@ export default class LetsWaitContainer extends React.Component {
 			userAccepted : '',
 			userlat: '',
 			userlong: '',
+			type: 1,
 		};
 	}
 
@@ -66,7 +67,7 @@ export default class LetsWaitContainer extends React.Component {
                 		status = objectReturned[key].status;
                 	}
                 }
-                rootRef.off();
+                // rootRef.off();
             	this.setState({
               		userAccepted: status
             	});     
@@ -92,6 +93,36 @@ export default class LetsWaitContainer extends React.Component {
 		}
 	}
 
+	loc3(){
+		var url = 'location/'+ this.state.username;
+		console.log(url);
+	    const rootRef= firebase.database().ref().child(url);
+	    navigator.geolocation.getCurrentPosition(function(location) {
+	      console.log("inside=>",location);
+
+	      if(this.state.userlat!=location.coords.latitude || this.state.userlong!=location.coords.longitude){
+	            // odlat=location.coords.latitude;
+	            // odlong=location.coords.longitude;
+	            console.log("here is change in firebase")
+	            rootRef.set({
+	                latitude: location.coords.latitude,
+	                longitude: location.coords.longitude
+	            });
+
+
+	            this.setState({
+	                userlat:location.coords.latitude,
+	                userlong:location.coords.longitude
+	            });   
+	        }
+	    }.bind(this))
+	    
+	    console.log(this.state.userlat, this.state.userlong)
+	    this.setState({
+	                type:1
+	         });
+  	}
+
 	render(){
 		if(this.state.userType=='donor')
 		{
@@ -110,6 +141,11 @@ export default class LetsWaitContainer extends React.Component {
 					<div>
 						<h1>Here is your location and the hospital location </h1>
 
+						{
+					        setTimeout(() => {
+					          this.loc3()     
+					        }, 10000)
+					    }
 					</div>
 				);
 			}
