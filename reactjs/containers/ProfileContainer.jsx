@@ -11,6 +11,7 @@ var ProfileContainer = React.createClass ({
       return {
       session: '',
       type: '',
+      userType : '',
       username: '',
       first_name: '',
       last_name: '',
@@ -39,6 +40,7 @@ var ProfileContainer = React.createClass ({
       street: '',
       verified: '',
       users: '',
+      userViewingOwnProfile : ''
 
       };
 
@@ -54,15 +56,27 @@ var ProfileContainer = React.createClass ({
       axios.get('/checkSession/').then(function(result) {    
           console.log(result.data.username)
           session=result.data.username
-          _this.setState({session: result.data.username})
-          url=("/profile/").concat(session);
+          _this.setState({session: result.data.username, userType : result.data.userType})
+          var viewUser = window.location.pathname;
+          var userViewed="";
+          for(var i=9;i<viewUser.length-1;i++)
+          {
+            userViewed = userViewed+ viewUser[i];
+          }
+          var sameUser = 'false';
+          if(userViewed==session)
+          {
+            sameUser = 'true'; 
+          }
+          url=("/profileFetch/").concat(userViewed);
           console.log(url);
           
           axios.get(url).then(function(result) {    
                 console.log(result)
                 //var this1=_this;
                 _this.setState({
-                  type: result.data.type  
+                  type: result.data.type,
+                  userViewingOwnProfile: sameUser
                 });
                 console.log(_this.state.type)
                 
@@ -123,7 +137,6 @@ var ProfileContainer = React.createClass ({
               <div className="container">
               <div className="row">
                 <div className="col-sm-12">
-                             <Headline></Headline>
 
                     <div>
                   {/*<form method="get" action="/home">

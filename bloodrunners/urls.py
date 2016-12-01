@@ -51,7 +51,9 @@ urlpatterns = [
    url(r'^data2$',
       generic.TemplateView.as_view(template_name='data2.html')),
    url(r'^req$',req),
-   url(r'^profile/(?P<name>[\w.@+-]+)/$',getUserInfo),
+   url(r'^profile/(?P<name>[\w.@+-]+)/$',
+    generic.TemplateView.as_view(template_name='profile.html')),
+   url(r'^profileFetch/(?P<name>[\w.@+-]+)/$',getUserInfo),
    url(r'^userLocData$',getUserLocation),
    url(r'^hosLocData$',getHospitalLocation),
    url(r'^maps/$',
@@ -86,14 +88,13 @@ urlpatterns = [
       generic.TemplateView.as_view(template_name='request.html')),
    url(r'^loc_change/$',
       generic.TemplateView.as_view(template_name='loc_change.html')),
-   url(r'^letsWait/$',
 
-      generic.TemplateView.as_view(template_name='letsWait.html')),
+   url(r'^letsWait/$',generic.TemplateView.as_view(template_name='LetsWait.html')),
     url(r'^Now/$',
       generic.TemplateView.as_view(template_name='Now.html')),
 
-      generic.TemplateView.as_view(template_name='LetsWait.html'),
-  
+      
+   url(r'^updateLocation/$',updateLocation),
    
    #url(r'', include('chat.urls')),
 

@@ -56,9 +56,9 @@ var Headline = React.createClass ({
     },
 
       getUrl:function(){
-        //var url=("/profile/").concat(this.state.session);
+        var url=("/profile/").concat(this.state.session) + '/';
         //console.log(url);
-        var url=("/profile/")
+        // var url=("/profile/")
         document.getElementById('urlForm').setAttribute('action', url);
       },
 
@@ -350,7 +350,7 @@ var Headline = React.createClass ({
                     <Navbar.Toggle />
                   </Navbar.Header>
                   
-                  <Navbar.Collapse>
+                 <Navbar.Collapse>
                     <Nav pullRight>
                     <Navbar.Brand>
                       <a eventKey={1} href="/home">Home</a>
@@ -382,12 +382,11 @@ var Headline = React.createClass ({
                   </Navbar.Collapse>
                 
                 </Navbar>
-
-
-
-                  <form id="urlForm" method="POST" action="#" onSubmit={this.getUrl}>
-                  <Button type="submit">Profile</Button>
+                  <form id="urlForm" method="GET" action="#" onSubmit={this.getUrl}>
+                  <button type="submit">Profile</button>
                   </form>
+
+
 
                   
 
