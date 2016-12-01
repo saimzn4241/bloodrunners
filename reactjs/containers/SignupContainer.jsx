@@ -55,6 +55,8 @@ export default class SignupContainer extends React.Component {
         cp2Contact: '',
         cp3Contact: '',
         gender: '',
+
+        firebaseEmail: '',
         
 
     }
@@ -78,17 +80,26 @@ export default class SignupContainer extends React.Component {
   }
 
   signUP() {
-    var email=this.state.email;
+    var email=this.state.firebaseEmail;
     var password= this.state.password;
     const auth=firebase.auth();
-    const promise = auth.createUserWithEmailAndPassword(email, password);
-    promise.catch(e => console.log(e.message));
+    const promise = auth.createUserWithEmailAndPassword(email, password).then(function(){
+      this.logOUT();
+    }.bind(this)).catch(function(error){
+      console.log(error);
+      alert(error.message);
+    });
+    
 
     //this.stateChange();
   }
 
   logOUT() {
-    const auth=firebase.auth().signOut();
+    const auth=firebase.auth().signOut().then(function(){
+      var url="/home/";
+      top.location.href = url;
+    });
+    
     //this.stateChange();
   }
 
@@ -96,28 +107,28 @@ export default class SignupContainer extends React.Component {
 
   updatFLocat(){
     this.setState({count : this.state.count + 1});
-    console.log(this.state.count);
-    console.log(this.props.type);
+    // console.log(this.state.count);
+    // console.log(this.props.type);
     var checkurl=BaseApiUrl;
     if(this.props.type=='hospital'){
         checkurl+=this.state.name+'%2C';
     }
     var url=checkurl+this.state.street+'%2C'+this.state.city+'%2C'+this.state.zip+'%2C'+this.state.country+Key;
-    console.log(url);
+    // console.log(url);
     axios.post(url)
     .then(function (response) {
         var result = response.data
         // console.log(result)
-        console.log("======")
+        // console.log("======")
         for(var key in result){
             
             console.log(result.results.length)
 
         }
         var locaIndex=result.results.length-1;
-        console.log("=====")
-        console.log(response.data)
-        console.log("seperate")
+        // console.log("=====")
+        // console.log(response.data)
+        // console.log("seperate")
         if(response.data.status=='OK'){
 
         console.log(response.data.results[locaIndex].geometry.location);
@@ -138,7 +149,7 @@ export default class SignupContainer extends React.Component {
   
 
   updatePassword(e){
-    console.log( e.target.value)
+    // console.log( e.target.value)
       
     this.setState({
         password: e.target.value
@@ -146,16 +157,16 @@ export default class SignupContainer extends React.Component {
   }
 
   updateUsername(e){
-    console.log( e.target.value)
+    // console.log( e.target.value)
       
     this.setState({
         username: e.target.value,
-        email: (e.target.value).concat("@gmail.com")
+        firebaseEmail: (e.target.value).concat("@gmail.com")
     });
   }
 
   updateName(e){
-    console.log( e.target.value)
+    // console.log( e.target.value)
       
     this.setState({
         name: e.target.value
@@ -166,7 +177,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateStreet(e){
-    console.log( e.target.value)
+    // console.log( e.target.value)
       
     this.setState({
         street: e.target.value
@@ -177,7 +188,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateCity(e){
-    console.log( e.target.value)
+    // console.log( e.target.value)
       
     this.setState({
         city: e.target.value
@@ -188,7 +199,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateZip(e){
-    console.log( e.target.value)
+    // console.log( e.target.value)
       
     this.setState({
         zip: e.target.value
@@ -200,7 +211,7 @@ export default class SignupContainer extends React.Component {
   }
 
   updateCountry(e){
-    console.log( e.target.value)
+    // console.log( e.target.value)
       
     this.setState({
         country: e.target.value
@@ -214,20 +225,20 @@ export default class SignupContainer extends React.Component {
 
     updateFirstname(e){
      
-     console.log( e.target.value)
+     // console.log( e.target.value)
        this.setState({
           first_name: e.target.value
       });
     }
     updateLastname(e){
-     console.log( e.target.value)
+     // console.log( e.target.value)
        
       this.setState({
           last_name: e.target.value
       });
     }
     updateGender(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           gender: e.target.value
@@ -235,7 +246,7 @@ export default class SignupContainer extends React.Component {
     }
 
     updateBday(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           dob: e.target.value
@@ -243,7 +254,7 @@ export default class SignupContainer extends React.Component {
     }
 
     updateContact(e){
-        console.log( e.target.value)
+        // console.log( e.target.value)
       
       this.setState({
           contact: e.target.value
@@ -251,7 +262,7 @@ export default class SignupContainer extends React.Component {
     } 
 
     updateEmail(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           email: e.target.value
@@ -259,7 +270,7 @@ export default class SignupContainer extends React.Component {
     }
 
     updateBloodGroup(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           bg: e.target.value
@@ -267,21 +278,21 @@ export default class SignupContainer extends React.Component {
     }
 
     updateCp1Firstname(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
           this.setState({
               cp1First_name: e.target.value
           });
         }
     updateCp1Lastname(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           cp1Last_name: e.target.value
       });
     }
     updateCp1Contact(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           cp1Contact: e.target.value
@@ -291,21 +302,21 @@ export default class SignupContainer extends React.Component {
 
 
     updateCp2Firstname(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           cp2First_name: e.target.value
       });
     }
     updateCp2Lastname(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           cp2Last_name: e.target.value
       });
     }
     updateCp2Contact(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           cp2Contact: e.target.value
@@ -315,21 +326,21 @@ export default class SignupContainer extends React.Component {
 
 
     updateCp3Firstname(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           cp2First_name: e.target.value
       });
     }
     updateCp3Lastname(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           cp2Last_name: e.target.value
       });
     }
     updateCp3Contact(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           cp2Contact: e.target.value
@@ -337,14 +348,14 @@ export default class SignupContainer extends React.Component {
     }
 
      updateState(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           state: e.target.value
       });
     }
     updateType(e){
-      console.log( e.target.value)
+      // console.log( e.target.value)
       
       this.setState({
           type: e.target.value
@@ -356,12 +367,6 @@ export default class SignupContainer extends React.Component {
 
     getUrl(){
         //var url=("/profile/").concat(this.state.session);
-        console.log("done");
-        this.signUP();
-        console.log("done signup");
-        this.logOUT();
-        console.log("done logout");
-        
         //document.getElementById('urlForm').setAttribute('action', url);
 
         var qs = require('qs');
@@ -404,26 +409,18 @@ export default class SignupContainer extends React.Component {
              
                 console.log(response);
                 console.log("here");
-                if(response.data.error=="False"){
-                    axios.get('/home/')
-                    .then(function (response) {
-                     
-                    
-                    })
-                    .catch(function (error) {
-                    console.log(error);
-                    });
-                    var url=("/home/");
-                    document.getElementById('urlForm1').setAttribute('action', url)
+                if(response.data.error==false){
+                    this.signUP();
+                    console.log("done signup");
                 }
-                else if(response.data.error=="True"){
+                else if(response.data.error==true){
                     this.setState({
                         error: true
                     });
                 }
 
                 
-            })
+            }.bind(this))
             .catch(function (error) {
               console.log(error);
             });
@@ -465,38 +462,24 @@ export default class SignupContainer extends React.Component {
              
                 console.log(response);
                 console.log("here");
-                if(response.data.error=="False"){
+                if(response.data.error==false){
+                    this.signUP();
+                    console.log("done signup");
                     
-                    axios.get('/home/')
-                    .then(function (response) {
-                     
-                    
-                    })
-                    .catch(function (error) {
-                    console.log(error);
-                    });
-                    var url=("/home/");
-                    document.getElementById('urlForm2').setAttribute('action', url)
                 }
-                else if(response.data.error=="True"){
+                else if(response.data.error==true){
                     this.setState({
                         error: true
 
                     });
                 }
-            })
+            }.bind(this))
             .catch(function (error) {
               console.log(error);
             });
 
         }
-
-        
-
-
-
       }
-
 
   render() {
   
@@ -508,9 +491,7 @@ export default class SignupContainer extends React.Component {
           <div className="col-sm-12">
             {this.state.error?<h1>There is an error..please submit the form again</h1>:<h1></h1>}
                   
-            <form id="urlForm1"  method="GET" onSubmit={this.getUrl.bind(this)} >
-                <input type="hidden" name="csrfmiddlewaretoken" value="$csrf_token"/>
-
+                <div>
                 <input type="hidden" name="type" value="donor" onChange={this.updateType.bind(this)}/>
 
                 {/* For fixed location */}
@@ -595,12 +576,8 @@ export default class SignupContainer extends React.Component {
                   <option value="O">O</option>
                 </select>
                 <br></br>
-               
-                
-                <input type="submit" value="Submit"/>
-                
-            </form>
-          
+                 <button  onClick={this.getUrl.bind(this)}>Submit</button>
+            </div>
           </div>
         </div>
       </div>
@@ -613,8 +590,7 @@ export default class SignupContainer extends React.Component {
 
             {this.state.error?<h1>There is an error..please submit the form again</h1>:<h1></h1>}
             
-            <form id="urlForm2"  method="GET" onSubmit={this.getUrl.bind(this)} >
-                <input type="hidden" name="csrfmiddlewaretoken" value="$csrf_token"/>
+            <div>
 
                 <input type="hidden" name="type" value="hospital" onChange={this.updateType.bind(this)}/>
                 
@@ -713,8 +689,8 @@ export default class SignupContainer extends React.Component {
                 <input type="text"  name="country" onChange={this.updateCountry.bind(this)}/>
                 <br></br>
 
-                <input type="submit" value="Submit"/>
-            </form>
+                 <button  onClick={this.getUrl.bind(this)}>Submit</button>
+            </div>
         </div>
         );
     }
