@@ -74,10 +74,9 @@ const React_map = React.createClass({
             markers:markers,
             toggle:1
             });
-            
-    
-
+   
   },
+  
   render() {
    
 

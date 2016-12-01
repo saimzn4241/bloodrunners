@@ -95,6 +95,9 @@ urlpatterns = [
 
       
    url(r'^updateLocation/$',updateLocation),
+   url(r'^ret_hosp_loc/$',RetHospLoc),
+       
+
    
    #url(r'', include('chat.urls')),
 

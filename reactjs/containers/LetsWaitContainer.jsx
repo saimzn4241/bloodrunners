@@ -2,7 +2,7 @@ import React from "react"
 import { render } from "react-dom"
 import axios from 'axios'
 import firebase from 'firebase'
-
+import MapUserHosp from './MapUserHosp'
 export default class LetsWaitContainer extends React.Component {
 
 	constructor(props){
@@ -100,6 +100,7 @@ export default class LetsWaitContainer extends React.Component {
 				return(
 					<div>
 						<h1>Here is your location and the hospital location </h1>
+						<MapUserHosp username={this.state.waitingFor} lat={this.state.userlat} long={this.state.userlong} >
 
 					</div>
 				);
@@ -130,6 +131,7 @@ export default class LetsWaitContainer extends React.Component {
 			}
 			else
 			{
+				//Pandu maps
 				return(
 					<div>
 						<p>{this.state.userlat} ... {this.state.userlong}</p>

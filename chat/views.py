@@ -145,4 +145,21 @@ def FrontendDistance(request):
 	
 	print ret	
 	return JsonResponse(ret)
+
+
+
+@csrf_exempt
+def RetHospLoc(request):
+	ret={}
+	hosp=str(request.POST.get('username'))
+
+	ret['error']="true"
+	if(Hospitals.objects.filter(username=hosp).exists()):
+			hospital=Hospitals.objects.filter(username=hosp)
+			ret['username']=hosp
+			ret['lat']=hospital[0].fix_lat
+			ret['long']=hospital[0].fix_long
+			ret['error']="false"
+	return JsonResponse(ret)
+
 	
