@@ -3,6 +3,14 @@ import React from "react"
 import axios from 'axios';
 
 
+import {OverlayTrigger, Popover, Tooltip,Modal, Clearfix, ButtonToolbar, Button, ButtonGroup, DropdownButton, MenuItem, SplitButton} from "react-bootstrap"
+import {Pager , Pagination, Row, Col, Tabs, Tab, Breadcrumb, FormGroup,FormControl, Nav, NavItem, NavDropdown, Navbar} from "react-bootstrap"
+import {Well , Accordion, Panel, Table, ListGroup, ListGroupItem, Grid, Jumbotron, PageHeader} from "react-bootstrap"
+import {Form,Glyphicon,  InputGroup,  Checkbox, Radio, ControlLabel,HelpBlock } from "react-bootstrap"
+import {Media, Carousel, ResponsiveEmbed, Thumbnail,  Image} from "react-bootstrap"
+import {bootstrapUtils,addStyle,  Fade, Collapse, ProgressBar, Alert, Badge, Label} from "react-bootstrap"
+
+
 export default class LoginContainer extends React.Component {
 
   constructor(props) {
@@ -67,23 +75,30 @@ export default class LoginContainer extends React.Component {
       return (
         <div className="container">
           <div className="row">
-            <div className="col-sm-12">
-              
-                  Username:
-                  <input type="text"   name="username" onChange = {this.updateUsername.bind(this)}>
-                  </input>
-                  <br></br>
+            <div style={Style1}>
 
-                  Password:    
-                  <input type="password"  name="password" onChange = {this.updatePassword.bind(this)}>
-                  </input>
                   
-                  
-                  <br></br>
+                    <FieldGroup
+                      id="formControlsText"
+                      type="text"
+                      label="Username"
+                      placeholder="Enter your username"
+                      onChange = {this.updateUsername.bind(this)}
+                    />
+                    <FieldGroup
+                      id="formControlsPassword"
+                      label="Password"
+                      type="password"
+                      placeholder="Enter your password" 
+                      onChange = {this.updatePassword.bind(this)}
+                    />
                   
                   <h4>{this.state.value}</h4>
                   
-                  <input type="button" value="Submit" onClick={this.request.bind(this)}/>
+                  <Button type="submit" onClick={this.request.bind(this)}>
+                    Login
+                  </Button>
+
                   
                   
 
@@ -95,3 +110,19 @@ export default class LoginContainer extends React.Component {
 
   }
 }
+
+function FieldGroup({ id, label, help, ...props }) {
+  return (
+    <FormGroup controlId={id}>
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl {...props} />
+      {help && <HelpBlock>{help}</HelpBlock>}
+    </FormGroup>
+  );
+}
+
+var Style1 = {
+    width: "30%",
+
+    
+};

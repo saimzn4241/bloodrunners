@@ -6,8 +6,13 @@ import firebase from 'firebase';
 
 import React_map from "../React_map"
 
-//import { Button } from 'react-bootstrap';
-//import StyleSheet from 'react-style';
+
+import {OverlayTrigger, Popover, Tooltip,Modal, Clearfix, ButtonToolbar, Button, ButtonGroup, DropdownButton, MenuItem, SplitButton} from "react-bootstrap"
+import {Pager , Pagination, Row, Col, Tabs, Tab, Breadcrumb, FormGroup,FormControl, Nav, NavItem, NavDropdown, Navbar} from "react-bootstrap"
+import {Well , Accordion, Panel, Table, ListGroup, ListGroupItem, Grid, Jumbotron, PageHeader} from "react-bootstrap"
+import {Form,Glyphicon,  InputGroup,  Checkbox, Radio, ControlLabel,HelpBlock } from "react-bootstrap"
+import {Media, Carousel, ResponsiveEmbed, Thumbnail,  Image} from "react-bootstrap"
+import {bootstrapUtils,addStyle,  Fade, Collapse, ProgressBar, Alert, Badge, Label} from "react-bootstrap"
       
 var Headline = React.createClass ({
 
@@ -69,6 +74,13 @@ var Headline = React.createClass ({
               this.signIN(loginEmail,loginPassword);
               this.updateUserType();
           });
+        },
+
+        closeProp:function() {
+        // var _this = this;
+        this.setState({
+          type:"initial"
+          })
         },
 
         updateUserType:function(){
@@ -296,6 +308,25 @@ var Headline = React.createClass ({
         });
 
       },
+      popoverBottom:function (){
+                      return (
+                        <Popover id="popover-positioned-bottom" title="">
+                        <strong>
+                        {this.state.notif!=''?
+                          <div>
+                            {this.state.notif}
+                          </div>
+                          :
+                          <div></div>
+                        }
+                        </strong>
+
+
+                        <strong>Holy guacamole!</strong> Check this info.
+                      </Popover>
+                      )
+      },
+       
 
 
       render:function() {
@@ -310,40 +341,57 @@ var Headline = React.createClass ({
             if(this.state.userType=='donor')
             {
               return (
-                <div /*style={divStyle}*/ >
-                  {this.state.session!=''?
-                    <h1>User logged in= {this.state.session}</h1>
-                    :
-                    <div></div>
-                  }
-                  {/*<button onClick={this.homefun}>Home</button>*/}
-                  <form method="get" action="/home">
-                  <button type="submit">HOME</button>
-                  </form>
+                <div >
+                <Navbar inverse collapseOnSelect>
+                  <Navbar.Header>
+                    <Navbar.Brand>
+                      <a href="/home">BLOOD-RUNNERS</a>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                  </Navbar.Header>
                   
+                  <Navbar.Collapse>
+                    <Nav pullRight>
+                    <Navbar.Brand>
+                      <a eventKey={1} href="/home">Home</a>
+                    </Navbar.Brand>
+                      <Navbar.Brand>
+                      <a eventKey={2} href="/maps">Maps</a>
+                    </Navbar.Brand>
+
+                    
+                      <a eventKey={3} >
+                      <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverBottom()}>
+                        <Navbar.Brand>
+                        Notifications
+                        </Navbar.Brand>
+                      </OverlayTrigger>
+                      </a>
+
+
+                    <Navbar.Brand> 
+                      <a eventKey={4}  >User:{this.state.session}</a>
+                    </Navbar.Brand>
+
+                    <Navbar.Brand>  
+                      <a eventKey={5} style={Style1} href="/home" onClick={this.logoutfun} >Logout</a>
+                    </Navbar.Brand>  
+                    
+                    
+                    </Nav>
+                  </Navbar.Collapse>
+                
+                </Navbar>
+
+
+
                   <form id="urlForm" method="POST" action="#" onSubmit={this.getUrl}>
-                  <button type="submit">Profile</button>
-                  </form>
-
-                  <form method="get" action="/maps">
-                  <button type="submit">MAPS</button>
+                  <Button type="submit">Profile</Button>
                   </form>
 
                   
-                  <form id="logout1" method="get" action="/home" onSubmit={this.logoutfun}>
-                  <button type="submit">Log-Out</button>
-                  </form>
 
-                  {/*<h1>notification={this.state.notif}</h1>*/}
-
-                  {this.state.notif!=''?
-                    <div>
-                      <h1>Notifications List : </h1>
-                      {this.state.notif}
-                    </div>
-                    :
-                    <div></div>
-                  }
+                  
                   <React_map />
                 </div>
               );
@@ -394,31 +442,41 @@ var Headline = React.createClass ({
 
           }
           else{
-
             return (
-          	<div>
-              <form method="get" action="/home">
-                <button type="submit">HOME</button>
-              </form>
+            <div>
+            <Navbar inverse collapseOnSelect>
+              <Navbar.Header>
+                <Navbar.Brand>
+                  <a href="/home">BLOOD-RUNNERS</a>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+              </Navbar.Header>
               
-              <form method="get" action="/maps">
-              <button type="submit">MAPS</button>
-              </form>
-              
-              <form method="get" action="/signup">
-              <button type="submit">Sign-Up</button>
-              </form>
-              
-              <button  onClick={this.loginfun} >Login</button>
-              <Login type={this.state.type} updateStateProp = {this.updateState} /> 
-              {this.state.notif!=''?
-                <h1>notification={this.state.notif}</h1>
-                :
-                <div></div>
-              }
+              <Navbar.Collapse>
+                <Nav pullRight>
+                <Navbar.Brand>
+                  <a eventKey={1} href="/home">Home</a>
+                </Navbar.Brand>
+                <Navbar.Brand>  
+                  <a eventKey={2} href="/maps">Maps</a>
+                </Navbar.Brand>
+                <Navbar.Brand>  
+                  <a eventKey={3} onClick={this.loginfun} >Login</a>
+                </Navbar.Brand>  
+                <Navbar.Brand> 
+                  <a eventKey={4} href="/signup" style={Style1}>Sign-Up</a>
+                </Navbar.Brand>  
+                </Nav>
+              </Navbar.Collapse>
+            
+            </Navbar>
+
+            <Login type={this.state.type} showModal={true} updateStateProp = {this.updateState} closeProp={this.closeProp} /> 
+           
             <React_map />
             </div>
             );
+            
           }
       }
 });
@@ -436,5 +494,14 @@ var Headline = React.createClass ({
 //         },
 // });
 
+var Style1 = {
+    paddingRight: "50px",
+    
+  };
+var Style2 = {
+    paddingRight: "50%",
+    paddingLeft: "50%",
+    
+  };  
 
 export default Headline;
