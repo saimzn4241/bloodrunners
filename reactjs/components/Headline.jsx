@@ -228,11 +228,27 @@ var Headline = React.createClass ({
                 console.log(snapshot.val());
                 var objectReturned=snapshot.val();
                 var notifications = [];
-                // notifications.push(<div>);
+                //notifications.push(<ListGroup>);
                 for(var key in objectReturned){
-                  console.log("===== "+objectReturned[key].username+" =====");
-                  notifications.push(<li>Request From :  {objectReturned[key].username} <button onClick={this.addHospitalAccepted.bind(this,objectReturned[key].username,objectReturned)}>Accept</button><button>Decline</button></li>);
+                  //console.log("===== "+objectReturned[key].username+" =====");
+                  notifications.push(
+                    <ListGroup>
+                    <ListGroupItem>
+                    Request From :  {objectReturned[key].username}
+                    </ListGroupItem> 
+                    <ListGroupItem>
+                    <Button onClick={this.addHospitalAccepted.bind(this,objectReturned[key].username,objectReturned)}>
+                    Accept
+                    </Button>
+                    <Button>
+                    Decline
+                    </Button>
+                    </ListGroupItem>
+                    </ListGroup>
+                    )
                 }
+                //notifications.push(</ListGroup>);
+                
                 // notifications.push(</div>);
                 this.setState({
                   notif: notifications
@@ -252,10 +268,28 @@ var Headline = React.createClass ({
                 //   console.log("===== "+obj[hospUsername]+" =====");
                 // });
                 var notifications = [];
+                //notifications.push(<ListGroup>);
+                
                 for(var key in objectReturned){
-                  console.log("===== "+objectReturned[key].hospUsername+" =====");
-                  notifications.push(<li>Request From :  {objectReturned[key].hospUsername} <button onClick={this.addAccepted.bind(this,objectReturned[key].hospUsername,this.state.session)}>Accept</button><button>Decline</button></li>);
+                  //console.log("===== "+objectReturned[key].hospUsername+" =====");
+                  notifications.push(
+                    <ListGroup>
+                    <ListGroupItem>
+                    Request From :  {objectReturned[key].hospUsername}
+                    </ListGroupItem> 
+                    <ListGroupItem>
+                    <Button onClick={this.addAccepted.bind(this,objectReturned[key].hospUsername,this.state.session)}>
+                    Accept
+                    </Button>
+                    <Button>
+                    Decline
+                    </Button>
+                    </ListGroupItem>
+                    </ListGroup>
+                    )
                 }
+                //notifications.push(</ListGroup>);
+                
                 this.setState({
                   notif: notifications
                 });
@@ -456,7 +490,7 @@ var Headline = React.createClass ({
           }
           else{
             return (
-            <div>
+            <div style={{backgroundColor: 'Black'}}>
             <Navbar inverse collapseOnSelect>
               <Navbar.Header>
                 <Navbar.Brand>
@@ -483,11 +517,42 @@ var Headline = React.createClass ({
               </Navbar.Collapse>
             
             </Navbar>
+                <div className="container">
+                <div className="row">
+                <div className="col-sm-12">
+                  <Jumbotron style={{backgroundColor: '#e60000'}}>
+                  <h1 style={{display: 'flex', justifyContent: 'center', color: 'white'}}>""You dont have to be a doctor""</h1>
+                  <h1 style={{display: 'flex', justifyContent: 'center' , color: 'white'}}>****TO SAVE A LIFE****</h1>
+                  </Jumbotron>
+                </div>
+                </div>
+                </div>
 
             <Login type={this.state.type} showModal={true} updateStateProp = {this.updateState} closeProp={this.closeProp} /> 
            
             <React_map />
+            <Jumbotron style={{backgroundColor: 'Black'}} responsive>
+                <div  style={{backgroundColor: 'Black'}}>
+                <Table  style={{display: 'flex', justifyContent: 'center',backgroundColor: 'Black'}}>
+                <Col  xs={6} md={4}>
+                  <Image src={require('./nippo.jpg')} style={{ display: 'flex', justifyContent: 'center',width: '320px',height: '400px'}} rounded  responsive/>
+                  <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Nipun Garg</h3>
+                </Col>
+                <Col xs={6} md={4}>
+                  <Image src={require('./arjun.jpg')} style={{display: 'flex', justifyContent: 'center', width: '320px',height: '400px'}} rounded responsive/>
+                  <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Arjun Gupta</h3>
+                </Col>
+                <Col xs={6} md={4}>
+                  <Image src={require('./rrj.jpg')} style={{ display: 'flex', justifyContent: 'center',width: '320px',height: '400px'}} rounded responsive/>
+                  <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Rishabh Raj Jain</h3>
+                </Col>
+                </Table>
+
+              </div>
+            </Jumbotron>
             </div>
+
+            
             );
             
           }
