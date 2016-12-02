@@ -59,7 +59,8 @@ var Headline = React.createClass ({
         var url=("/profile/").concat(this.state.session) + '/';
         //console.log(url);
         // var url=("/profile/")
-        document.getElementById('urlForm').setAttribute('action', url);
+        top.location.href = url;
+        //document.getElementById('urlForm').setAttribute('action', url);
       },
 
        updateState:function(arg,loginEmail,loginPassword,userType1) {
@@ -381,6 +382,7 @@ var Headline = React.createClass ({
                         <Navbar.Brand>
                           <a href="/home">BLOOD-RUNNERS</a>
                         </Navbar.Brand>
+                        <Image src={require('./logo.png')} style={{width: '50px',height: '50px'}} rounded responsive/>
                         <Navbar.Toggle />
                       </Navbar.Header>
                   
@@ -389,9 +391,7 @@ var Headline = React.createClass ({
                         <Navbar.Brand>
                           <a eventKey={1} href="/home">Home</a>
                         </Navbar.Brand>
-                          <Navbar.Brand>
-                          <a eventKey={2} href="/maps">Maps</a>
-                        </Navbar.Brand>
+                          
 
                         
                           <a eventKey={3} >
@@ -404,7 +404,7 @@ var Headline = React.createClass ({
 
 
                       <Navbar.Brand> 
-                        <a eventKey={4}  >User:{this.state.session}</a>
+                        <a eventKey={4}  href={("/profile/").concat(this.state.session) + '/'}>User : {this.state.session} </a>
                       </Navbar.Brand>
 
                       <Navbar.Brand>  
@@ -417,9 +417,7 @@ var Headline = React.createClass ({
                 
                    </Navbar>
 
-                  <form id="urlForm" method="GET" action="#" onSubmit={this.getUrl}>
-                  <Button type="submit">Profile</Button>
-                  </form>
+                  
 
                   <React_map />
                 </div>
@@ -437,6 +435,7 @@ var Headline = React.createClass ({
                       <Navbar.Brand>
                         <a href="/home">BLOOD-RUNNERS</a>
                       </Navbar.Brand>
+                      <Image src={require('./logo.png')} style={{width: '50px',height: '50px'}} rounded responsive/>
                       <Navbar.Toggle />
                     </Navbar.Header>
                   
@@ -445,10 +444,7 @@ var Headline = React.createClass ({
                         <Navbar.Brand>
                           <a eventKey={1} href="/home">Home</a>
                         </Navbar.Brand>
-                          <Navbar.Brand>
-                          <a eventKey={2} href="/maps">Maps</a>
-                        </Navbar.Brand>
-
+                          
                         
                           <a eventKey={3} >
                           <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverBottom()}>
@@ -458,13 +454,17 @@ var Headline = React.createClass ({
                           </OverlayTrigger>
                           </a>
 
-
                       <Navbar.Brand> 
-                        <a eventKey={4} >Hospital:{this.state.session}</a>
+                        <a eventKey={4}  href={("/profile/").concat(this.state.session) + '/'}>Hospital : {this.state.session} </a>
                       </Navbar.Brand>
+                      
+                      <Navbar.Brand> 
+                        <a eventKey={5} href="/request/">Request</a>
+                      </Navbar.Brand>
+                      
 
                       <Navbar.Brand>  
-                        <a eventKey={5} style={Style1} href="/home" onClick={this.logoutfun} >Logout</a>
+                        <a eventKey={6} style={Style1} href="/home" onClick={this.logoutfun} >Logout</a>
                       </Navbar.Brand>  
                       
                       
@@ -473,13 +473,7 @@ var Headline = React.createClass ({
                 
                   </Navbar>
 
-                  <form method="get" action="/request/">
-                  <Button type="submit">Request</Button>
-                  </form>
-
-                  <form id="urlForm" method="GET" action="#" onSubmit={this.getUrl}>
-                  <Button type="submit">Profile</Button>
-                  </form>
+                  
 
                   <React_map />
                 </div>
@@ -496,6 +490,7 @@ var Headline = React.createClass ({
                 <Navbar.Brand>
                   <a href="/home">BLOOD-RUNNERS</a>
                 </Navbar.Brand>
+                  <Image src={require('./logo.png')} style={{width: '50px',height: '50px'}} rounded responsive/>
                 <Navbar.Toggle />
               </Navbar.Header>
               
@@ -503,9 +498,6 @@ var Headline = React.createClass ({
                 <Nav pullRight>
                 <Navbar.Brand>
                   <a eventKey={1} href="/home">Home</a>
-                </Navbar.Brand>
-                <Navbar.Brand>  
-                  <a eventKey={2} href="/maps">Maps</a>
                 </Navbar.Brand>
                 <Navbar.Brand>  
                   <a eventKey={3} onClick={this.loginfun} >Login</a>
@@ -533,19 +525,24 @@ var Headline = React.createClass ({
             <React_map />
             <Jumbotron style={{backgroundColor: 'Black'}} responsive>
                 <div  style={{backgroundColor: 'Black'}}>
+                <h1 style={{ display: 'flex', justifyContent: 'center',color:'White'}}>We are the developers</h1>
                 <Table  style={{display: 'flex', justifyContent: 'center',backgroundColor: 'Black'}}>
-                <Col  xs={6} md={4}>
-                  <Image src={require('./nippo.jpg')} style={{ display: 'flex', justifyContent: 'center',width: '320px',height: '400px'}} rounded  responsive/>
-                  <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Nipun Garg</h3>
-                </Col>
-                <Col xs={6} md={4}>
-                  <Image src={require('./arjun.jpg')} style={{display: 'flex', justifyContent: 'center', width: '320px',height: '400px'}} rounded responsive/>
-                  <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Arjun Gupta</h3>
-                </Col>
-                <Col xs={6} md={4}>
-                  <Image src={require('./rrj.jpg')} style={{ display: 'flex', justifyContent: 'center',width: '320px',height: '400px'}} rounded responsive/>
-                  <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Rishabh Raj Jain</h3>
-                </Col>
+                 <tbody>
+                  <tr>
+                  <td>
+                    <Image src={require('./nippo.jpg')} style={{ display: 'flex', justifyContent: 'center',width: '320px',height: '400px'}} rounded  responsive/>
+                    <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Nipun Garg</h3>
+                  </td>
+                  <td>
+                    <Image src={require('./arjun.jpg')} style={{display: 'flex', justifyContent: 'center', width: '320px',height: '400px'}} rounded responsive/>
+                    <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Arjun Gupta</h3>
+                  </td>
+                  <td>
+                    <Image src={require('./rrj.jpg')} style={{ display: 'flex', justifyContent: 'center',width: '320px',height: '400px'}} rounded responsive/>
+                    <h3 style={{display: 'flex', justifyContent: 'center',color: 'white'}}>Rishabh Raj Jain</h3>
+                  </td>
+                   </tr>
+                 </tbody>
                 </Table>
 
               </div>
