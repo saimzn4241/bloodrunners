@@ -34,7 +34,7 @@ class Home extends React.Component {
   	firebase.initializeApp(config);
 
     return (
-    	<div >
+    	<div style={{backgroundColor: 'Black'}}>
 		<HomeContainer/>  
     	</div>
     )

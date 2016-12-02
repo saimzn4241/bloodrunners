@@ -8,13 +8,9 @@ export default class RequestContainer extends React.Component {
 
 	render(){
 		return(
-			<div className="container">
-		        <div className="row">
-		        	<div className="col-sm-12">
-		            	<Headline></Headline>
-		            	<PingContainer></PingContainer>
-		          	</div>
-		        </div>
+			<div style={{backgroundColor: 'Black'}}>
+			<Headline></Headline>
+		    <PingContainer></PingContainer>
 		    </div>
 		);
 	}
