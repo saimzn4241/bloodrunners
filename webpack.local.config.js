@@ -10,7 +10,8 @@ config.devtool = "#eval-source-map"
 //var ip='172.20.10.6'
 //var ip = '172.16.102.229'
 // var ip = 'localhost'
-var ip = '172.20.10.4'
+// var ip = '172.20.10.4'
+var ip = '127.0.0.1'
 
 
 config.entry = {

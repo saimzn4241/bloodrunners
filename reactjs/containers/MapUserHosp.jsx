@@ -20,6 +20,7 @@ var var_time='';
 var markers=[]
 const React_map = React.createClass({
   getInitialState() {
+
   return {
         markers:[],
         type:0,
@@ -27,69 +28,83 @@ const React_map = React.createClass({
         toggle:0,
         distance:'',
         time:'',
-        lat:this.props.lat,
-        lng:this.props.long,
+        lat: '',
+        lng:'',
         hlat:'',
         hlng:'',
-
+        waitingFor: this.props.waitingFor,
+        username: this.props.username,
+        userType: this.props.userType,
+        userlat: this.props.userlat,
+        userlong: this.props.userlong,
+        userDist: this.props.userDist,
+        userTime: this.props.userTime,
+        hosplat: this.props.hosplat,
+        hosplong: this.props.hosplong
       };
+      console.log("after sending props:",this.props.userlat,this.props.userlong);
+      console.log("after sending state:",this.state.userlat,this.state.userlong);
+
   },
-  componentWillMount(){
-     this.onReady();
-     console.log("distance=", this.distance());
+  componentDidMount(){
+     // this.onReady();
+     // console.log("distance=", this.distance());
+     console.log("after sending props:",this.props.userlat,this.props.userlong);
+      console.log("after sending state:",this.state.userlat,this.state.userlong);
+
   },
 
-  onReady(){
-    var that=this;
-    var qs = require('qs');
+  // onReady(){
+  //   var that=this;
+  //   var qs = require('qs');
       
-    axios.post('/ret_hosp_loc/' ,qs.stringify({username: this.props.username}))
-    .then(function (response) {
-        console.log(response);
-          if(response.data.error=="false"){
+  //   axios.post('/ret_hosp_loc/' ,qs.stringify({username: this.props.username}))
+  //   .then(function (response) {
+  //       console.log(response);
+  //         if(response.data.error=="false"){
 
-             that.setState({
-            hlat: response.data.lat,
-            hlng:  response.data.long,
-            });
-           }
-          else{
-            console.log("error=true");
-          }       
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  },
+  //            that.setState({
+  //           hlat: response.data.lat,
+  //           hlng:  response.data.long,
+  //           });
+  //          }
+  //         else{
+  //           console.log("error=true");
+  //         }       
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // },
   
-  distance(){
+  // distance(){
       
-      var key="&key=AIzaSyBChu-qFYq9rJpaGOZcatYv_tbuTAu42Gw";
-      var url="https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
-      var origin="&origins=";
-      console.log("here in distance");
-      origin=origin.concat(this.state.lat).concat(",").concat(this.state.lng)
-      var destination="&destinations=".concat(this.state.hlat).concat(",").concat(this.state.hlng)
-      url=url.concat(origin).concat(destination).concat(key)
+  //     var key="&key=AIzaSyBChu-qFYq9rJpaGOZcatYv_tbuTAu42Gw";
+  //     var url="https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
+  //     var origin="&origins=";
+  //     console.log("here in distance");
+  //     origin=origin.concat(this.state.lat).concat(",").concat(this.state.lng)
+  //     var destination="&destinations=".concat(this.state.hlat).concat(",").concat(this.state.hlng)
+  //     url=url.concat(origin).concat(destination).concat(key)
 
-      console.log("url=>", url);
-      var that=this;
+  //     console.log("url=>", url);
+  //     var that=this;
 
-      var qs = require('qs');
-      axios.post("/FrontendDistance/",qs.stringify({url: url}))
-      .then(function (response) {
-          console.log(response);
-          if(var_dist!= response.data.distance|| var_time!=response.data.time){
-              var_dist=response.data.distance;
-              var_time=response.data.time;
+  //     var qs = require('qs');
+  //     axios.post("/FrontendDistance/",qs.stringify({url: url}))
+  //     .then(function (response) {
+  //         console.log(response);
+  //         if(var_dist!= response.data.distance|| var_time!=response.data.time){
+  //             var_dist=response.data.distance;
+  //             var_time=response.data.time;
               
-              that.setState({
-               distance: response.data.distance,
-               time: response.data.time,
-             });
-          }
-        })
-  },
+  //             that.setState({
+  //              distance: response.data.distance,
+  //              time: response.data.time,
+  //            });
+  //         }
+  //       })
+  // },
   
   onMapCreated(map) {
     map.setOptions({
@@ -133,55 +148,54 @@ const React_map = React.createClass({
     //console.log(this.state.json);
 
     var count=0;
-    console.log("in render=>", this.state.lat, this.state.lng)
+    console.log("in render=>", this.state.userlat, this.state.userlong)
     return (
       <div>
       <Gmaps
         width={'800px'}
         height={'400px'}
-        lat={this.state.lat}
-        lng={this.state.lng}
+        lat={this.state.userlat}
+        lng={this.state.userlong}
         zoom={17}
         loadingMessage={'Be happy'}
-        params={{v: '3.exp', key: 'AIzaSyCwVTLGKslXV0UwsLFLP9NSEibmNMoK97c'}}
+        params={{v: '3.exp', key: 'AIzaSyCp8MTlU-kdlw5wGd0DwYfERUr3U8fF6YA'}}
         onMapCreated={this.onMapCreated}
         >
 
 
         <Marker
             key="donor"
-            lng= {this.state.lng}
-            lat={this.state.lat}
+            lng= {this.state.userlong}
+            lat={this.state.userlat}
             icon= {donorMarker}
            
             />
         <Marker
             key="hosp"
-            lng= {this.state.hlng}
-            lat={this.state.hlat}
+            lng= {this.state.hosplong}
+            lat={this.state.hosplat}
             icon= {hospMarker}
            
         />
          <InfoWindow
-                lng= {this.state.hlng}
-                lat={this.state.hlat}
+                lng= {this.state.hosplong}
+                lat={this.state.hosplat}
                 content={this.props.username}
                 onCloseClick={this.onCloseClick} />    
 
         <Circle
-          lng= {this.state.lng}
-          lat={this.state.lat}
+          lng= {this.state.userlong}
+          lat={this.state.userlat}
           radius={100}
           onClick={this.onClick} />
           
       </Gmaps>
       <br/>
       <br/>
-      {this.distance()}
-      <h1>distance={this.state.distance}</h1>
+      <h1>distance={this.state.userDist}</h1>
       <br/>
       <br/>
-      <h1>time={this.state.time}</h1>
+      <h1>time={this.state.userTime}</h1>
       <br/>
       <br/>
       

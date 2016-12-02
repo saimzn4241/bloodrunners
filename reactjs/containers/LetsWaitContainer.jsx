@@ -15,7 +15,11 @@ export default class LetsWaitContainer extends React.Component {
 			userAccepted : '',
 			userlat: '',
 			userlong: '',
+			userDist: '',
+			userTime: '',
 			type: 1,
+			hosplat: '',
+			hosplong: '',
 		};
 	}
 
@@ -41,11 +45,42 @@ export default class LetsWaitContainer extends React.Component {
 					this.setState({
 						waitingFor: username
 					},function notif(){
-						this.checkNotification();
+						if(this.state.userType=='donor')
+						{
+							this.getHospitalLocationAndCheckNotification(this.state.waitingFor);
+						}
+						else if(this.state.userType=='hospital')
+						{
+							this.getHospitalLocationAndCheckNotification(this.state.username);
+						}
+						// this.checkNotification();
 					}.bind(this));
 		        });
         }.bind(this));
+
 		
+	}
+
+	getHospitalLocationAndCheckNotification(hospital){
+
+		var qs = require('qs');
+	    axios.post('/ret_hosp_loc/' ,qs.stringify({username: hospital})).then(function (response) {
+	        console.log(response);
+	        if(response.data.error=="false"){
+
+	            this.setState({
+	            	hosplat: response.data.lat,
+	            	hosplong:  response.data.long,
+	            });
+	        }
+	        else{
+	            console.log("error=true");
+	        }
+	        this.checkNotification(); 
+	    }.bind(this)).catch(function (error) {
+	      console.log(error);
+	    });
+
 	}
 
 	checkNotification(){
@@ -86,8 +121,10 @@ export default class LetsWaitContainer extends React.Component {
                 var longitude = objectReturned.longitude;
                 
             	this.setState({
-              		userlat:latitude,
-              		userlong:longitude
+              		userlat: latitude,
+              		userlong: longitude,
+              		userDist: objectReturned.distance,
+              		userTime: objectReturned.time,
             	});     
             }.bind(this));
 		}
@@ -101,23 +138,43 @@ export default class LetsWaitContainer extends React.Component {
 	      console.log("inside=>",location);
 
 	      if(this.state.userlat!=location.coords.latitude || this.state.userlong!=location.coords.longitude){
-	            // odlat=location.coords.latitude;
-	            // odlong=location.coords.longitude;
-	            console.log("here is change in firebase")
-	            rootRef.set({
-	                latitude: location.coords.latitude,
-	                longitude: location.coords.longitude
-	            });
+	            var key="&key=AIzaSyBChu-qFYq9rJpaGOZcatYv_tbuTAu42Gw";
+			    var url1="https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
+			    var origin="&origins=";
+			    console.log("here in distance");
+			    origin=origin.concat(location.coords.latitude).concat(",").concat(location.coords.longitude)
+			    var destination="&destinations=".concat(this.state.hosplat).concat(",").concat(this.state.hosplong)
+			    url1=url1.concat(origin).concat(destination).concat(key)
+	            var qs = require('qs');
+	            console.log(url1);
+	            console.log("hospital : ",this.state.hosplat,this.state.hosplong)
+			    axios.post("/FrontendDistance/",qs.stringify({url: url1})).then(function (response) {
+			        console.log(response);
+			        
+			        var dist=response.data.distance;
+			        var time=response.data.time;
+			        console.log("loc3/axios/FrontendDistance : ",dist,time)
+			        this.setState({
+			        	userlat: location.coords.latitude,
+	                	userlong: location.coords.longitude,
+			            userDist: response.data.distance,
+			            userTime: response.data.time,
+			        },function(){
+			        	console.log("loc3/axios/FrontendDistance : ",this.state.userlat,this.state.userlong)
+			        });
+			        rootRef.set({
+	                	latitude: location.coords.latitude,
+	                	longitude: location.coords.longitude,
+	                	distance : dist,
+	                	time: time
+	            	});
+			        	console.log("loc3/axios/FrontendDistance : ","location on firebase updated")
 
-
-	            this.setState({
-	                userlat:location.coords.latitude,
-	                userlong:location.coords.longitude
-	            });   
+			    }.bind(this));
 	        }
 	    }.bind(this))
 	    
-	    console.log(this.state.userlat, this.state.userlong)
+	    console.log("loc3/just : ",this.state.userlat, this.state.userlong);
 	    this.setState({
 	                type:1
 	         });
@@ -141,7 +198,7 @@ export default class LetsWaitContainer extends React.Component {
 					<div>
 						<h1>Here is your location and the hospital location </h1>
 						{this.state.waitingFor!=''&& this.state.userlat!='' && this.state.userlong!=''?
-						<MapUserHosp username={this.state.waitingFor} lat={this.state.userlat} long={this.state.userlong} />:<h1></h1>
+						<MapUserHosp userType={this.state.userType} username={this.state.username} waitingFor={this.state.waitingFor} userlat={this.state.userlat} userlong={this.state.userlong} userDist={this.state.userDist} userTime={this.state.userTime} hosplat={this.state.hosplat} hosplong={this.state.hosplong} />:<h1></h1>
 						}	
 						{
 					        setTimeout(() => {
@@ -180,6 +237,7 @@ export default class LetsWaitContainer extends React.Component {
 				//Pandu maps
 				return(
 					<div>
+						<MapUserHosp userType={this.state.userType} username={this.state.username} waitingFor={this.state.waitingFor} userlat={this.state.userlat} userlong={this.state.userlong} userDist={this.state.userDist} userTime={this.state.userTime} hosplat={this.state.hosplat} hosplong={this.state.hosplong} />
 						<p>{this.state.userlat} ... {this.state.userlong}</p>
 					</div>
 				);
